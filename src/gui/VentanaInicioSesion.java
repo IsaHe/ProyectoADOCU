@@ -31,7 +31,7 @@ public class VentanaInicioSesion extends JFrame{
 		panelCentro = new JPanel();
 		panelCentroIzq = new JPanel();
 		panelSur = new JPanel();
-		lblFoto = new JLabel(new ImageIcon(getClass().getResource("ADOCU.png")));
+		lblFoto = new JLabel();
 		panelConstraseña = new JPanel();
 		panelUsuario = new JPanel();
 		
