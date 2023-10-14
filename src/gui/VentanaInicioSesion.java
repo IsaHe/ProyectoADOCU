@@ -31,7 +31,7 @@ public class VentanaInicioSesion extends JFrame{
 		panelCentro = new JPanel();
 		panelCentroIzq = new JPanel();
 		panelSur = new JPanel();
-		lblFoto = new JLabel();
+		lblFoto = new JLabel(new ImageIcon(getClass().getResource("/resources/images//ADOCU.png")));
 		panelConstraseña = new JPanel();
 		panelUsuario = new JPanel();
 		
@@ -51,6 +51,7 @@ public class VentanaInicioSesion extends JFrame{
 		panelSur.setLayout(new GridLayout(1,3));
 		panelConstraseña.setLayout(new GridLayout(3,1));
 		panelUsuario.setLayout(new GridLayout(3,1));
+		
 		
 		//FUNCIONES COMPONENTES
 		lblTitulo.setFont(new Font(Font.DIALOG, Font.ITALIC, 65));
