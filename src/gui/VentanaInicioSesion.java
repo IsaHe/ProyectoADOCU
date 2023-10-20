@@ -92,10 +92,13 @@ public class VentanaInicioSesion extends JFrame{
 		btnSalir.addActionListener((e)->{
 			System.exit(EXIT_ON_CLOSE);
 		});
-	}
-	
-	public static void main(String[] args) {
-		new VentanaInicioSesion();
+		
+		btnRegistrarse.addActionListener((e)->{
+			
+			new VentanaRegistro();
+			this.dispose();
+			
+		});
 	}
 
 }
