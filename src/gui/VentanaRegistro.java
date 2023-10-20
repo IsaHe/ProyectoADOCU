@@ -24,9 +24,9 @@ public class VentanaRegistro extends JFrame{
 	
 	// ATRIBUTOS DE LA VENTANA
 	
-	private JPanel pSur, pCentro, pDerecha;
+	private JPanel pSur, pCentro, pNorte, pNombre, pUsuario, pApellidos, pContra, pEdad;
 	private JTextField txtNombre, txtUsuario, txtApellidos;
-	private JLabel lblNombre, lblUsuario, lblContra, lblApellidos, lblEdad;
+	private JLabel lblNombre, lblUsuario, lblContra, lblApellidos, lblEdad, lblTitulo;
 	private JPasswordField txtContra;
 	private JComboBox<Integer> cEdad;
 	private JButton btnRegistro, btnVolver, btnSalir;
@@ -36,24 +36,38 @@ public class VentanaRegistro extends JFrame{
 	
 		//TAMAÑO Y FORMA DE LA VENTANA
 		
-		setBounds(200, 200, 500, 200);
-		setResizable(false);
+		setBounds(200, 200, 600, 400);
 		setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
 		
 		//PANELES Y SUS ASIGNACIONES EN LA VENTANA
 		
 		pCentro = new JPanel();
-		pDerecha = new JPanel(new GridLayout(0, 2));
+		pNorte = new JPanel();
 		pSur = new JPanel();
+		pNombre = new JPanel();
+		pApellidos = new JPanel();
+		pEdad = new JPanel();
+		pContra = new JPanel();
+		pUsuario = new JPanel();
+		
+		pCentro.setLayout(new GridLayout(0,2));
+		pSur.setLayout(new GridLayout(1,3));
+		pNombre.setLayout(new GridLayout(3,1));
+		pApellidos.setLayout(new GridLayout(3,1));
+		pEdad.setLayout(new GridLayout(3,1));
+		pUsuario.setLayout(new GridLayout(3,1));
+		pContra.setLayout(new GridLayout(3,1));
+		
 		
 		getContentPane().add(pCentro, BorderLayout.CENTER);
 		getContentPane().add(pSur, BorderLayout.SOUTH);
+		getContentPane().add(pNorte, BorderLayout.NORTH);
 		
 		//NOMBRE
 		
 		txtNombre = new JTextField(20);
-		lblNombre = new JLabel("NOMBRE: ");
-		lblNombre.setFont(new Font(Font.SERIF, Font.BOLD, 14));
+		lblNombre = new JLabel("      - NOMBRE: ");
+		lblNombre.setFont(new Font(Font.SERIF, Font.PLAIN, 30));
 		lblNombre.setForeground(Color.BLACK);
 		
 		//KEYADAPTER PARA EL TEXTFIELD(NOMBRE)
@@ -71,8 +85,8 @@ public class VentanaRegistro extends JFrame{
 		//APELLIDOS
 		
 		txtApellidos = new JTextField(20);
-		lblApellidos = new JLabel("APELLIDOS: ");
-		lblApellidos.setFont(new Font(Font.SERIF, Font.BOLD, 14));
+		lblApellidos = new JLabel("      - APELLIDOS: ");
+		lblApellidos.setFont(new Font(Font.SERIF, Font.PLAIN, 30));
 		lblApellidos.setForeground(Color.BLACK);
 		
 		//KEYADAPTER PARA EL TEXTFIELD(APELLIDOS)
@@ -95,15 +109,16 @@ public class VentanaRegistro extends JFrame{
 		}
 		cEdad = new JComboBox<Integer>(numeros);
 		
-		lblEdad = new JLabel("EDAD: ");
-		lblEdad.setFont(new Font(Font.SERIF, Font.BOLD, 14));
+		
+		lblEdad = new JLabel("      - EDAD: ");
+		lblEdad.setFont(new Font(Font.SERIF, Font.PLAIN, 30));
 		lblEdad.setForeground(Color.BLACK);
 	
 		//USUARIO
 		
 		txtUsuario = new JTextField(20);
-		lblUsuario = new JLabel("USUARIO: ");
-		lblUsuario.setFont(new Font(Font.SERIF, Font.BOLD, 14));
+		lblUsuario = new JLabel("      - USUARIO: ");
+		lblUsuario.setFont(new Font(Font.SERIF, Font.PLAIN, 30));
 		lblUsuario.setForeground(Color.BLACK);
 		
 		//KEYADAPTER PARA EL TEXTFIELD(USUARIO)
@@ -120,8 +135,8 @@ public class VentanaRegistro extends JFrame{
 		//CONTRASEÑA
 		
 		txtContra = new JPasswordField(20);
-		lblContra = new JLabel("CONTRASEÑA: ");
-		lblContra.setFont(new Font(Font.SERIF, Font.BOLD, 14));
+		lblContra = new JLabel("      - CONTRASEÑA: ");
+		lblContra.setFont(new Font(Font.SERIF, Font.PLAIN, 30));
 		lblContra.setForeground(Color.BLACK);
 		
 		//KEYADAPTER PARA EL TEXTFIELD(CONTRASEÑA)
@@ -136,25 +151,49 @@ public class VentanaRegistro extends JFrame{
 			}
 		});
 		
+		//TITULO
+		
+		lblTitulo  = new JLabel("REGISTRO");
+		lblTitulo.setFont(new Font(Font.SERIF, Font.PLAIN, 40));
+		
 		//BOTONES
 		
 		btnRegistro = new JButton("REGISTRO");
+		btnRegistro.setFont(new Font(Font.SERIF, Font.PLAIN, 25));
 		btnVolver = new JButton("VOLVER");
+		btnVolver.setFont(new Font(Font.SERIF, Font.PLAIN, 25));
 		btnSalir = new JButton("SALIR");
+		btnSalir.setFont(new Font(Font.SERIF, Font.PLAIN, 25));
 		
 		//ASIGNACIÓN DE LOS ATRIBUTOS A LA VENTANA
 		
-		pCentro.add(pDerecha);
-		pDerecha.add(lblNombre);
-		pDerecha.add(txtNombre);
-		pDerecha.add(lblApellidos);
-		pDerecha.add(txtApellidos);
-		pDerecha.add(lblEdad);
-		pDerecha.add(cEdad);
-		pDerecha.add(lblUsuario);
-		pDerecha.add(txtUsuario);
-		pDerecha.add(lblContra);
-		pDerecha.add(txtContra);
+		pNorte.add(lblTitulo);
+		
+		pCentro.add(lblNombre);
+		pCentro.add(pNombre);
+		pNombre.add(new JPanel());
+		pNombre.add(txtNombre);
+		pNombre.add(new JPanel());
+		pCentro.add(lblApellidos);
+		pCentro.add(pApellidos);
+		pApellidos.add(new JPanel());
+		pApellidos.add(txtApellidos);
+		pApellidos.add(new JPanel());
+		pCentro.add(lblEdad);
+		pCentro.add(pEdad);
+		pEdad.add(new JPanel());
+		pEdad.add(cEdad);
+		pEdad.add(new JPanel());
+		pCentro.add(lblUsuario);
+		pCentro.add(pUsuario);
+		pUsuario.add(new JPanel());
+		pUsuario.add(txtUsuario);
+		pUsuario.add(new JPanel());
+		pCentro.add(lblContra);
+		pCentro.add(pContra);
+		pContra.add(new JPanel());
+		pContra.add(txtContra);
+		pContra.add(new JPanel());
 		pSur.add(btnRegistro);
 		pSur.add(btnVolver);
 		pSur.add(btnSalir);
