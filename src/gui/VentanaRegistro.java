@@ -22,6 +22,8 @@ public class VentanaRegistro extends JFrame{
 	
 	private static final long serialVersionUID = 1L;
 	
+	private JFrame vAnterior;
+	
 	// ATRIBUTOS DE LA VENTANA
 	
 	private JPanel pSur, pCentro, pNorte, pNombre, pUsuario, pApellidos, pContra, pEdad;
@@ -210,19 +212,16 @@ public class VentanaRegistro extends JFrame{
 			}
 		});
 		
+		btnVolver.addActionListener((e)->{
+			
+			new VentanaInicioSesion();
+			this.dispose();
+			
+		});
+		
+		
+		
 		setVisible(true);
 	}
-	
-	//MAIN
-	
-	public static void main(String[] args) {
-		VentanaRegistro v = new VentanaRegistro();
-		
-		System.out.println(v.toString());
-		
-	}
-	
-	
-	
 
 }
