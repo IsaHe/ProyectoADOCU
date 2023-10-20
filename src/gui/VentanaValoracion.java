@@ -13,6 +13,7 @@ public class VentanaValoracion extends JFrame {
         setTitle("Valoración");
         setIconImage(new ImageIcon(Objects.requireNonNull(getClass().getResource("/resources/images//ADOCU.png"))).getImage());
 
+        //CREACION DE ELEMENTOS Y CONTENEDORES
         JComboBox<Valoracion> valoracion = new JComboBox<>(Valoracion.values());
 
         String htmlContent = "<html><body>" +
@@ -35,12 +36,14 @@ public class VentanaValoracion extends JFrame {
         JButton btnEnviar = new JButton("Enviar");
         btnEnviar.addActionListener(e -> dispose());
 
+        //ADICION DE ELEMENTOS A LOS CONTENEDORES
         panelValoracion.add(valoracion, BorderLayout.CENTER);
         panelValoracion.add(btnEnviar, BorderLayout.SOUTH);
 
         add(panelValoracion, BorderLayout.SOUTH);
         add(etiqueta, BorderLayout.CENTER);
 
+        //CONFIGURACION DE LA VENTANA
         setSize(1014, 607);
         setResizable(false);
         setLocationRelativeTo(null);
