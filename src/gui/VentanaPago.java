@@ -1,3 +1,4 @@
+
 package gui;
 
 import java.awt.BorderLayout;
@@ -18,7 +19,7 @@ public class VentanaPago extends JFrame{
 
 	private static final long serialVersionUID = 1L;
 	
-	private JPanel pCentro, pSur, pNorte, pNumTarjeta, pImporte, pCVV, pAbajoUsuario, pAbajoContraseña;
+	private JPanel pCentro, pSur, pNorte, pNumTarjeta, pImporte, pCVV, pAbajoUsuario, pAbajoContraseña, pUsuario, pContra;
 	private JLabel lblImporte, lblNumTarjeta, lblCVV, lblTitulo, lblUsuario, lblContrasena;
 	private JTextField txtTitular, txtNumTarjeta, txtCVV, txtUsuario;
 	private JButton btnPagar, btnVolver;
@@ -38,6 +39,8 @@ public class VentanaPago extends JFrame{
 		pCVV = new JPanel();
 		pAbajoUsuario = new JPanel();
 		pAbajoContraseña = new JPanel();
+		pUsuario = new JPanel();
+		pContra = new JPanel();
 		
 		pCentro.setLayout(new GridLayout(0,2));
 		pSur.setLayout(new GridLayout(0,2));
@@ -46,6 +49,8 @@ public class VentanaPago extends JFrame{
 		pCVV.setLayout(new GridLayout(3,1));
 		pAbajoUsuario.setLayout(new GridLayout(0,2));
 		pAbajoContraseña.setLayout(new GridLayout(0,2));
+		pUsuario.setLayout(new GridLayout(3,0));
+		pContra.setLayout(new GridLayout(3,0));
 		
 		getContentPane().add(pCentro, BorderLayout.CENTER);
 		getContentPane().add(pSur, BorderLayout.SOUTH);
@@ -96,9 +101,15 @@ public class VentanaPago extends JFrame{
 		pCentro.add(pAbajoUsuario);
 		pCentro.add(pAbajoContraseña);
 		pAbajoUsuario.add(lblUsuario);
-		pAbajoUsuario.add(txtUsuario);
 		pAbajoContraseña.add(lblContrasena);
-		pAbajoContraseña.add(pasContrasena);
+		pAbajoUsuario.add(pUsuario);
+		pAbajoContraseña.add(pContra);
+		pUsuario.add(new JPanel());
+		pUsuario.add(txtUsuario);
+		pUsuario.add(new JPanel());
+		pContra.add(new JPanel());
+		pContra.add(pasContrasena);
+		pContra.add(new JPanel());
 		
 		setVisible(true);
 	}
