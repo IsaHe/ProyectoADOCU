@@ -2,18 +2,14 @@ package gui;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.Component;
 import java.awt.Font;
 import java.awt.GridLayout;
-import java.awt.HeadlessException;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
-import java.util.ArrayList;
 import java.util.Vector;
 
-import javax.swing.ComboBoxModel;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
@@ -23,6 +19,8 @@ import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
 public class VentanaRegistro extends JFrame{
+	
+	private static final long serialVersionUID = 1L;
 	
 	// ATRIBUTOS DE LA VENTANA
 	
@@ -129,6 +127,7 @@ public class VentanaRegistro extends JFrame{
 		//KEYADAPTER PARA EL TEXTFIELD(CONTRASEÑA)
 		
 		txtContra.addKeyListener(new KeyAdapter() {
+			@SuppressWarnings("deprecation")
 			@Override
 			public void keyTyped(KeyEvent e) {
 				   if ((txtContra.getText().length() >= 30)) {
@@ -179,6 +178,8 @@ public class VentanaRegistro extends JFrame{
 	
 	public static void main(String[] args) {
 		VentanaRegistro v = new VentanaRegistro();
+		
+		System.out.println(v.toString());
 		
 	}
 	
