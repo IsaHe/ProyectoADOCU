@@ -14,7 +14,7 @@ public class VentanaModificacionActividades extends JFrame {
             "Actividad 5",
     }; // Variable temporal hasta la creacion del objeto Actividad
 
-    public VentanaModificacionActividades(int numeroPersonas, int[] horaInicioActividad, int[] horaFinActividad, LocalDate fechaActividad) {    //Formato horas [hora, minutos, segundos]
+    public VentanaModificacionActividades(int numeroPersonas, String horaActividad, LocalDate fechaActividad) {    //Formato horas [hora, minutos, segundos]
         int numeroMaxPersonas = 10; // Variable temporal hasta la creacion del objeto Actividad
         setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
         setTitle("Modificación de actividades");
@@ -22,7 +22,7 @@ public class VentanaModificacionActividades extends JFrame {
         setLayout(new GridLayout(4, 2, 0, 0));
 
         //CREACION Y FORMATO DE LOS LABELS
-        JLabel lblHora = new JLabel(" Hora: " + horaInicioActividad[0] + ":" + horaInicioActividad[1] + ":" + horaInicioActividad[2] + " - " + horaFinActividad[0] + ":" + horaFinActividad[1] + ":" + horaFinActividad[2]);
+        JLabel lblHora = new JLabel(" Hora: " + horaActividad);
         JLabel lblFecha = new JLabel("Fecha: " + fechaActividad);
         JLabel lblNumeroPersonas = new JLabel("Número de personas: " + numeroPersonas + "/" + numeroMaxPersonas);
         JLabel lblActividad = new JLabel("Actividad: ");
@@ -47,8 +47,8 @@ public class VentanaModificacionActividades extends JFrame {
         JButton btnVolver = new JButton("Volver");
 
         btnVolver.addActionListener(e -> {
-            new VentanaTabla(this);
-            dispose();
+            new VentanaTabla();
+            this.dispose();
         });
 
         //CREACION DE LOS CONTENEDORES Y CONFIGURACION DE LOS MISMOS
@@ -79,14 +79,9 @@ public class VentanaModificacionActividades extends JFrame {
         add(btnRegistrarHora);
 
         //CONFIGURACION DE LA VENTANA
-        setSize(1014, 607);
-        pack();
+        setExtendedState(MAXIMIZED_BOTH);
         setResizable(true);
         setLocationRelativeTo(null);
         setVisible(true);
-    }
-
-    public static void main(String[] args) {
-        new VentanaModificacionActividades(5, new int[]{12, 0, 0}, new int[]{13, 0, 0}, LocalDate.now());
     }
 }

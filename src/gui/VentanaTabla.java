@@ -6,6 +6,7 @@ import java.awt.Component;
 import java.awt.Point;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,8 +20,6 @@ import javax.swing.table.AbstractTableModel;
 import javax.swing.table.TableCellRenderer;
 
 public class VentanaTabla extends JFrame{
-
-	private JFrame vActual, vAnterior;
 	
 	private JPanel pCentro, pSur;
 	private JTable tabla;
@@ -32,9 +31,7 @@ public class VentanaTabla extends JFrame{
 	private int fila;
 	private  int columna;
 	
-	public VentanaTabla(JFrame vAnterior) {
-		
-		vActual = this;
+	public VentanaTabla () {
 		
 		//CLASE DE LA TABLA
 		class TablaActividades extends AbstractTableModel{
@@ -119,7 +116,7 @@ public class VentanaTabla extends JFrame{
 		horas.add("11:10 - 12:00");
 		
 		setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
-		setBounds(100, 100, 600, 500);
+		setExtendedState(MAXIMIZED_BOTH);
 		
 		pSur = new JPanel();
 		pCentro =  new JPanel();
@@ -147,15 +144,23 @@ public class VentanaTabla extends JFrame{
 				fila = tabla.rowAtPoint(p);
 				columna = tabla.columnAtPoint(p);
 				tabla.repaint();
+				new VentanaModificacionActividades(10, (String) tabla.getValueAt(fila, 0), LocalDate.now());
 				
 			}
 		
 		});
 		
+		btnPagar.addActionListener((e)->{
+			
+			new VentanaPago();
+			this.dispose();
+			
+		});
+		
 		btnVolver.addActionListener((e)->{
 			
 			new VentanaInicioSesion();
-			vActual.dispose();
+			this.dispose();
 			
 		});
 		

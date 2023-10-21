@@ -28,7 +28,7 @@ public class VentanaPago extends JFrame{
 	public VentanaPago(){
 		super();
 		
-		setBounds(200, 200, 1000, 500);
+		setExtendedState(MAXIMIZED_BOTH);
 		setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
 		
 		pCentro = new JPanel();
@@ -111,17 +111,15 @@ public class VentanaPago extends JFrame{
 		pContra.add(pasContrasena);
 		pContra.add(new JPanel());
 		
+		btnVolver.addActionListener((e)->{
+			
+			new VentanaTabla();
+			this.dispose();
+			
+		});
+		
+		
 		setVisible(true);
 	}
-	
-	public static void main(String[] args) {
-		VentanaPago v = new VentanaPago();
-		System.out.println(v.toString());
-	}
-	
-	
-	
-	
-	
 
 }

@@ -1,8 +1,10 @@
 package gui;
 
 import java.awt.BorderLayout;
+import java.awt.Component;
 import java.awt.Font;
 import java.awt.GridLayout;
+import java.awt.Rectangle;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -22,7 +24,8 @@ public class VentanaInicioSesion extends JFrame{
 	
 	public VentanaInicioSesion () {
 		
-		setBounds(100, 100, 600, 400);
+		setExtendedState(MAXIMIZED_BOTH);
+		
 		setTitle("ADOCU");
 		setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
 		
@@ -89,8 +92,16 @@ public class VentanaInicioSesion extends JFrame{
 		
 		//EVENTOS
 		
+		btnInicioSesion.addActionListener((e)->{
+			
+			new VentanaTabla();
+			this.dispose();
+			
+		});
+		
 		btnSalir.addActionListener((e)->{
-			System.exit(EXIT_ON_CLOSE);
+			new VentanaValoracion();
+			this.dispose();
 		});
 		
 		btnRegistrarse.addActionListener((e)->{

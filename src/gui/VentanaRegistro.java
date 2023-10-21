@@ -22,8 +22,6 @@ public class VentanaRegistro extends JFrame{
 	
 	private static final long serialVersionUID = 1L;
 	
-	private JFrame vAnterior;
-	
 	// ATRIBUTOS DE LA VENTANA
 	
 	private JPanel pSur, pCentro, pNorte, pNombre, pUsuario, pApellidos, pContra, pEdad;
@@ -38,7 +36,7 @@ public class VentanaRegistro extends JFrame{
 	
 		//TAMAÑO Y FORMA DE LA VENTANA
 		
-		setBounds(200, 200, 600, 400);
+		setExtendedState(MAXIMIZED_BOTH);
 		setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
 		
 		//PANELES Y SUS ASIGNACIONES EN LA VENTANA
