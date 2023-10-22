@@ -28,9 +28,11 @@ public class VentanaPago extends JFrame{
 	public VentanaPago(){
 		super();
 		
+		//FUNCIONES VENTANA
 		setExtendedState(MAXIMIZED_BOTH);
 		setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
 		
+		//CREACION CONTENEDORES
 		pCentro = new JPanel();
 		pSur = new JPanel();
 		pNorte = new JPanel();
@@ -42,6 +44,7 @@ public class VentanaPago extends JFrame{
 		pUsuario = new JPanel();
 		pContra = new JPanel();
 		
+		//FUNCION CONTENEDORES
 		pCentro.setLayout(new GridLayout(0,2));
 		pSur.setLayout(new GridLayout(0,2));
 		pImporte.setLayout(new GridLayout(3,1));
@@ -52,34 +55,37 @@ public class VentanaPago extends JFrame{
 		pUsuario.setLayout(new GridLayout(3,0));
 		pContra.setLayout(new GridLayout(3,0));
 		
+		//AÑADIR CONTENEDOR A VENTANA PRINCIPAL
 		getContentPane().add(pCentro, BorderLayout.CENTER);
 		getContentPane().add(pSur, BorderLayout.SOUTH);
 		getContentPane().add(pNorte, BorderLayout.NORTH);
 		
+		//CREACION COMPONENTES
 		lblTitulo = new JLabel("PAGOS");
-		lblTitulo.setFont(new Font(Font.SERIF, Font.PLAIN, 60));
 		lblImporte = new JLabel("IMPORTE A PAGAR: ");
-		lblImporte.setFont(new Font(Font.SERIF, Font.PLAIN, 35));
 		lblNumTarjeta = new JLabel("NUMERO DE LA TARJETA: ");
-		lblNumTarjeta.setFont(new Font(Font.SERIF, Font.PLAIN, 35));
 		lblCVV = new JLabel("CVV: ");
-		lblCVV.setFont(new Font(Font.SERIF, Font.PLAIN, 35));
 		lblUsuario = new JLabel("USUARIO: ");
-		lblUsuario.setFont(new Font(Font.SERIF, Font.PLAIN, 35));
 		lblContrasena = new JLabel("CONTRASEÑA: ");
-		lblContrasena.setFont(new Font(Font.SERIF, Font.PLAIN, 35));
-		
 		txtTitular = new JTextField(20);
 		txtNumTarjeta = new JTextField(20);
 		txtCVV = new JTextField(20);
 		txtUsuario = new JTextField(20);
 		pasContrasena = new JPasswordField(20);
-		
 		btnPagar = new JButton("PAGAR");
-		btnPagar.setFont(new Font(Font.SERIF, Font.PLAIN, 30));
 		btnVolver = new JButton("VOLVER");
+		
+		//FUNCION COMPONENTES
+		lblTitulo.setFont(new Font(Font.SERIF, Font.PLAIN, 60));
+		lblImporte.setFont(new Font(Font.SERIF, Font.PLAIN, 35));
+		lblNumTarjeta.setFont(new Font(Font.SERIF, Font.PLAIN, 35));
+		lblCVV.setFont(new Font(Font.SERIF, Font.PLAIN, 35));
+		lblUsuario.setFont(new Font(Font.SERIF, Font.PLAIN, 35));
+		lblContrasena.setFont(new Font(Font.SERIF, Font.PLAIN, 35));
+		btnPagar.setFont(new Font(Font.SERIF, Font.PLAIN, 30));
 		btnVolver.setFont(new Font(Font.SERIF, Font.PLAIN, 30));
 		
+		//AÑADIR COMPONENTES A CONTENEDORES
 		pNorte.add(lblTitulo);
 		pSur.add(btnVolver);
 		pSur.add(btnPagar);
@@ -111,6 +117,9 @@ public class VentanaPago extends JFrame{
 		pContra.add(pasContrasena);
 		pContra.add(new JPanel());
 		
+		setVisible(true);
+		
+		//EVENTOS BOTONES
 		btnVolver.addActionListener((e)->{
 			
 			new VentanaTabla();
@@ -119,7 +128,7 @@ public class VentanaPago extends JFrame{
 		});
 		
 		
-		setVisible(true);
+		
 	}
 
 }

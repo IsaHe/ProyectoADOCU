@@ -47,7 +47,6 @@ public class VentanaModificacionActividades extends JFrame {
         JButton btnVolver = new JButton("Volver");
 
         btnVolver.addActionListener(e -> {
-            new VentanaTabla();
             this.dispose();
         });
 

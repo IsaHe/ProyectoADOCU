@@ -199,7 +199,7 @@ public class VentanaRegistro extends JFrame{
 		pSur.add(btnSalir);
 		
 		
-		//ACTIONS
+		//EVENTOS BOTONES
 		
 		btnSalir.addActionListener(new ActionListener() {
 			

@@ -1,5 +1,6 @@
 package gui;
 
+
 import java.awt.BorderLayout;
 import java.awt.Component;
 import java.awt.Font;
@@ -24,8 +25,8 @@ public class VentanaInicioSesion extends JFrame{
 	
 	public VentanaInicioSesion () {
 		
+		//FUNCIONES VENTANA
 		setExtendedState(MAXIMIZED_BOTH);
-		
 		setTitle("ADOCU");
 		setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
 		
@@ -90,8 +91,7 @@ public class VentanaInicioSesion extends JFrame{
 		
 		setVisible(true);
 		
-		//EVENTOS
-		
+		//EVENTOS BOTONES
 		btnInicioSesion.addActionListener((e)->{
 			
 			new VentanaTabla();
