@@ -2,6 +2,7 @@ package gui;
 
 import javax.swing.*;
 import java.awt.*;
+import java.net.URL;
 import java.util.Objects;
 
 public class VentanaValoracion extends JFrame {
@@ -16,9 +17,10 @@ public class VentanaValoracion extends JFrame {
         //CREACION DE ELEMENTOS Y CONTENEDORES
         JComboBox<Valoracion> valoracion = new JComboBox<>(Valoracion.values());
 
-        String htmlContent = "<html><body>" +
+        URL urlLogo = getClass().getResource("/resources/images//ADOCU.png");
+        String textoExplicacionValoracionHTML = "<html><body>" +
                 "<div style='text-align: center; margin-top: 20px;'>" +
-//                "<img src='../resources/images//ADOCU.png' alt='Logo de ADOCU' width='150'><br><br>" +
+                "<img src= " + urlLogo + " alt='Logo de ADOCU' width='150'><br><br>" +
                 "<h2>¡Gracias por elegir nuestros espacios para tu actividad!</h2>" +
                 "<p>En ADOCU, nos esforzamos por brindarte la mejor experiencia en nuestros espacios. Para seguir mejorando y ofrecerte un servicio excepcional, te pedimos que tomes un momento para valorar tu experiencia con nosotros.</p>" +
                 "<p>Tu opinión es invaluable para nosotros. Nos ayuda a entender lo que estamos haciendo bien y a identificar áreas en las que podemos mejorar. Estamos comprometidos en proporcionarte un entorno cómodo y acogedor para tus actividades, y tu feedback nos guía en ese camino.</p>" +
@@ -26,7 +28,7 @@ public class VentanaValoracion extends JFrame {
                 "<p>Gracias por tu colaboración y por confiar en ADOCU. Esperamos verte de nuevo pronto en nuestros espacios.</p>" +
                 "<p>Atentamente,<br>El equipo de ADOCU</p>" +
                 "</div></body></html>";
-        JEditorPane etiqueta = new JEditorPane("text/html", htmlContent);
+        JEditorPane etiqueta = new JEditorPane("text/html", textoExplicacionValoracionHTML);
         etiqueta.setEditable(false);
         etiqueta.setOpaque(false);
 
