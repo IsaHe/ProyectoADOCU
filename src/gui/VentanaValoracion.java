@@ -18,7 +18,7 @@ public class VentanaValoracion extends JFrame {
 
         String htmlContent = "<html><body>" +
                 "<div style='text-align: center; margin-top: 20px;'>" +
-                "<img src='file:///C:/Users/Thega/IdeaProjects/ProyectoADOCU/src/resources/images/ADOCU.png' alt='Logo de ADOCU' width='150'><br><br>" +
+//                "<img src='../resources/images//ADOCU.png' alt='Logo de ADOCU' width='150'><br><br>" +
                 "<h2>¡Gracias por elegir nuestros espacios para tu actividad!</h2>" +
                 "<p>En ADOCU, nos esforzamos por brindarte la mejor experiencia en nuestros espacios. Para seguir mejorando y ofrecerte un servicio excepcional, te pedimos que tomes un momento para valorar tu experiencia con nosotros.</p>" +
                 "<p>Tu opinión es invaluable para nosotros. Nos ayuda a entender lo que estamos haciendo bien y a identificar áreas en las que podemos mejorar. Estamos comprometidos en proporcionarte un entorno cómodo y acogedor para tus actividades, y tu feedback nos guía en ese camino.</p>" +

@@ -46,9 +46,7 @@ public class VentanaModificacionActividades extends JFrame {
         JButton btnRegistrarHora = new JButton("Registrar hora");
         JButton btnVolver = new JButton("Volver");
 
-        btnVolver.addActionListener(e -> {
-            this.dispose();
-        });
+        btnVolver.addActionListener(e -> this.dispose());
 
         //CREACION DE LOS CONTENEDORES Y CONFIGURACION DE LOS MISMOS
         JPanel panelVacio = new JPanel();
@@ -78,8 +76,9 @@ public class VentanaModificacionActividades extends JFrame {
         add(btnRegistrarHora);
 
         //CONFIGURACION DE LA VENTANA
-        setExtendedState(MAXIMIZED_BOTH);
-        setResizable(true);
+//        setExtendedState(MAXIMIZED_BOTH);
+        pack(); //No se pone en pantalla completa que esta pensado para salir en pequeño pequeño
+        setResizable(false);
         setLocationRelativeTo(null);
         setVisible(true);
     }
