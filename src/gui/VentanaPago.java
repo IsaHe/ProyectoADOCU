@@ -117,8 +117,6 @@ public class VentanaPago extends JFrame{
 		pContra.add(pasContrasena);
 		pContra.add(new JPanel());
 		
-		setVisible(true);
-		
 		//EVENTOS BOTONES
 		btnVolver.addActionListener((e)->{
 			
@@ -127,8 +125,14 @@ public class VentanaPago extends JFrame{
 			
 		});
 		
+		btnPagar.addActionListener(e ->{
+			
+			new VentanaProcesarPago();
+			this.dispose();
+			
+		});
 		
-		
+		setVisible(true);
 	}
 
 }

@@ -11,9 +11,11 @@ public class VentanaProcesarPago extends JFrame{
 	private JProgressBar pb;
 	private JPanel pCentral,panel;
 	private JLabel lblTitulo;
+	private JFrame vActual;
 	
 	public VentanaProcesarPago() {
 		super();
+		vActual = this;
 		
 		setBounds(200, 200, 200, 100);
 		setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
@@ -21,6 +23,7 @@ public class VentanaProcesarPago extends JFrame{
 		setLocationRelativeTo(null);
 		setIconImage(null);
 		
+		//CREACION DE CONTENEDORES
 		pb = new JProgressBar(1, 100);
 		lblTitulo = new JLabel("Procesando el pago...");
 		
@@ -32,7 +35,7 @@ public class VentanaProcesarPago extends JFrame{
 		pCentral.add(panel);
 		getContentPane().add(pCentral);
 		
-		Runnable r = new Runnable() {
+		Thread t = new Thread(new Runnable() {
 			
 			@Override
 			public void run() {
@@ -41,25 +44,16 @@ public class VentanaProcesarPago extends JFrame{
 					try {
 						Thread.sleep(20);
 					} catch (InterruptedException e) {
-						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}
 				}
 				JOptionPane.showMessageDialog(null, "Pago recibido correctamente");
-				System.exit(0);
+				new VentanaPago();
+				vActual.dispose();
 			}
-		};
-		Thread t = new Thread(r);
+		}); 
 		t.start();
 		
-		
-	
 		setVisible(true);
 	}
-	
-	public static void main(String[] args) {
-		VentanaProcesarPago v = new VentanaProcesarPago();
-	}
-	
-	
 }
