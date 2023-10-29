@@ -76,7 +76,7 @@ public class Usuario {
 	
 	@Override
 	public boolean equals(Object obj) {
-		return this.getUsuario().equals(((Usuario) obj).getUsuario()) && this.getContraseña().equals(((Usuario)obj).getContraseña());
+		return this.getUsuario().equals(((Usuario) obj).getUsuario());
 	}
 	
 }
