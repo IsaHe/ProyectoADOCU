@@ -1,14 +1,18 @@
 package gui;
 
-import domain.Actividad;
-
 import javax.swing.*;
 import java.awt.*;
 import java.time.LocalDate;
 import java.util.Objects;
 
 public class VentanaModificacionActividades extends JFrame {
-    Actividad[] listaActividades;
+    String[] listaActividades = {
+            "Actividad 1",
+            "Actividad 2",
+            "Actividad 3",
+            "Actividad 4",
+            "Actividad 5",
+    }; // Variable temporal hasta la creacion del objeto Actividad
 
     public VentanaModificacionActividades(int numeroPersonas, String horaActividad, LocalDate fechaActividad) {    //Formato horas [hora, minutos, segundos]
         int numeroMaxPersonas = 10; // Variable temporal hasta la creacion del objeto Actividad
@@ -31,7 +35,7 @@ public class VentanaModificacionActividades extends JFrame {
         lblNumeroPersonas.setFont(new Font(Font.DIALOG, Font.ITALIC, 30));
 
         //CREACION Y CONFIGURACION DE LOS ELEMENTOS CON LOS QUE PUEDE INTERACTUAR EL USUARIO
-        JComboBox<Actividad> actividades = new JComboBox<>(listaActividades);
+        JComboBox<String> actividades = new JComboBox<>(listaActividades);
 
         JRadioButton btnSi = new JRadioButton("Si");
         JRadioButton btnNo = new JRadioButton("No");
@@ -73,7 +77,7 @@ public class VentanaModificacionActividades extends JFrame {
 
         //CONFIGURACION DE LA VENTANA
 //        setExtendedState(MAXIMIZED_BOTH);
-        pack();
+        pack(); //No se pone en pantalla completa que esta pensado para salir en pequeño pequeño
         setResizable(false);
         setLocationRelativeTo(null);
         setVisible(true);

@@ -20,6 +20,14 @@ public class Usuario {
 		this.usuario = usuario;
 		this.contraseña = contraseña;
 	}
+	
+	
+
+	public Usuario(String usuario, String contraseña) {
+		super();
+		this.usuario = usuario;
+		this.contraseña = contraseña;
+	}
 
 	public String getNom() {
 		return nom;
@@ -63,8 +71,12 @@ public class Usuario {
 
 	@Override
 	public String toString() {
-		return "Usuario [nom=" + nom + ", apellido=" + apellido + ", edad=" + edad + ", usuario=" + usuario
-				+ ", contraseña=" + contraseña + "]";
+		return nom + ";" + apellido + ";" + edad + ";" + usuario + ";" + contraseña;
+	}
+	
+	@Override
+	public boolean equals(Object obj) {
+		return this.getUsuario().equals(((Usuario) obj).getUsuario()) && this.getContraseña().equals(((Usuario)obj).getContraseña());
 	}
 	
 }

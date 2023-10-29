@@ -4,7 +4,6 @@ import javax.swing.*;
 import java.awt.*;
 import java.net.URL;
 import java.util.Objects;
-import java.util.logging.Logger;
 
 public class VentanaValoracion extends JFrame {
     enum Valoracion {
@@ -37,9 +36,7 @@ public class VentanaValoracion extends JFrame {
         panelValoracion.setLayout(new BorderLayout());
 
         JButton btnEnviar = new JButton("Enviar");
-        btnEnviar.addActionListener(e -> {
-            dispose();
-        });
+        btnEnviar.addActionListener(e -> dispose());
 
         //ADICION DE ELEMENTOS A LOS CONTENEDORES
         panelValoracion.add(valoracion, BorderLayout.CENTER);

@@ -8,15 +8,21 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.Vector;
 
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
+
+import db.BaseDeDatos;
+import domain.Usuario;
 
 public class VentanaRegistro extends JFrame{
 	
@@ -30,6 +36,7 @@ public class VentanaRegistro extends JFrame{
 	private JPasswordField txtContra;
 	private JComboBox<Integer> cEdad;
 	private JButton btnRegistro, btnVolver, btnSalir;
+	private Path ruta = Paths.get("src/io/UsuariosRegistrados.txt"); 
 		
 	public VentanaRegistro(){
 		super();
@@ -217,7 +224,19 @@ public class VentanaRegistro extends JFrame{
 			
 		});
 		
-		
+		btnRegistro.addActionListener(e->{
+			
+			Usuario usuario = new Usuario(txtNombre.getText(), txtApellidos.getText(), (int)cEdad.getSelectedItem(), txtUsuario.getText(), txtContra.getText());
+			if (!BaseDeDatos.comprobarUsuario(usuario)) {
+				BaseDeDatos.getUsuarios().add(usuario);
+				BaseDeDatos.cargarUsuariosEnFichero(ruta);
+				JOptionPane.showMessageDialog(null, "Usuario Registrado Correctamente");
+				new VentanaInicioSesion();
+				this.dispose();
+			}else {
+				JOptionPane.showMessageDialog(null, "Este Usuario ya existe");
+			}
+		});
 		
 		setVisible(true);
 	}

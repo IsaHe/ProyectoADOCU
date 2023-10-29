@@ -6,14 +6,20 @@ import java.awt.Component;
 import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.Rectangle;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
+
+import db.BaseDeDatos;
+import domain.Usuario;
 
 public class VentanaInicioSesion extends JFrame{
 	
@@ -22,8 +28,11 @@ public class VentanaInicioSesion extends JFrame{
 	private JTextField txtUsuario;
 	private JPasswordField pasContrasena;
 	private JButton btnInicioSesion, btnRegistrarse, btnSalir;
+	private Path ruta = Paths.get("src/io/UsuariosRegistrados.txt"); 
 	
 	public VentanaInicioSesion () {
+		
+		BaseDeDatos.obtenerUsuariosDeFichero(ruta);
 		
 		//FUNCIONES VENTANA
 		setExtendedState(MAXIMIZED_BOTH);
@@ -94,18 +103,21 @@ public class VentanaInicioSesion extends JFrame{
 		//EVENTOS BOTONES
 		btnInicioSesion.addActionListener((e)->{
 			
-			new VentanaTabla();
-			this.dispose();
-			
+			Usuario usuario = new Usuario(txtUsuario.getText(), pasContrasena.getText());
+			if (BaseDeDatos.comprobarUsuario(usuario)) {
+				new VentanaTabla();
+				this.dispose();
+			}else{
+				JOptionPane.showMessageDialog(null, "El usuario no esta registrado");
+			}
 		});
 		
-		btnSalir.addActionListener((e)->{
+		btnSalir.addActionListener((e)->{	
 			new VentanaValoracion();
 			this.dispose();
 		});
 		
 		btnRegistrarse.addActionListener((e)->{
-			
 			new VentanaRegistro();
 			this.dispose();
 			
