@@ -1,13 +1,12 @@
 package gui;
-import java.awt.GridLayout;
 
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-import javax.swing.JPanel;
-import javax.swing.JProgressBar;
+import javax.swing.*;
+import java.awt.*;
+import java.util.logging.Logger;
 
 public class VentanaProcesarPago extends JFrame{
+
+	private final Logger logger = Logger.getLogger(VentanaProcesarPago.class.getName());
 	private JProgressBar pb;
 	private JPanel pCentral,panel;
 	private JLabel lblTitulo;
@@ -44,7 +43,8 @@ public class VentanaProcesarPago extends JFrame{
 					try {
 						Thread.sleep(20);
 					} catch (InterruptedException e) {
-						e.printStackTrace();
+						logger.warning("Error al dormir el hilo");
+						logger.warning(e.getMessage());
 					}
 				}
 				JOptionPane.showMessageDialog(null, "Pago recibido correctamente");

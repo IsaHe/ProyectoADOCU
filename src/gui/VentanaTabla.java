@@ -1,29 +1,19 @@
 package gui;
 
-import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.Component;
-import java.awt.Dimension;
-import java.awt.Font;
-import java.awt.Point;
-import java.awt.Rectangle;
+import javax.swing.*;
+import javax.swing.table.AbstractTableModel;
+import javax.swing.table.TableCellRenderer;
+import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
-
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.JScrollPane;
-import javax.swing.JTable;
-import javax.swing.table.AbstractTableModel;
-import javax.swing.table.TableCellRenderer;
+import java.util.logging.Logger;
 
 public class VentanaTabla extends JFrame{
-	
+
+	private final Logger logger = Logger.getLogger(VentanaTabla.class.getName());
 	private JPanel pCentro, pSur;
 	private JTable tabla;
 	private JButton btnVolver, btnPagar;
@@ -160,19 +150,22 @@ public class VentanaTabla extends JFrame{
 					new VentanaModificacionActividades(10, (String) tabla.getValueAt(fila, 0), LocalDate.parse(tabla.getColumnName(columna)));
 				}
 				e.consume();
+				logger.info("Se ha pulsado la celda: " + tabla.getValueAt(fila, columna));
 			}
 		});
 		
 		//EVENTO BOTONES
 		btnPagar.addActionListener((e)->{
-			
+
+			logger.info("Se ha pulsado el botón Pagar");
 			new VentanaPago();
 			this.dispose();
 			
 		});
 		
 		btnVolver.addActionListener((e)->{
-			
+
+			logger.info("Se ha pulsado el botón Volver");
 			new VentanaInicioSesion();
 			this.dispose();
 			

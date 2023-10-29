@@ -1,21 +1,21 @@
 package db;
 
+import domain.Usuario;
+
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
-import java.io.FileReader;
-import java.io.PipedWriter;
 import java.io.PrintWriter;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
-
-import domain.Usuario;
+import java.util.logging.Logger;
 
 public class BaseDeDatos {
 
 	private static List<Usuario> usuarios = new ArrayList<>();
+	static Logger logger = Logger.getLogger(BaseDeDatos.class.getName());
 	
 	public static void cargarUsuariosEnFichero(Path ruta) {
 		
@@ -26,7 +26,7 @@ public class BaseDeDatos {
 			}
 			pw.close();
 		} catch (FileNotFoundException e) {
-			e.printStackTrace();
+			logger.warning("Error al cargar los usuarios al fichero");
 		}
 	}
 	
@@ -44,7 +44,7 @@ public class BaseDeDatos {
 			}
 			sc.close();
 		} catch (FileNotFoundException e) {
-			e.printStackTrace();
+			logger.warning("Error al obtener los usuarios del fichero");
 		}
 			
 	}

@@ -1,17 +1,20 @@
 package gui;
 
+import domain.Actividad;
+
 import javax.swing.*;
 import java.awt.*;
 import java.time.LocalDate;
 import java.util.Objects;
+import java.util.logging.Logger;
 
 public class VentanaModificacionActividades extends JFrame {
-    String[] listaActividades = {
-            "Actividad 1",
-            "Actividad 2",
-            "Actividad 3",
-            "Actividad 4",
-            "Actividad 5",
+    private static final Logger logger = Logger.getLogger(VentanaModificacionActividades.class.getName());
+    Actividad[] listaActividades = {
+            new Actividad(),
+            new Actividad(),
+            new Actividad(),
+            new Actividad()
     }; // Variable temporal hasta la creacion del objeto Actividad
 
     public VentanaModificacionActividades(int numeroPersonas, String horaActividad, LocalDate fechaActividad) {    //Formato horas [hora, minutos, segundos]
@@ -35,7 +38,9 @@ public class VentanaModificacionActividades extends JFrame {
         lblNumeroPersonas.setFont(new Font(Font.DIALOG, Font.ITALIC, 30));
 
         //CREACION Y CONFIGURACION DE LOS ELEMENTOS CON LOS QUE PUEDE INTERACTUAR EL USUARIO
-        JComboBox<String> actividades = new JComboBox<>(listaActividades);
+        JComboBox<Actividad> actividades = new JComboBox<>(listaActividades);
+
+        actividades.addActionListener(e -> logger.info("Se ha seleccionado la actividad: " + Objects.requireNonNull(actividades.getSelectedItem())));
 
         JRadioButton btnSi = new JRadioButton("Si");
         JRadioButton btnNo = new JRadioButton("No");
@@ -46,7 +51,15 @@ public class VentanaModificacionActividades extends JFrame {
         JButton btnRegistrarHora = new JButton("Registrar hora");
         JButton btnVolver = new JButton("Volver");
 
-        btnVolver.addActionListener(e -> this.dispose());
+        btnVolver.addActionListener(e -> {
+            logger.info("Se ha pulsado el botón Volver");
+            this.dispose();
+        });
+
+        btnRegistrarHora.addActionListener(e -> {
+            logger.info("Se ha pulsado el botón Registrar hora");
+            this.dispose();
+        });
 
         //CREACION DE LOS CONTENEDORES Y CONFIGURACION DE LOS MISMOS
         JPanel panelVacio = new JPanel();

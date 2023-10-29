@@ -1,24 +1,15 @@
 
 package gui;
 
-import java.awt.BorderLayout;
-import java.awt.Font;
-import java.awt.GridLayout;
-import java.awt.HeadlessException;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.JPasswordField;
-import javax.swing.JTextField;
+import javax.swing.*;
+import java.awt.*;
+import java.util.logging.Logger;
 
 public class VentanaPago extends JFrame{
 
 	private static final long serialVersionUID = 1L;
-	
+
+	private final Logger logger = Logger.getLogger(VentanaPago.class.getName());
 	private JPanel pCentro, pSur, pNorte, pNumTarjeta, pImporte, pCVV, pAbajoUsuario, pAbajoContraseña, pUsuario, pContra;
 	private JLabel lblImporte, lblNumTarjeta, lblCVV, lblTitulo, lblUsuario, lblContrasena;
 	private JTextField txtTitular, txtNumTarjeta, txtCVV, txtUsuario;
@@ -119,14 +110,16 @@ public class VentanaPago extends JFrame{
 		
 		//EVENTOS BOTONES
 		btnVolver.addActionListener((e)->{
-			
+
+			logger.info("Se ha pulsado el botón Volver");
 			new VentanaTabla();
 			this.dispose();
 			
 		});
 		
 		btnPagar.addActionListener(e ->{
-			
+
+			logger.info("Se ha pulsado el botón Pagar");
 			new VentanaProcesarPago();
 			this.dispose();
 			

@@ -1,35 +1,24 @@
 package gui;
 
-import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.Font;
-import java.awt.GridLayout;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import db.BaseDeDatos;
+import domain.Usuario;
+
+import javax.swing.*;
+import java.awt.*;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Vector;
-
-import javax.swing.JButton;
-import javax.swing.JComboBox;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-import javax.swing.JPanel;
-import javax.swing.JPasswordField;
-import javax.swing.JTextField;
-
-import db.BaseDeDatos;
-import domain.Usuario;
+import java.util.logging.Logger;
 
 public class VentanaRegistro extends JFrame{
 	
 	private static final long serialVersionUID = 1L;
 	
 	// ATRIBUTOS DE LA VENTANA
-	
+
+	private final Logger logger = Logger.getLogger(VentanaRegistro.class.getName());
 	private JPanel pSur, pCentro, pNorte, pNombre, pUsuario, pApellidos, pContra, pEdad;
 	private JTextField txtNombre, txtUsuario, txtApellidos;
 	private JLabel lblNombre, lblUsuario, lblContra, lblApellidos, lblEdad, lblTitulo;
@@ -82,10 +71,11 @@ public class VentanaRegistro extends JFrame{
 		txtNombre.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyTyped(KeyEvent e) {
-				  char j = e.getKeyChar();
-				   if ((j < 'a' || j > 'z') &&(j < 'A' || j > 'Z') &&(j > ' ') || (txtNombre.getText().length() >= 15)) {
-					   e.consume();
+				char j = e.getKeyChar();
+				if ((j < 'a' || j > 'z') &&(j < 'A' || j > 'Z') &&(j > ' ') || (txtNombre.getText().length() >= 15)) {
+					e.consume();
 				}
+				logger.info("Se ha pulsado la tecla: " + e.getKeyChar());
 			}
 		}); 
 		
@@ -101,10 +91,11 @@ public class VentanaRegistro extends JFrame{
 		txtApellidos.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyTyped(KeyEvent e) {
-				  char j = e.getKeyChar();
-				   if ((j < 'a' || j > 'z') &&(j < 'A' || j > 'Z') &&(j > ' ') || (txtApellidos.getText().length() >= 30)) {
-					   e.consume();
+				char j = e.getKeyChar();
+				if ((j < 'a' || j > 'z') &&(j < 'A' || j > 'Z') &&(j > ' ') || (txtApellidos.getText().length() >= 30)) {
+					e.consume();
 				}
+				logger.info("Se ha pulsado la tecla: " + e.getKeyChar());
 			}
 		}); 
 		
@@ -133,9 +124,10 @@ public class VentanaRegistro extends JFrame{
 		txtUsuario.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyTyped(KeyEvent e) {
-				   if ((txtUsuario.getText().length() >= 15)) {
-					   e.consume();
+				if ((txtUsuario.getText().length() >= 15)) {
+					e.consume();
 				}
+				logger.info("Se ha pulsado la tecla: " + e.getKeyChar());
 			}
 		});
 		
@@ -152,9 +144,10 @@ public class VentanaRegistro extends JFrame{
 			@SuppressWarnings("deprecation")
 			@Override
 			public void keyTyped(KeyEvent e) {
-				   if ((txtContra.getText().length() >= 30)) {
-					   e.consume();
+				if ((txtContra.getText().length() >= 30)) {
+					e.consume();
 				}
+				logger.info("Se ha pulsado la tecla: " + e.getKeyChar());
 			}
 		});
 		
@@ -208,19 +201,16 @@ public class VentanaRegistro extends JFrame{
 		
 		//EVENTOS BOTONES
 		
-		btnSalir.addActionListener(new ActionListener() {
-			
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				System.exit(0);
-				
-			}
-		});
+		btnSalir.addActionListener(e -> {
+            System.exit(0);
+            logger.info("Se ha pulsado el botón Salir");
+        });
 		
 		btnVolver.addActionListener((e)->{
 			
 			new VentanaInicioSesion();
 			this.dispose();
+			logger.info("Se ha pulsado el botón Volver");
 			
 		});
 		
@@ -231,10 +221,12 @@ public class VentanaRegistro extends JFrame{
 				BaseDeDatos.getUsuarios().add(usuario);
 				BaseDeDatos.cargarUsuariosEnFichero(ruta);
 				JOptionPane.showMessageDialog(null, "Usuario Registrado Correctamente");
+				logger.info("Usuario Registrado Correctamente");
 				new VentanaInicioSesion();
 				this.dispose();
 			}else {
 				JOptionPane.showMessageDialog(null, "Este Usuario ya existe");
+				logger.info("Se ha intentado registrar un usuario que ya existe");
 			}
 		});
 		

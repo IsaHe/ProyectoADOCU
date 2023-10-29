@@ -1,28 +1,18 @@
 package gui;
 
 
-import java.awt.BorderLayout;
-import java.awt.Component;
-import java.awt.Font;
-import java.awt.GridLayout;
-import java.awt.Rectangle;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-
-import javax.swing.ImageIcon;
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-import javax.swing.JPanel;
-import javax.swing.JPasswordField;
-import javax.swing.JTextField;
-
 import db.BaseDeDatos;
 import domain.Usuario;
 
+import javax.swing.*;
+import java.awt.*;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.logging.Logger;
+
 public class VentanaInicioSesion extends JFrame{
-	
+
+	private final Logger logger = Logger.getLogger(VentanaInicioSesion.class.getName());
 	private JPanel panelCentro, panelCentroIzq, panelSur, panelNorte, panelConstraseña, panelUsuario;
 	private JLabel lblUsuario, lblContrasena, lblTitulo, lblFoto;
 	private JTextField txtUsuario;
@@ -110,17 +100,19 @@ public class VentanaInicioSesion extends JFrame{
 			}else{
 				JOptionPane.showMessageDialog(null, "El usuario no esta registrado");
 			}
+			logger.info("Se ha pulsado el botón Iniciar Sesion");
 		});
 		
 		btnSalir.addActionListener((e)->{	
 			new VentanaValoracion();
 			this.dispose();
+			logger.info("Se ha pulsado el botón Salir");
 		});
 		
 		btnRegistrarse.addActionListener((e)->{
 			new VentanaRegistro();
 			this.dispose();
-			
+			logger.info("Se ha pulsado el botón Registrarse");
 		});
 	}
 

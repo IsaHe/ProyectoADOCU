@@ -4,8 +4,10 @@ import javax.swing.*;
 import java.awt.*;
 import java.net.URL;
 import java.util.Objects;
+import java.util.logging.Logger;
 
 public class VentanaValoracion extends JFrame {
+    Logger logger = Logger.getLogger(VentanaValoracion.class.getName());
     enum Valoracion {
         MUY_MAL, MAL, REGULAR, BIEN, MUY_BIEN
     }
@@ -16,6 +18,7 @@ public class VentanaValoracion extends JFrame {
 
         //CREACION DE ELEMENTOS Y CONTENEDORES
         JComboBox<Valoracion> valoracion = new JComboBox<>(Valoracion.values());
+        valoracion.addActionListener(e -> logger.info("Se ha seleccionado la valoración: " + Objects.requireNonNull(valoracion.getSelectedItem())));
 
         URL urlLogo = getClass().getResource("/resources/images//ADOCU.png");
         String textoExplicacionValoracionHTML = "<html><body>" +
@@ -36,7 +39,10 @@ public class VentanaValoracion extends JFrame {
         panelValoracion.setLayout(new BorderLayout());
 
         JButton btnEnviar = new JButton("Enviar");
-        btnEnviar.addActionListener(e -> dispose());
+        btnEnviar.addActionListener(e -> {
+            logger.info("Se ha pulsado el botón Enviar");
+            dispose();
+        });
 
         //ADICION DE ELEMENTOS A LOS CONTENEDORES
         panelValoracion.add(valoracion, BorderLayout.CENTER);
@@ -50,6 +56,10 @@ public class VentanaValoracion extends JFrame {
         setResizable(false);
         setLocationRelativeTo(null);
         setVisible(true);
+    }
+
+    public static void main(String[] args) {
+        new VentanaValoracion();
     }
 
 }
