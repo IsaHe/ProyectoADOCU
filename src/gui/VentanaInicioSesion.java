@@ -95,12 +95,13 @@ public class VentanaInicioSesion extends JFrame{
 			
 			Usuario usuario = new Usuario(txtUsuario.getText(), pasContrasena.getText());
 			if (BaseDeDatos.comprobarUsuario(usuario)) {
+				logger.info("Se ha iniciado sesion");
 				new VentanaTabla();
 				this.dispose();
 			}else{
 				JOptionPane.showMessageDialog(null, "El usuario no esta registrado");
+				logger.info("El usuario no esta registrado");
 			}
-			logger.info("Se ha pulsado el botón Iniciar Sesion");
 		});
 		
 		btnSalir.addActionListener((e)->{	

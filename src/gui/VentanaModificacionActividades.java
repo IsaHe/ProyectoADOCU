@@ -48,6 +48,9 @@ public class VentanaModificacionActividades extends JFrame {
         aceptarRechazarRecordatorio.add(btnSi);
         aceptarRechazarRecordatorio.add(btnNo);
 
+        btnNo.addActionListener(e -> logger.info("El usuario rechaza el recordatorio"));
+        btnSi.addActionListener(e -> logger.info("El usuario acepta el recordatorio"));
+
         JButton btnRegistrarHora = new JButton("Registrar hora");
         JButton btnVolver = new JButton("Volver");
 
