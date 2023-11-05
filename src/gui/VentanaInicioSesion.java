@@ -19,7 +19,12 @@ public class VentanaInicioSesion extends JFrame{
 	private JPasswordField pasContrasena;
 	private JButton btnInicioSesion, btnRegistrarse, btnSalir;
 	private Path ruta = Paths.get("src/io/UsuariosRegistrados.txt"); 
+	private static Usuario  usuario;
 	
+	public static Usuario getUsuario() {
+		return usuario;
+	}
+
 	public VentanaInicioSesion () {
 		
 		BaseDeDatos.obtenerUsuariosDeFichero(ruta);
@@ -93,9 +98,12 @@ public class VentanaInicioSesion extends JFrame{
 		//EVENTOS BOTONES
 		btnInicioSesion.addActionListener((e)->{
 			
-			Usuario usuario = new Usuario(txtUsuario.getText(), pasContrasena.getText());
+			usuario = new Usuario(txtUsuario.getText(), pasContrasena.getText());
 			int pos = BaseDeDatos.getUsuarios().indexOf(usuario);
 			if (BaseDeDatos.comprobarUsuario(usuario) && BaseDeDatos.getUsuarios().get(pos).getContraseña().equals(usuario.getContraseña())) {
+				usuario.setNom(BaseDeDatos.getUsuarios().get(pos).getNom());
+				usuario.setApellido(BaseDeDatos.getUsuarios().get(pos).getApellido());
+				usuario.setEdad(BaseDeDatos.getUsuarios().get(pos).getEdad());
 				logger.info("Se ha iniciado sesion");
 				new VentanaTabla();
 				this.dispose();
