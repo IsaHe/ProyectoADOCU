@@ -17,7 +17,7 @@ public class VentanaAdmin extends JFrame{
 	private JFrame VentanaAntigua, VentanaActual;
 	private JPanel pSur,pCentro, pNorte;
 	private JLabel lblTitulo;
-	private JButton btnVolver, btnVerUsuarios, btnVerActividades, btnVerPagos;
+	private JButton btnVolver, btnVerUsuarios, btnVerActividades, btnVerPagos, btnSalir;
 
 	public VentanaAdmin(JFrame va){
 		super();
@@ -40,24 +40,37 @@ public class VentanaAdmin extends JFrame{
 		lblTitulo.setFont(new Font(Font.SERIF, Font.PLAIN, 30));
 		lblTitulo.setForeground(Color.BLACK);
 		
-		btnVolver = new JButton("SALIR");
+		btnSalir = new JButton("SALIR");
+		btnVolver = new JButton("VOLVER");
 		btnVerUsuarios = new JButton("VER USUARIOS");
 		btnVerActividades = new JButton("VER ACTIVIDADES");
 		btnVerPagos = new JButton("VER PAGOS");
 		
 		pNorte.add(lblTitulo);
+		pSur.add(btnSalir);
 		pSur.add(btnVolver);
 		pCentro.add(btnVerUsuarios);
 		pCentro.add(btnVerActividades);
 		pCentro.add(btnVerPagos);
 		
-		btnVolver.addActionListener(new ActionListener() {
+		btnSalir.addActionListener(new ActionListener() {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				System.exit(0);
 			}
 		});
+		
+		btnVolver.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				new VentanaInicioSesion();
+				VentanaActual.setVisible(false);
+				
+			}
+		});
+		
 		//TODO
 		btnVerUsuarios.addActionListener(new ActionListener() {
 			
@@ -66,6 +79,7 @@ public class VentanaAdmin extends JFrame{
 				
 			}
 		});
+		
 		//TODO
 		btnVerActividades.addActionListener(new ActionListener() {
 			
@@ -74,6 +88,7 @@ public class VentanaAdmin extends JFrame{
 		
 			}
 		});
+		
 		//TODO
 		btnVerPagos.addActionListener(new ActionListener() {
 			

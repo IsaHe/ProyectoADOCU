@@ -124,6 +124,9 @@ public class VentanaInicioSesion extends JFrame{
 				JOptionPane.showMessageDialog(null, "El usuario no esta registrado");
 				logger.info("El usuario no esta registrado");
 			}
+			
+			txtUsuario.setText("");
+			pasContrasena.setText("");
 		});
 		
 		btnSalir.addActionListener((e)->{	
