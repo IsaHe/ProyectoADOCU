@@ -18,6 +18,7 @@ public class VentanaInicioSesion extends JFrame{
 	private JTextField txtUsuario;
 	private JPasswordField pasContrasena;
 	private JButton btnInicioSesion, btnRegistrarse, btnSalir;
+	private JFrame VentanaActual;
 	private Path ruta = Paths.get("src/io/UsuariosRegistrados.txt"); 
 	private static Usuario  usuario;
 	
@@ -27,6 +28,7 @@ public class VentanaInicioSesion extends JFrame{
 
 	public VentanaInicioSesion () {
 		
+		VentanaActual = this;
 		BaseDeDatos.obtenerUsuariosDeFichero(ruta);
 		
 		//FUNCIONES VENTANA
@@ -99,8 +101,16 @@ public class VentanaInicioSesion extends JFrame{
 		btnInicioSesion.addActionListener((e)->{
 			
 			usuario = new Usuario(txtUsuario.getText(), pasContrasena.getText());
+			String contrasena = pasContrasena.getText();
+			String usuario1 = txtUsuario.getText();
 			int pos = BaseDeDatos.getUsuarios().indexOf(usuario);
-			if (BaseDeDatos.comprobarUsuario(usuario) && BaseDeDatos.getUsuarios().get(pos).getContraseña().equals(usuario.getContraseña())) {
+			if(usuario1.equals("Admin") && contrasena.equals("111")) {
+				usuario.setNom("Admin");
+				usuario.setApellido("Admin");
+				usuario.setEdad(20);
+				new VentanaAdmin(VentanaActual);
+				VentanaActual.setVisible(false);
+			}else if (BaseDeDatos.comprobarUsuario(usuario) && BaseDeDatos.getUsuarios().get(pos).getContraseña().equals(usuario.getContraseña())) {
 				usuario.setNom(BaseDeDatos.getUsuarios().get(pos).getNom());
 				usuario.setApellido(BaseDeDatos.getUsuarios().get(pos).getApellido());
 				usuario.setEdad(BaseDeDatos.getUsuarios().get(pos).getEdad());
