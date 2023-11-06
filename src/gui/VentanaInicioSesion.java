@@ -30,6 +30,8 @@ public class VentanaInicioSesion extends JFrame{
 		
 		VentanaActual = this;
 		BaseDeDatos.obtenerUsuariosDeFichero(ruta);
+		BaseDeDatos.obtenerActividadesDeFichero(Paths.get("src/io/ListaActividades.txt"));
+		System.out.println(BaseDeDatos.getActividades());
 		
 		//FUNCIONES VENTANA
 		setExtendedState(MAXIMIZED_BOTH);

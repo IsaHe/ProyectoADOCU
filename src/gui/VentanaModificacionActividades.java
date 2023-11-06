@@ -1,5 +1,6 @@
 package gui;
 
+import db.BaseDeDatos;
 import domain.Actividad;
 
 import javax.swing.*;
@@ -10,15 +11,10 @@ import java.util.logging.Logger;
 
 public class VentanaModificacionActividades extends JFrame {
     private static final Logger logger = Logger.getLogger(VentanaModificacionActividades.class.getName());
-    Actividad[] listaActividades = {
-            new Actividad(),
-            new Actividad(),
-            new Actividad(),
-            new Actividad()
-    }; // Variable temporal hasta la creacion del objeto Actividad
+    Actividad[] listaActividades;
+    int numeroMaxPersonas = 0;
 
     public VentanaModificacionActividades(int numeroPersonas, String horaActividad, LocalDate fechaActividad) {    //Formato horas [hora, minutos, segundos]
-        int numeroMaxPersonas = 10; // Variable temporal hasta la creacion del objeto Actividad
         setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
         setTitle("Modificación de actividades");
         setIconImage(new ImageIcon(Objects.requireNonNull(getClass().getResource("/resources/images//ADOCU.png"))).getImage());
@@ -38,7 +34,16 @@ public class VentanaModificacionActividades extends JFrame {
         lblNumeroPersonas.setFont(new Font(Font.DIALOG, Font.ITALIC, 30));
 
         //CREACION Y CONFIGURACION DE LOS ELEMENTOS CON LOS QUE PUEDE INTERACTUAR EL USUARIO
+        String dia = convertirDiaSemana(fechaActividad.getDayOfWeek().toString());
+        listaActividades = BaseDeDatos.getActividades().get(dia).toArray(new Actividad[0]);
+
         JComboBox<Actividad> actividades = new JComboBox<>(listaActividades);
+        actividades.addActionListener(e -> {
+            Actividad actividad = (Actividad) actividades.getSelectedItem();
+            assert actividad != null;
+            numeroMaxPersonas = actividad.getNumeroParticipantes();
+            lblNumeroPersonas.setText("Número de personas: " + numeroPersonas + "/" + numeroMaxPersonas);
+        });
 
         actividades.addActionListener(e -> logger.info("Se ha seleccionado la actividad: " + Objects.requireNonNull(actividades.getSelectedItem())));
 
@@ -97,5 +102,18 @@ public class VentanaModificacionActividades extends JFrame {
         setResizable(false);
         setLocationRelativeTo(null);
         setVisible(true);
+    }
+
+    private String convertirDiaSemana(String dia) {
+        return switch (dia) {
+            case "MONDAY" -> "Lunes";
+            case "TUESDAY" -> "Martes";
+            case "WEDNESDAY" -> "Miercoles";
+            case "THURSDAY" -> "Jueves";
+            case "FRIDAY" -> "Viernes";
+            case "SATURDAY" -> "Sabado";
+            case "SUNDAY" -> "Domingo";
+            default -> "";
+        };
     }
 }

@@ -1,0 +1,7 @@
+Miercoles;Gimnasia,8;Alpinismo,2;Patinaje,5;Judo,3;Running,6;Zumba,5;Airsoft,4;Taekwondo,6;Triatlon,5;
+Martes;Golf,3;Boxeo,5;Paintball,8;Tenis,0;Paseo,9;Pesca,4;Ajedrez,1;Paracaidismo,2;Pilates,5;Taekwondo,3;
+Viernes;Senderismo,1;Musculacion,2;Patinaje,1;Boxeo,2;Balonvolea,2;Paintball,1;Judo,0;Vela,2;
+Lunes;Parapente,3;Paintball,0;Esqui,7;Baloncesto,2;Zumba,4;Ajedrez,5;Espeleologia,5;Yoga,3;Barranquismo,6;Taekwondo,0;
+Domingo;Gimnasia,7;Atletismo,7;Patinaje,3;Paintball,1;Airsoft,5;Ciclismo,4;Vela,7;Taekwondo,0;Padel,1;
+Jueves;Gimnasia,9;Billar,7;Atletismo,6;Alpinismo,4;Paintball,0;Puenting,0;Escalada,5;Natacion,6;Voleibol,1;
+Sabado;Buceo,0;Patinaje,0;Boxeo,8;Lucha,8;Tenis,8;Airsoft,3;Espeleologia,6;Voleibol,0;Snowboard,4;

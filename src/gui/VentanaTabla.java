@@ -142,7 +142,7 @@ public class VentanaTabla extends JFrame{
 		
 			@Override
 			public void mouseClicked(MouseEvent e) {
-			
+
 				Point p = e.getPoint();
 				fila = tabla.rowAtPoint(p);
 				columna = tabla.columnAtPoint(p);
@@ -150,7 +150,7 @@ public class VentanaTabla extends JFrame{
 					new VentanaModificacionActividades(10, (String) tabla.getValueAt(fila, 0), LocalDate.parse(tabla.getColumnName(columna)));
 				}
 				e.consume();
-				logger.info("Se ha pulsado la celda: " + tabla.getValueAt(fila, columna));
+				logger.info("Se ha pulsado la celda en la fila: " + fila + " y columna: " + columna);
 			}
 		});
 		

@@ -1,20 +1,13 @@
 package domain;
 
-import java.time.LocalDate;
-import java.util.Arrays;
-
 public class Actividad {
     private String nombre;
     private int numeroParticipantes;
-    private String[] diasDeLaSemana;
-    private LocalDate fecha;
-    
-	public Actividad(String nombre, int numeroParticipantes, String[] diasDeLaSemana, LocalDate fecha) {
+
+	public Actividad(String nombre, int numeroParticipantes) {
 		super();
 		this.nombre = nombre;
 		this.numeroParticipantes = numeroParticipantes;
-		this.diasDeLaSemana = diasDeLaSemana;
-		this.fecha = fecha;
 	}
 	
 	public Actividad() {
@@ -32,25 +25,22 @@ public class Actividad {
 	public void setNumeroParticipantes(int numeroParticipantes) {
 		this.numeroParticipantes = numeroParticipantes;
 	}
-	public String[] getDiasDeLaSemana() {
-		return diasDeLaSemana;
-	}
-	public void setDiasDeLaSemana(String[] diasDeLaSemana) {
-		this.diasDeLaSemana = diasDeLaSemana;
-	}
-	public LocalDate getFecha() {
-		return fecha;
-	}
-	public void setFecha(LocalDate fecha) {
-		this.fecha = fecha;
-	}
+
 	@Override
 	public String toString() {
-		return "Actividad [nombre=" + nombre + ", numeroParticipantes=" + numeroParticipantes + ", diasDeLaSemana="
-				+ Arrays.toString(diasDeLaSemana) + ", fecha=" + fecha + "]";
+		return nombre + "( " + "numero maximo de participantes: " + numeroParticipantes + " )";
 	}
-    
-    
-    
-    
+
+	@Override
+	public int hashCode() {
+		return nombre.hashCode();
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (obj instanceof Actividad){
+			return nombre.equals(((Actividad) obj).getNombre());
+		}
+		return false;
+	}
 }
