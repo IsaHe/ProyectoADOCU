@@ -1,11 +1,15 @@
 package gui;
 
+import db.BaseDeDatos;
+import domain.Actividad;
+
 import javax.swing.*;
 import javax.swing.table.AbstractTableModel;
 import javax.swing.table.TableCellRenderer;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.nio.file.Paths;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -52,18 +56,28 @@ public class VentanaTabla extends JFrame{
 			public int getRowCount() {
 				return horas.size();
 			}
-					
+
+			@Override
+			public void setValueAt(Object aValue, int rowIndex, int columnIndex) {
+				BaseDeDatos.setActividad((Actividad) aValue, columnIndex, rowIndex);
+				BaseDeDatos.cargarActividadesSemanalesEnFichero(Paths.get("src/io/ActividadesSemanales.txt"));
+				fireTableCellUpdated(rowIndex, columnIndex);
+			}
+
 			//Valor de fila y columna
 			@Override
 			public Object getValueAt(int rowIndex, int columnIndex) {
-				if (columnIndex == 0) {
-					String hora = horas.get(rowIndex);
-					return hora;
+				if (columnIndex != 0) {
+					for (int i = 0; i < 5; i++) {
+						if (BaseDeDatos.getActividadesSemanales()[columnIndex-1][rowIndex][i] != null) {
+							return BaseDeDatos.getActividadesSemanales()[columnIndex-1][rowIndex][i];
+						}
+					}
+					return "";
 				}
-				return "";
-						
+				return horas.get(rowIndex);
 			}
-					
+
 			//Es la celda editable
 			@Override
 			public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -71,6 +85,8 @@ public class VentanaTabla extends JFrame{
 						
 			}
 		}
+
+
 				
 		//CLASE DE RENDER
 		class RenderTabla implements TableCellRenderer{
@@ -147,7 +163,7 @@ public class VentanaTabla extends JFrame{
 				fila = tabla.rowAtPoint(p);
 				columna = tabla.columnAtPoint(p);
 				if (columna != 0) {
-					new VentanaModificacionActividades(10, (String) tabla.getValueAt(fila, 0), LocalDate.parse(tabla.getColumnName(columna)));
+					new VentanaModificacionActividades(10, (String) tabla.getValueAt(fila, 0), LocalDate.parse(tabla.getColumnName(columna)), VentanaTabla.this);
 				}
 				e.consume();
 				logger.info("Se ha pulsado la celda en la fila: " + fila + " y columna: " + columna);
@@ -171,5 +187,8 @@ public class VentanaTabla extends JFrame{
 			
 		});
 	}
-	
+
+	public JTable getTabla() {
+		return tabla;
+	}
 }

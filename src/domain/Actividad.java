@@ -9,10 +9,11 @@ public class Actividad {
 		this.nombre = nombre;
 		this.numeroParticipantes = numeroParticipantes;
 	}
-	
+
 	public Actividad() {
 		super();
 	}
+
 	public String getNombre() {
 		return nombre;
 	}
@@ -26,9 +27,13 @@ public class Actividad {
 		this.numeroParticipantes = numeroParticipantes;
 	}
 
+	public String toStringBd() {
+		return nombre + "," + numeroParticipantes;
+	}
+
 	@Override
 	public String toString() {
-		return nombre + "( " + "numero maximo de participantes: " + numeroParticipantes + " )";
+		return nombre;
 	}
 
 	@Override

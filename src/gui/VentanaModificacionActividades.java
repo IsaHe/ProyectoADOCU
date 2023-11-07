@@ -14,7 +14,7 @@ public class VentanaModificacionActividades extends JFrame {
     Actividad[] listaActividades;
     int numeroMaxPersonas = 0;
 
-    public VentanaModificacionActividades(int numeroPersonas, String horaActividad, LocalDate fechaActividad) {    //Formato horas [hora, minutos, segundos]
+    public VentanaModificacionActividades(int numeroPersonas, String horaActividad, LocalDate fechaActividad, VentanaTabla ventanaTabla) {    //Formato horas [hora, minutos, segundos]
         setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
         setTitle("Modificación de actividades");
         setIconImage(new ImageIcon(Objects.requireNonNull(getClass().getResource("/resources/images//ADOCU.png"))).getImage());
@@ -65,6 +65,7 @@ public class VentanaModificacionActividades extends JFrame {
         });
 
         btnRegistrarHora.addActionListener(e -> {
+            ventanaTabla.getTabla().setValueAt(actividades.getSelectedItem(), localizarHoraEnTabla(horaActividad), localizarFechaEnTabla(fechaActividad));
             logger.info("Se ha pulsado el botón Registrar hora");
             this.dispose();
         });
@@ -97,8 +98,7 @@ public class VentanaModificacionActividades extends JFrame {
         add(btnRegistrarHora);
 
         //CONFIGURACION DE LA VENTANA
-//        setExtendedState(MAXIMIZED_BOTH);
-        pack(); //No se pone en pantalla completa que esta pensado para salir en pequeño pequeño
+        pack();
         setResizable(false);
         setLocationRelativeTo(null);
         setVisible(true);
@@ -115,5 +115,40 @@ public class VentanaModificacionActividades extends JFrame {
             case "SUNDAY" -> "Domingo";
             default -> "";
         };
+    }
+
+    private int localizarHoraEnTabla(String hora) {
+    	return switch (hora) {
+    		case "8:10 - 9:00" -> 0;
+    		case "9:10 - 10:00" -> 1;
+    		case "10:10 - 11:00" -> 2;
+    		case "11:10 - 12:00" -> 3;
+    		case "12:10 - 13:00" -> 4;
+    		case "13:10 - 14:00" -> 5;
+    		case "17:10 - 18:00" -> 6;
+    		case "18:10 - 19:00" -> 7;
+    		case "19:10 - 20:00" -> 8;
+    		case "20:10 - 21:00" -> 9;
+            default -> -1;
+    	};
+    }
+
+    private int localizarFechaEnTabla(LocalDate fecha) {
+        if (Objects.equals(fecha, LocalDate.now())) {
+            return 1;
+        }
+        if (Objects.equals(fecha, LocalDate.now().plusDays(1))) {
+            return 2;
+        }
+        if (Objects.equals(fecha, LocalDate.now().plusDays(2))) {
+            return 3;
+        }
+        if (Objects.equals(fecha, LocalDate.now().plusDays(3))) {
+            return 4;
+        }
+        if (Objects.equals(fecha, LocalDate.now().plusDays(4))) {
+            return 5;
+        }
+        return 6;
     }
 }

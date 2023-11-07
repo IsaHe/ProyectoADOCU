@@ -31,8 +31,8 @@ public class VentanaInicioSesion extends JFrame{
 		VentanaActual = this;
 		BaseDeDatos.obtenerUsuariosDeFichero(ruta);
 		BaseDeDatos.obtenerActividadesDeFichero(Paths.get("src/io/ListaActividades.txt"));
-		System.out.println(BaseDeDatos.getActividades());
-		
+		BaseDeDatos.obtenerActividadesSemanalesDeFichero(Paths.get("src/io/ActividadesSemanales.txt"));
+
 		//FUNCIONES VENTANA
 		setExtendedState(MAXIMIZED_BOTH);
 		setTitle("ADOCU");

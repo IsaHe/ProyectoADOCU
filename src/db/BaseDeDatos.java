@@ -15,10 +15,9 @@ public class BaseDeDatos {
 
 	private static List<Usuario> usuarios = new ArrayList<>();
 	private static Map<String, Set<Actividad>> actividades = new HashMap<>();
+	private static Actividad[][][] actividadesSemanales = new Actividad[6][10][5];
 	static Logger logger = Logger.getLogger(BaseDeDatos.class.getName());
 
-	static Random r = new Random();
-	
 	public static void cargarUsuariosEnFichero(Path ruta) {
 		
 		try {
@@ -74,9 +73,58 @@ public class BaseDeDatos {
 		}
 
 	}
-	
+
+	public static void cargarActividadesSemanalesEnFichero(Path ruta) {
+
+        try {
+			PrintWriter pw = new PrintWriter(new FileOutputStream(ruta.toFile()));
+			for (int i = 0; i < 6; i++) {
+				for (int j = 0; j < 10; j++) {
+					for (int k = 0; k < 5; k++) {
+						if (actividadesSemanales[i][j][k] != null) {
+							pw.write(actividadesSemanales[i][j][k].toStringBd() + ":");
+						}
+					}
+					pw.write(";");
+				}
+				pw.write("\n");
+			}
+			pw.close();
+		} catch (FileNotFoundException e) {
+			logger.warning("Error al cargar las actividades semanales al fichero");
+		}
+	}
+
+	public static void obtenerActividadesSemanalesDeFichero(Path ruta) {
+
+		actividadesSemanales = new Actividad[6][10][5];
+		try {
+			Scanner sc = new Scanner(new FileInputStream(ruta.toFile()));
+			int i = 0;
+			while (sc.hasNext()) {
+				String linea = sc.next();
+				String[] partes = linea.split(";");
+				for (int j = 0; j < partes.length; j++) {
+					String[] partesActividad = partes[j].split(":");
+					for(int k = 0; k < partesActividad.length; k++) {
+						if (!partesActividad[k].isEmpty()) {
+							String[] partesActividad2 = partesActividad[k].split(",");
+							Actividad actividad = new Actividad(partesActividad2[0], Integer.parseInt(partesActividad2[1]));
+							actividadesSemanales[i][j][k] = actividad;
+						}
+					}
+				}
+				i++;
+			}
+			sc.close();
+		} catch (FileNotFoundException e) {
+			logger.warning("Error al obtener las actividades semanales del fichero");
+		}
+
+	}
+
 	public static boolean comprobarUsuario(Usuario usuario) {
-		return usuarios.contains(usuario);	
+		return usuarios.contains(usuario);
 	}
 
 	public static List<Usuario> getUsuarios() {
@@ -86,5 +134,18 @@ public class BaseDeDatos {
 	public static Map<String, Set<Actividad>> getActividades() {
 		return actividades;
 	}
-	
+
+	public static Actividad[][][] getActividadesSemanales() {
+		return actividadesSemanales;
+	}
+
+	public static void setActividad(Actividad a, int i, int j) {
+		for (int l = 0; l < 5; l++) {
+			if (actividadesSemanales[i][j][l] == null) {
+				actividadesSemanales[i][j][l] = a;
+				break;
+			}
+		}
+		Logger.getLogger(BaseDeDatos.class.getName()).warning("Maximo de actividades alcanzado");
+	}
 }
