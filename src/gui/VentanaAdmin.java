@@ -14,23 +14,27 @@ import javax.swing.JPanel;
 
 public class VentanaAdmin extends JFrame{
 	
-	private JFrame VentanaAntigua, VentanaActual;
+	private static final long serialVersionUID = 1L;
+	
+	JFrame ventanaActual = this;
 	private JPanel pSur,pCentro, pNorte;
 	private JLabel lblTitulo;
 	private JButton btnVolver, btnVerUsuarios, btnVerActividades, btnVerPagos, btnSalir;
 
-	public VentanaAdmin(JFrame va){
+	public VentanaAdmin(){
 		super();
-		VentanaAntigua = va;
-		VentanaActual = this;
 		
-		setBounds(200, 200, 400, 600);
+		setBounds(200, 200, 400, 550);
+		setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
+		setResizable(false);
 		
 		pSur = new JPanel();
 		pCentro = new JPanel();
 		pNorte = new JPanel();
 		
-		pCentro.setLayout(new GridLayout(0, 1));
+		
+		pCentro.setLayout(new GridLayout(9, 1));
+		
 		
 		getContentPane().add(pSur, BorderLayout.SOUTH);
 		getContentPane().add(pCentro, BorderLayout.CENTER);
@@ -49,9 +53,13 @@ public class VentanaAdmin extends JFrame{
 		pNorte.add(lblTitulo);
 		pSur.add(btnSalir);
 		pSur.add(btnVolver);
+		pCentro.add(new JPanel());
 		pCentro.add(btnVerUsuarios);
+		pCentro.add(new JPanel());
 		pCentro.add(btnVerActividades);
+		pCentro.add(new JPanel());
 		pCentro.add(btnVerPagos);
+		pCentro.add(new JPanel());
 		
 		btnSalir.addActionListener(new ActionListener() {
 			
@@ -65,8 +73,9 @@ public class VentanaAdmin extends JFrame{
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				ventanaActual.dispose();
 				new VentanaInicioSesion();
-				VentanaActual.setVisible(false);
+				
 				
 			}
 		});

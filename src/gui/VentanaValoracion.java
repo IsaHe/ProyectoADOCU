@@ -41,7 +41,7 @@ public class VentanaValoracion extends JFrame {
         JButton btnEnviar = new JButton("Enviar");
         btnEnviar.addActionListener(e -> {
             logger.info("Se ha pulsado el botón Enviar");
-            dispose();
+            System.exit(0);
         });
 
         //ADICION DE ELEMENTOS A LOS CONTENEDORES
@@ -56,10 +56,6 @@ public class VentanaValoracion extends JFrame {
         setResizable(false);
         setLocationRelativeTo(null);
         setVisible(true);
-    }
-
-    public static void main(String[] args) {
-        new VentanaValoracion();
     }
 
 }
