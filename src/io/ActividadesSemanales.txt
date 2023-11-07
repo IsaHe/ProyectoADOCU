@@ -1,6 +1,6 @@
-;;;;;;;;;;
-;;;;;;;;;;
-;;;;;;;;;;
-;;;;;;Senderismo,1;;;;
-;;;;;;;;;;
+;;;Gimnasia,8;;;;Gimnasia,8;;;
+;Natacion,6;Paintball,0;Gimnasia,9;;;;;;Gimnasia,9;
+;;;;Gimnasia,9;;Gimnasia,9;Gimnasia,9;;;
+;;Buceo,0;;;Senderismo,1;Senderismo,1;;;Senderismo,1;
+;;Taekwondo,0;;;Gimnasia,7;;;;Gimnasia,7;
 ;;;;;;;;;;

@@ -80,7 +80,13 @@ public class VentanaTabla extends JFrame{
 			@Override
 			public boolean isCellEditable(int rowIndex, int columnIndex) {
 				return false;
-						
+
+			}
+
+			@Override
+			public void fireTableCellUpdated(int row, int column) {
+				super.fireTableCellUpdated(row, column);
+				tabla.repaint();
 			}
 		}
 

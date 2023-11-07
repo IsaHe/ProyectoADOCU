@@ -135,20 +135,20 @@ public class VentanaModificacionActividades extends JFrame {
 
     private int localizarFechaEnTabla(LocalDate fecha) {
         if (Objects.equals(fecha, LocalDate.now())) {
-            return 1;
+            return 0;
         }
         if (Objects.equals(fecha, LocalDate.now().plusDays(1))) {
-            return 2;
+            return 1;
         }
         if (Objects.equals(fecha, LocalDate.now().plusDays(2))) {
-            return 3;
+            return 2;
         }
         if (Objects.equals(fecha, LocalDate.now().plusDays(3))) {
-            return 4;
+            return 3;
         }
         if (Objects.equals(fecha, LocalDate.now().plusDays(4))) {
-            return 5;
+            return 4;
         }
-        return 6;
+        return 5;
     }
 }
