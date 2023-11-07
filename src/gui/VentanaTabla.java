@@ -68,10 +68,8 @@ public class VentanaTabla extends JFrame{
 			@Override
 			public Object getValueAt(int rowIndex, int columnIndex) {
 				if (columnIndex != 0) {
-					for (int i = 0; i < 5; i++) {
-						if (BaseDeDatos.getActividadesSemanales()[columnIndex-1][rowIndex][i] != null) {
-							return BaseDeDatos.getActividadesSemanales()[columnIndex-1][rowIndex][i];
-						}
+					if (BaseDeDatos.getActividadesSemanales()[columnIndex-1][rowIndex] != null) {
+						return BaseDeDatos.getActividadesSemanales()[columnIndex-1][rowIndex];
 					}
 					return "";
 				}
@@ -162,7 +160,7 @@ public class VentanaTabla extends JFrame{
 				Point p = e.getPoint();
 				fila = tabla.rowAtPoint(p);
 				columna = tabla.columnAtPoint(p);
-				if (columna != 0) {
+				if (columna != 0 && tabla.getValueAt(fila, columna) == "") {
 					new VentanaModificacionActividades(10, (String) tabla.getValueAt(fila, 0), LocalDate.parse(tabla.getColumnName(columna)), VentanaTabla.this);
 				}
 				e.consume();

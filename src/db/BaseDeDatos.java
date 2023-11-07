@@ -15,7 +15,7 @@ public class BaseDeDatos {
 
 	private static List<Usuario> usuarios = new ArrayList<>();
 	private static Map<String, Set<Actividad>> actividades = new HashMap<>();
-	private static Actividad[][][] actividadesSemanales = new Actividad[6][10][5];
+	private static Actividad[][] actividadesSemanales = new Actividad[6][10];
 	static Logger logger = Logger.getLogger(BaseDeDatos.class.getName());
 
 	public static void cargarUsuariosEnFichero(Path ruta) {
@@ -80,10 +80,8 @@ public class BaseDeDatos {
 			PrintWriter pw = new PrintWriter(new FileOutputStream(ruta.toFile()));
 			for (int i = 0; i < 6; i++) {
 				for (int j = 0; j < 10; j++) {
-					for (int k = 0; k < 5; k++) {
-						if (actividadesSemanales[i][j][k] != null) {
-							pw.write(actividadesSemanales[i][j][k].toStringBd() + ":");
-						}
+					if (actividadesSemanales[i][j] != null) {
+						pw.write(actividadesSemanales[i][j].toStringBd());
 					}
 					pw.write(";");
 				}
@@ -97,7 +95,7 @@ public class BaseDeDatos {
 
 	public static void obtenerActividadesSemanalesDeFichero(Path ruta) {
 
-		actividadesSemanales = new Actividad[6][10][5];
+		actividadesSemanales = new Actividad[6][10];
 		try {
 			Scanner sc = new Scanner(new FileInputStream(ruta.toFile()));
 			int i = 0;
@@ -105,13 +103,10 @@ public class BaseDeDatos {
 				String linea = sc.next();
 				String[] partes = linea.split(";");
 				for (int j = 0; j < partes.length; j++) {
-					String[] partesActividad = partes[j].split(":");
-					for(int k = 0; k < partesActividad.length; k++) {
-						if (!partesActividad[k].isEmpty()) {
-							String[] partesActividad2 = partesActividad[k].split(",");
-							Actividad actividad = new Actividad(partesActividad2[0], Integer.parseInt(partesActividad2[1]));
-							actividadesSemanales[i][j][k] = actividad;
-						}
+					if (!partes[j].isEmpty()) {
+						String[] partesActividad = partes[j].split(",");
+						Actividad actividad = new Actividad(partesActividad[0], Integer.parseInt(partesActividad[1]));
+						actividadesSemanales[i][j] = actividad;
 					}
 				}
 				i++;
@@ -135,17 +130,11 @@ public class BaseDeDatos {
 		return actividades;
 	}
 
-	public static Actividad[][][] getActividadesSemanales() {
+	public static Actividad[][] getActividadesSemanales() {
 		return actividadesSemanales;
 	}
 
 	public static void setActividad(Actividad a, int i, int j) {
-		for (int l = 0; l < 5; l++) {
-			if (actividadesSemanales[i][j][l] == null) {
-				actividadesSemanales[i][j][l] = a;
-				break;
-			}
-		}
-		Logger.getLogger(BaseDeDatos.class.getName()).warning("Maximo de actividades alcanzado");
+		actividadesSemanales[i][j] = a;
 	}
 }
