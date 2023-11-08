@@ -6,6 +6,7 @@ import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.logging.Logger;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -16,13 +17,17 @@ public class VentanaAdmin extends JFrame{
 	
 	private static final long serialVersionUID = 1L;
 	
+	private final Logger logger = Logger.getLogger(VentanaAdmin.class.getName());
 	JFrame ventanaActual = this;
 	private JPanel pSur,pCentro, pNorte;
 	private JLabel lblTitulo;
 	private JButton btnVolver, btnVerUsuarios, btnVerActividades, btnVerPagos, btnSalir;
+	private JFrame VentanaActual;
 
 	public VentanaAdmin(){
 		super();
+		
+		VentanaActual = this;
 		
 		setBounds(200, 200, 400, 550);
 		setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
@@ -66,6 +71,7 @@ public class VentanaAdmin extends JFrame{
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				System.exit(0);
+				logger.info("Se ha pulsado el boton para salir");
 			}
 		});
 		
@@ -75,7 +81,7 @@ public class VentanaAdmin extends JFrame{
 			public void actionPerformed(ActionEvent e) {
 				ventanaActual.dispose();
 				new VentanaInicioSesion();
-				
+				logger.info("Se ha pulsado el boton para volver a la VentanaInicioSesion");
 				
 			}
 		});
@@ -85,6 +91,9 @@ public class VentanaAdmin extends JFrame{
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				new VentanaUsuario_Admin(VentanaActual);
+				VentanaActual.dispose();
+				logger.info("Se ha pulsado el boton para ver los usuarios");
 				
 			}
 		});

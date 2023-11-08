@@ -112,6 +112,7 @@ public class VentanaInicioSesion extends JFrame{
 				usuario.setEdad(20);
 				new VentanaAdmin();
 				VentanaActual.setVisible(false);
+				logger.info("Se ha iniciado Sesion con el admin");
 			}else if (BaseDeDatos.comprobarUsuario(usuario) && BaseDeDatos.getUsuarios().get(pos).getContraseña().equals(usuario.getContraseña())) {
 				usuario.setNom(BaseDeDatos.getUsuarios().get(pos).getNom());
 				usuario.setApellido(BaseDeDatos.getUsuarios().get(pos).getApellido());
