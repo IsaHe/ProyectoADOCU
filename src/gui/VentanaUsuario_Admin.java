@@ -1,6 +1,8 @@
 package gui;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Font;
 import java.awt.ScrollPane;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -8,6 +10,7 @@ import java.awt.event.ActionListener;
 import javax.swing.DefaultListModel;
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JPanel;
 
@@ -16,6 +19,7 @@ import domain.Usuario;
 public class VentanaUsuario_Admin extends JFrame{
 	
 	private JPanel pCentro, pTitulo, pSur;
+	private JLabel lblTitulo;
 	private JList<Usuario> lUsu;
 	private DefaultListModel<Usuario> modeloLista;
 	private ScrollPane scroll;
@@ -38,6 +42,9 @@ public class VentanaUsuario_Admin extends JFrame{
 		getContentPane().add(pTitulo, BorderLayout.NORTH);
 		getContentPane().add(pSur, BorderLayout.SOUTH);
 		
+		lblTitulo = new JLabel("USUARIOS REGISTRADOS");
+		lblTitulo.setFont(new Font(Font.SERIF, Font.PLAIN, 30));
+		lblTitulo.setForeground(Color.BLACK);
 		
 		btnSalir = new JButton("SALIR");
 		btnVolver = new JButton("VOLVER");
@@ -50,6 +57,7 @@ public class VentanaUsuario_Admin extends JFrame{
 		pCentro.add(scroll);
 		pSur.add(btnVolver);
 		pSur.add(btnSalir);
+		pTitulo.add(lblTitulo);
 		
 		btnSalir.addActionListener(new ActionListener() {
 			

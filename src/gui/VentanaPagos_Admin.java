@@ -1,21 +1,26 @@
 package gui;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Font;
 import java.awt.ScrollPane;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.DefaultListModel;
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JList;
 import javax.swing.JPanel;
-import javax.swing.JTable;
-import javax.swing.table.DefaultTableModel;
 
 public class VentanaPagos_Admin extends JFrame{
 	
+	private static final long serialVersionUID = 1L;
 	private JPanel pCentro, pTitulo, pSur;
-	private JTable tActividad;
-	private DefaultTableModel modeloTabla;
+	private JLabel lblTitulo;
+	private JList<Integer> lPagos;
+	private DefaultListModel<Integer> modeloLista;
 	private ScrollPane scroll;
 	private JButton btnVolver, btnSalir;
 	private JFrame VentanaAntigua, VentanaActual;
@@ -36,18 +41,22 @@ public class VentanaPagos_Admin extends JFrame{
 		getContentPane().add(pTitulo, BorderLayout.NORTH);
 		getContentPane().add(pSur, BorderLayout.SOUTH);
 		
+		lblTitulo = new JLabel("PAGOS REGISTRADOS");
+		lblTitulo.setFont(new Font(Font.SERIF, Font.PLAIN, 30));
+		lblTitulo.setForeground(Color.BLACK);
 		
 		btnSalir = new JButton("SALIR");
 		btnVolver = new JButton("VOLVER");
 		
-		modeloTabla = new DefaultTableModel();
-		tActividad = new JTable(modeloTabla);
+		modeloLista = new DefaultListModel<Integer>();
+		lPagos = new JList<Integer>(modeloLista);
 		scroll = new ScrollPane();
-		scroll.add(tActividad);
+		scroll.add(lPagos);
 		
 		pCentro.add(scroll);
 		pSur.add(btnVolver);
 		pSur.add(btnSalir);
+		pTitulo.add(lblTitulo);
 		
 		btnSalir.addActionListener(new ActionListener() {
 			
