@@ -5,24 +5,23 @@ import java.awt.ScrollPane;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import javax.swing.DefaultListModel;
 import javax.swing.JButton;
 import javax.swing.JFrame;
-import javax.swing.JList;
 import javax.swing.JPanel;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
 
 import domain.Usuario;
 
-public class VentanaUsuario_Admin extends JFrame{
-	
+public class VentanaActividad_Admin extends JFrame{
 	private JPanel pCentro, pTitulo, pSur;
-	private JList<Usuario> lUsu;
-	private DefaultListModel<Usuario> modeloLista;
+	private JTable tActividad;
+	private DefaultTableModel modeloTabla;
 	private ScrollPane scroll;
 	private JButton btnVolver, btnSalir;
 	private JFrame VentanaAntigua, VentanaActual;
 	
-	public VentanaUsuario_Admin(JFrame va) {
+	public VentanaActividad_Admin(JFrame va) {
 		
 		VentanaActual = this;
 		VentanaAntigua = va;
@@ -42,10 +41,10 @@ public class VentanaUsuario_Admin extends JFrame{
 		btnSalir = new JButton("SALIR");
 		btnVolver = new JButton("VOLVER");
 		
-		modeloLista = new DefaultListModel<>();
+		modeloTabla = new DefaultTableModel();
+		tActividad = new JTable(modeloTabla);
 		scroll = new ScrollPane();
-		lUsu = new JList<Usuario>(modeloLista);
-		scroll.add(lUsu);
+		scroll.add(tActividad);
 		
 		pCentro.add(scroll);
 		pSur.add(btnVolver);
@@ -67,8 +66,6 @@ public class VentanaUsuario_Admin extends JFrame{
 				VentanaActual.dispose();
 			}
 		});
-		
 		setVisible(true);
 	}
-
 }

@@ -103,7 +103,9 @@ public class VentanaAdmin extends JFrame{
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-		
+				new VentanaUsuario_Admin(VentanaActual);
+				VentanaActual.dispose();
+				logger.info("Se ha pulsado el boton para ver las Actividades");
 			}
 		});
 		
@@ -112,7 +114,9 @@ public class VentanaAdmin extends JFrame{
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				
+				new VentanaUsuario_Admin(VentanaActual);
+				VentanaActual.dispose();
+				logger.info("Se ha pulsado el boton para ver los pagos");
 			}
 		});
 		
