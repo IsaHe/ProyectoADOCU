@@ -1,6 +1,8 @@
 
 package gui;
 
+import domain.Usuario;
+
 import javax.swing.*;
 import java.awt.*;
 import java.util.logging.Logger;
@@ -18,7 +20,7 @@ public class VentanaPago extends JFrame{
 	private JButton btnPagar, btnVolver, btnPasarAPagada, btnPasarAPendiente, btnPasarTodosAPagar, btnPasarTodosAPendiente;
 	private JPasswordField pasContrasena;
 
-	public VentanaPago(){
+	public VentanaPago(Usuario usuario){
 		super();
 		
 		//FUNCIONES VENTANA
@@ -123,7 +125,7 @@ public class VentanaPago extends JFrame{
 		btnVolver.addActionListener((e)->{
 
 			logger.info("Se ha pulsado el botón Volver");
-			new VentanaTabla();
+			new VentanaTabla(usuario);
 			this.dispose();
 			
 		});
@@ -131,7 +133,7 @@ public class VentanaPago extends JFrame{
 		btnPagar.addActionListener(e ->{
 
 			logger.info("Se ha pulsado el botón Pagar");
-			new VentanaProcesarPago();
+			new VentanaProcesarPago(usuario);
 			this.dispose();
 			
 		});

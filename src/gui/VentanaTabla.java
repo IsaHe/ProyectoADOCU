@@ -2,6 +2,7 @@ package gui;
 
 import db.BaseDeDatos;
 import domain.Actividad;
+import domain.Usuario;
 
 import javax.swing.*;
 import javax.swing.table.AbstractTableModel;
@@ -28,7 +29,7 @@ public class VentanaTabla extends JFrame{
 	private int fila = -1;
 	private  int columna = -1;
 	
-	public VentanaTabla () {
+	public VentanaTabla (Usuario usuario) {
 		
 		//CLASE DE LA TABLA
 		class TablaActividades extends AbstractTableModel{
@@ -61,6 +62,7 @@ public class VentanaTabla extends JFrame{
 			public void setValueAt(Object aValue, int rowIndex, int columnIndex) {
 				BaseDeDatos.setActividad((Actividad) aValue, columnIndex, rowIndex);
 				BaseDeDatos.cargarActividadesSemanalesEnFichero(Paths.get("src/io/ActividadesSemanales.txt"));
+				usuario.getActividades().add((Actividad) aValue);
 				fireTableCellUpdated(rowIndex, columnIndex);
 			}
 
@@ -178,7 +180,7 @@ public class VentanaTabla extends JFrame{
 		btnPagar.addActionListener((e)->{
 
 			logger.info("Se ha pulsado el botón Pagar");
-			new VentanaPago();
+			new VentanaPago(usuario);
 			this.dispose();
 			
 		});

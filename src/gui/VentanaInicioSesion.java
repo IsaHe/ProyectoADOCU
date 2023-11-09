@@ -21,10 +21,6 @@ public class VentanaInicioSesion extends JFrame{
 	private JFrame VentanaActual;
 	private Path ruta = Paths.get("src/io/UsuariosRegistrados.txt"); 
 	private static Usuario  usuario;
-	
-	public static Usuario getUsuario() {
-		return usuario;
-	}
 
 	public VentanaInicioSesion () {
 		
@@ -118,7 +114,7 @@ public class VentanaInicioSesion extends JFrame{
 				usuario.setApellido(BaseDeDatos.getUsuarios().get(pos).getApellido());
 				usuario.setEdad(BaseDeDatos.getUsuarios().get(pos).getEdad());
 				logger.info("Se ha iniciado sesion");
-				new VentanaTabla();
+				new VentanaTabla(usuario);
 				this.dispose();
 			}else if (BaseDeDatos.comprobarUsuario(usuario)){
 				JOptionPane.showMessageDialog(null, "Contraseña incorrecta");

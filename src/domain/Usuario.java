@@ -1,5 +1,8 @@
 package domain;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Usuario {
 	
 	private String nom;
@@ -7,6 +10,7 @@ public class Usuario {
 	private int edad;
 	private String usuario;
 	private String contraseña;
+	private List<Actividad> actividades = new ArrayList<>();
 	
 	public Usuario() {
 		super();
@@ -67,6 +71,10 @@ public class Usuario {
 
 	public void setContraseña(String contraseña) {
 		this.contraseña = contraseña;
+	}
+
+	public List<Actividad> getActividades() {
+		return actividades;
 	}
 
 	@Override
