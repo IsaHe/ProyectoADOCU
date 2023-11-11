@@ -1,6 +1,6 @@
 ;;;;;;;;;;
-;;;;Senderismo,1;;;;;;
-;;;Buceo,0;Buceo,0;;;;;;
-;;;;Gimnasia,7;;;;;;
-;;;;;;;;;;
+;Gimnasia,7;;;;;;;;;
+;Parapente,3;Esqui,7;;;;;;;;
+;;Golf,3;;;;;;;;
+;Gimnasia,8;;;;;;;;;
 ;;;;;;;;;;

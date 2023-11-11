@@ -1,10 +1,13 @@
 
 package gui;
 
-import domain.Usuario;
-
 import javax.swing.*;
+
+import domain.Actividad;
+
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.logging.Logger;
 
 public class VentanaPago extends JFrame{
@@ -12,15 +15,15 @@ public class VentanaPago extends JFrame{
 	private static final long serialVersionUID = 1L;
 
 	private final Logger logger = Logger.getLogger(VentanaPago.class.getName());
-	private DefaultListModel<String> modeloPendiente, modeloPagada;
-	private JList<String> listaPendiente, listaPagada;
+	private DefaultListModel<Actividad> modeloPendiente, modeloPagada;
+	private JList<Actividad> listaPendiente, listaPagada;
 	private JPanel pCentro, pSur, pNorte, pCentroArriba, pCentroAbajo, pUsuario, pContraseña, pEntreListas, pPagar, pTodosPagar, pPendiente,pTodosPendiente , pImporte;
 	private JLabel lblImporte, lblTitulo, lblUsuario, lblContrasena, lblImporteAPagar;
 	private JTextField txtUsuario;
 	private JButton btnPagar, btnVolver, btnPasarAPagada, btnPasarAPendiente, btnPasarTodosAPagar, btnPasarTodosAPendiente;
 	private JPasswordField pasContrasena;
 
-	public VentanaPago(Usuario usuario){
+	public VentanaPago(){
 		super();
 		
 		//FUNCIONES VENTANA
@@ -121,11 +124,16 @@ public class VentanaPago extends JFrame{
 		pSur.add(btnPagar);
 		pSur.add(btnVolver);
 		
+		//LLENAR LA JLIST PENDIENTES
+		for (Actividad a : VentanaInicioSesion.getUsuario().getlActividades()) {
+			modeloPendiente.addElement(a);
+		}
+		
 		//EVENTOS BOTONES
 		btnVolver.addActionListener((e)->{
 
 			logger.info("Se ha pulsado el botón Volver");
-			new VentanaTabla(usuario);
+			new VentanaTabla();
 			this.dispose();
 			
 		});
@@ -133,9 +141,63 @@ public class VentanaPago extends JFrame{
 		btnPagar.addActionListener(e ->{
 
 			logger.info("Se ha pulsado el botón Pagar");
-			new VentanaProcesarPago(usuario);
+			new VentanaProcesarPago();
 			this.dispose();
 			
+		});
+		
+		btnPasarAPagada.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+		
+				Actividad act = listaPendiente.getSelectedValue();
+				if (act != null) {
+					modeloPagada.addElement(act);
+					modeloPendiente.removeElement(act);
+				}else {
+					JOptionPane.showMessageDialog(null, "Seleccione una actividad");
+				}
+			}
+		});
+		
+		btnPasarAPendiente.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				Actividad act = listaPagada.getSelectedValue();
+				if (act != null) {
+					modeloPendiente.addElement(act);
+					modeloPagada.removeElement(act);
+				}else {
+					JOptionPane.showMessageDialog(null, "Seleccione una actividad");
+				}
+			}
+		});
+		
+		btnPasarTodosAPagar.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+		
+				for(int i = 0; i<modeloPendiente.getSize(); i++) {
+					modeloPagada.addElement(modeloPendiente.get(i));
+				}
+				modeloPendiente.removeAllElements();
+				
+			}
+		});
+		
+		btnPasarTodosAPendiente.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+		
+				for (int i = 0; i<modeloPagada.getSize(); i++) {
+					modeloPendiente.addElement(modeloPagada.get(i));
+				}
+				modeloPagada.removeAllElements();
+			}
 		});
 		
 		setVisible(true);

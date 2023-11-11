@@ -1,7 +1,5 @@
 package gui;
 
-import domain.Usuario;
-
 import javax.swing.*;
 import java.awt.*;
 import java.util.logging.Logger;
@@ -14,7 +12,7 @@ public class VentanaProcesarPago extends JFrame{
 	private JLabel lblTitulo;
 	private JFrame vActual;
 	
-	public VentanaProcesarPago(Usuario usuario) {
+	public VentanaProcesarPago() {
 		super();
 		vActual = this;
 		
@@ -50,7 +48,7 @@ public class VentanaProcesarPago extends JFrame{
 					}
 				}
 				JOptionPane.showMessageDialog(null, "Pago recibido correctamente");
-				new VentanaPago(usuario);
+				new VentanaPago();
 				vActual.dispose();
 			}
 		}); 

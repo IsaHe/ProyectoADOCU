@@ -66,6 +66,7 @@ public class VentanaModificacionActividades extends JFrame {
 
         btnRegistrarHora.addActionListener(e -> {
             ventanaTabla.getTabla().setValueAt(actividades.getSelectedItem(), localizarHoraEnTabla(horaActividad), localizarFechaEnTabla(fechaActividad));
+            VentanaInicioSesion.getUsuario().getlActividades().add((Actividad) actividades.getSelectedItem());
             logger.info("Se ha pulsado el botón Registrar hora");
             this.dispose();
         });

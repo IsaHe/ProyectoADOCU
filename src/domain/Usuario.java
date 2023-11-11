@@ -1,7 +1,6 @@
 package domain;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class Usuario {
 	
@@ -10,21 +9,21 @@ public class Usuario {
 	private int edad;
 	private String usuario;
 	private String contraseña;
-	private List<Actividad> actividades = new ArrayList<>();
+	private ArrayList<Actividad> lActividades = new ArrayList<>();
 	
 	public Usuario() {
 		super();
 	}
 
-	public Usuario(String nom, String apellido, int edad, String usuario, String contraseña) {
+	public Usuario(String nom, String apellido, int edad, String usuario, String contraseña, ArrayList<Actividad> lActividades) {
 		super();
 		this.nom = nom;
 		this.apellido = apellido;
 		this.edad = edad;
 		this.usuario = usuario;
 		this.contraseña = contraseña;
+		this.lActividades = lActividades;
 	}
-	
 	
 
 	public Usuario(String usuario, String contraseña) {
@@ -33,6 +32,14 @@ public class Usuario {
 		this.contraseña = contraseña;
 	}
 
+	public ArrayList<Actividad> getlActividades() {
+		return lActividades;
+	}
+
+	public void setlActividades(ArrayList<Actividad> lActividades) {
+		this.lActividades = lActividades;
+	}
+	
 	public String getNom() {
 		return nom;
 	}
@@ -71,10 +78,6 @@ public class Usuario {
 
 	public void setContraseña(String contraseña) {
 		this.contraseña = contraseña;
-	}
-
-	public List<Actividad> getActividades() {
-		return actividades;
 	}
 
 	@Override

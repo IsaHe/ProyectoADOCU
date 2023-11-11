@@ -216,7 +216,7 @@ public class VentanaRegistro extends JFrame{
 		
 		btnRegistro.addActionListener(e->{
 			
-			Usuario usuario = new Usuario(txtNombre.getText(), txtApellidos.getText(), (int)cEdad.getSelectedItem(), txtUsuario.getText(), txtContra.getText());
+			Usuario usuario = new Usuario(txtNombre.getText(), txtApellidos.getText(), (int)cEdad.getSelectedItem(), txtUsuario.getText(), txtContra.getText(), null);
 			if (!BaseDeDatos.comprobarUsuario(usuario)) {
 				BaseDeDatos.getUsuarios().add(usuario);
 				BaseDeDatos.cargarUsuariosEnFichero(ruta);

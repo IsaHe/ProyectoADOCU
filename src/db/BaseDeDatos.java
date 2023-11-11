@@ -39,7 +39,7 @@ public class BaseDeDatos {
 			while (sc.hasNext()) {
 				String linea = sc.next();
 				String[] partes = linea.split(";");
-				Usuario usuario = new Usuario(partes[0], partes[1], Integer.parseInt(partes[2]), partes[3], partes[4]);
+				Usuario usuario = new Usuario(partes[0], partes[1], Integer.parseInt(partes[2]), partes[3], partes[4],null);
 				if (!usuarios.contains(usuario)) {
 					usuarios.add(usuario);	
 				}
