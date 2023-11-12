@@ -4,6 +4,7 @@ package gui;
 import javax.swing.*;
 
 import domain.Actividad;
+import domain.Usuario;
 
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -142,8 +143,20 @@ public class VentanaPago extends JFrame{
 		btnPagar.addActionListener(e ->{
 
 			logger.info("Se ha pulsado el botón Pagar");
-			new VentanaProcesarPago();
-			this.dispose();
+			Usuario usuario = VentanaInicioSesion.getUsuario();
+			if (txtUsuario.getText().equals(usuario.getUsuario()) && pasContrasena.getText().equals(usuario.getContraseña()) && !modeloPagada.isEmpty()) {
+				lblImporteAPagar.setText("0");
+				for (int i = modeloPagada.size()-1; i>=0; i--) {
+					usuario.getlActividades().remove(i);
+				}
+				modeloPagada.removeAllElements();
+				new VentanaProcesarPago();
+				this.dispose();
+			}else if (modeloPagada.isEmpty()){
+				JOptionPane.showMessageDialog(null, "Seleccione actividades a pagar");
+			}else {
+				JOptionPane.showMessageDialog(null, "Error al pagar, inserte el usuario y contrasenia correctos");
+			}
 			
 		});
 		
