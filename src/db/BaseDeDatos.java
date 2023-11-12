@@ -62,7 +62,7 @@ public class BaseDeDatos {
 				String dia = partes[0];
 				for (int i = 1; i < partes.length; i++) {
 					String[] partesActividad = partes[i].split(",");
-					Actividad actividad = new Actividad(partesActividad[0], Integer.parseInt(partesActividad[1]));
+					Actividad actividad = new Actividad(partesActividad[0], Integer.parseInt(partesActividad[1]), Float.parseFloat(partesActividad[2]));
 					listaActividades.add(actividad);
 				}
 				actividades.put(dia, listaActividades);
@@ -105,7 +105,7 @@ public class BaseDeDatos {
 				for (int j = 0; j < partes.length; j++) {
 					if (!partes[j].isEmpty()) {
 						String[] partesActividad = partes[j].split(",");
-						Actividad actividad = new Actividad(partesActividad[0], Integer.parseInt(partesActividad[1]));
+						Actividad actividad = new Actividad(partesActividad[0], Integer.parseInt(partesActividad[1]),Float.parseFloat(partesActividad[2]));
 						actividadesSemanales[i][j] = actividad;
 					}
 				}

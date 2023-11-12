@@ -22,6 +22,7 @@ public class VentanaPago extends JFrame{
 	private JTextField txtUsuario;
 	private JButton btnPagar, btnVolver, btnPasarAPagada, btnPasarAPendiente, btnPasarTodosAPagar, btnPasarTodosAPendiente;
 	private JPasswordField pasContrasena;
+	private float precio = 0;
 
 	public VentanaPago(){
 		super();
@@ -153,8 +154,11 @@ public class VentanaPago extends JFrame{
 		
 				Actividad act = listaPendiente.getSelectedValue();
 				if (act != null) {
+					precio = precio + act.getPrecio();
 					modeloPagada.addElement(act);
 					modeloPendiente.removeElement(act);
+					String precioStr = Float.toString(precio);
+					lblImporteAPagar.setText(precioStr);
 				}else {
 					JOptionPane.showMessageDialog(null, "Seleccione una actividad");
 				}
@@ -167,8 +171,11 @@ public class VentanaPago extends JFrame{
 			public void actionPerformed(ActionEvent e) {
 				Actividad act = listaPagada.getSelectedValue();
 				if (act != null) {
+					precio = precio - act.getPrecio();
 					modeloPendiente.addElement(act);
 					modeloPagada.removeElement(act);
+					String precioStr = Float.toString(precio);
+					lblImporteAPagar.setText(precioStr);
 				}else {
 					JOptionPane.showMessageDialog(null, "Seleccione una actividad");
 				}
@@ -182,7 +189,10 @@ public class VentanaPago extends JFrame{
 		
 				for(int i = 0; i<modeloPendiente.getSize(); i++) {
 					modeloPagada.addElement(modeloPendiente.get(i));
+					precio = precio + modeloPendiente.get(i).getPrecio();
 				}
+				String precioStr = Float.toString(precio);
+				lblImporteAPagar.setText(precioStr);
 				modeloPendiente.removeAllElements();
 				
 			}
@@ -196,6 +206,9 @@ public class VentanaPago extends JFrame{
 				for (int i = 0; i<modeloPagada.getSize(); i++) {
 					modeloPendiente.addElement(modeloPagada.get(i));
 				}
+				precio = 0;
+				String precioStr = Float.toString(precio);
+				lblImporteAPagar.setText(precioStr);
 				modeloPagada.removeAllElements();
 			}
 		});

@@ -3,15 +3,25 @@ package domain;
 public class Actividad {
     private String nombre;
     private int numeroParticipantes;
+    private float precio;
 
-	public Actividad(String nombre, int numeroParticipantes) {
+	public Actividad(String nombre, int numeroParticipantes, float precio) {
 		super();
 		this.nombre = nombre;
 		this.numeroParticipantes = numeroParticipantes;
+		this.precio = precio;
 	}
 
 	public Actividad() {
 		super();
+	}
+
+	public float getPrecio() {
+		return precio;
+	}
+
+	public void setPrecio(float precio) {
+		this.precio = precio;
 	}
 
 	public String getNombre() {
@@ -28,7 +38,7 @@ public class Actividad {
 	}
 
 	public String toStringBd() {
-		return nombre + "," + numeroParticipantes;
+		return nombre + "," + numeroParticipantes+","+precio;
 	}
 
 	@Override

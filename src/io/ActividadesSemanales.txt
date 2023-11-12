@@ -1,6 +1,6 @@
-;;;;;;;;;;
-;Gimnasia,7;;;;;;;;;
-;Parapente,3;Esqui,7;;;;;;;;
-;;Golf,3;;;;;;;;
-;Gimnasia,8;;;;;;;;;
+;;;Gimnasia,7,70.0;;;;;;;
+;;Parapente,3,56.6;Parapente,3,56.6;;;;;;;
+;;Golf,3,86.5;;Golf,3,86.5;;;;;;
+;;Gimnasia,8,50.0;Gimnasia,8,50.0;;;;;;;
+;Gimnasia,9,76.6;;;Gimnasia,9,76.6;;;;;;
 ;;;;;;;;;;

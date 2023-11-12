@@ -1,7 +1,7 @@
-Miercoles;Gimnasia,8;Alpinismo,2;Patinaje,5;Judo,3;Running,6;Zumba,5;Airsoft,4;Taekwondo,6;Triatlon,5;
-Martes;Golf,3;Boxeo,5;Paintball,8;Tenis,0;Paseo,9;Pesca,4;Ajedrez,1;Paracaidismo,2;Pilates,5;Taekwondo,3;
-Viernes;Senderismo,1;Musculacion,2;Patinaje,1;Boxeo,2;Balonvolea,2;Paintball,1;Judo,0;Vela,2;
-Lunes;Parapente,3;Paintball,0;Esqui,7;Baloncesto,2;Zumba,4;Ajedrez,5;Espeleologia,5;Yoga,3;Barranquismo,6;Taekwondo,0;
-Domingo;Gimnasia,7;Atletismo,7;Patinaje,3;Paintball,1;Airsoft,5;Ciclismo,4;Vela,7;Taekwondo,0;Padel,1;
-Jueves;Gimnasia,9;Billar,7;Atletismo,6;Alpinismo,4;Paintball,0;Puenting,0;Escalada,5;Natacion,6;Voleibol,1;
-Sabado;Buceo,0;Patinaje,0;Boxeo,8;Lucha,8;Tenis,8;Airsoft,3;Espeleologia,6;Voleibol,0;Snowboard,4;
+Miercoles;Gimnasia,8,50.0;Alpinismo,2,60.7;Patinaje,5,83.7;Judo,3,78.8;Running,6,45.6;Zumba,5,56.7;Airsoft,4,70.8;Taekwondo,6,60.7;Triatlon,5,80.8;
+Martes;Golf,3,86.5;Boxeo,5,60.0;Paintball,8,78.9;Tenis,0,68.7;Paseo,9,68.7;Pesca,4,89.9;Ajedrez,1,25.5;Paracaidismo,2,35.5;Pilates,5,67.6;Taekwondo,3,89.9;
+Viernes;Senderismo,1,56.6;Musculacion,2,89.9;Patinaje,1,89.9;Boxeo,2,60.0;Balonvolea,2,90;Paintball,1,78.9;Judo,0,78.8;Vela,2,90.9;
+Lunes;Parapente,3,56.6;Paintball,0,78.9;Esqui,7,35.9;Baloncesto,2,30;Zumba,4,45;Ajedrez,5,45.5;Espeleologia,5,78.8;Yoga,3,60;Barranquismo,6,89.9;Taekwondo,0,90;
+Domingo;Gimnasia,7,70.0;Atletismo,7,67.7;Patinaje,3,87.7;Paintball,1,98.8;Airsoft,5,78.8;Ciclismo,4,76.6;Vela,7,35.5;Taekwondo,0,78.8;Padel,1,87.7;
+Jueves;Gimnasia,9,76.6;Billar,7,76;Atletismo,6,60.6;Alpinismo,4,76.6;Paintball,0,78.9;Puenting,0,29,9;Escalada,5,67.9;Natacion,6,65.8;Voleibol,1,76.6;
+Sabado;Buceo,0,99.9;Patinaje,0,69;Boxeo,8,60.0;Lucha,8,60.0;Tenis,8,65.5;Airsoft,3,65;Espeleologia,6,78;Voleibol,0,98;Snowboard,4,68;
