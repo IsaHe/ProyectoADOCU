@@ -167,7 +167,12 @@ public class VentanaTabla extends JFrame{
 				fila = tabla.rowAtPoint(p);
 				columna = tabla.columnAtPoint(p);
 				if (columna != 0 && tabla.getValueAt(fila, columna) == "") {
-					new VentanaModificacionActividades(10, (String) tabla.getValueAt(fila, 0), LocalDate.parse(tabla.getColumnName(columna)), VentanaTabla.this);
+					new VentanaModificacionActividades(
+							10, (String) tabla.getValueAt(fila, 0),
+							LocalDate.parse(tabla.getColumnName(columna)), VentanaTabla.this);
+				} else {
+					BaseDeDatos.getActividadesSemanales()[columna-1][fila] = null;
+					getTabla().setValueAt(null, fila, columna);
 				}
 				e.consume();
 				logger.info("Se ha pulsado la celda en la fila: " + fila + " y columna: " + columna);
