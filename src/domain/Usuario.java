@@ -80,6 +80,10 @@ public class Usuario {
 		this.contraseña = contraseña;
 	}
 
+	public void eliminarActividadDeLista(Actividad actividad) {
+		lActividades.remove(actividad);
+	}
+
 	@Override
 	public String toString() {
 		return nom + ";" + apellido + ";" + edad + ";" + usuario + ";" + contraseña;

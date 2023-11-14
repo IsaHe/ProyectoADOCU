@@ -2,6 +2,7 @@ package gui;
 
 import db.BaseDeDatos;
 import domain.Actividad;
+import domain.Usuario;
 
 import javax.swing.*;
 import javax.swing.table.AbstractTableModel;
@@ -24,6 +25,8 @@ public class VentanaTabla extends JFrame{
 	
 	private JScrollPane scroll;
 	private List<String> horas;
+
+	private Usuario usuario = VentanaInicioSesion.getUsuario();
 	
 	private int fila = -1;
 	private  int columna = -1;
@@ -172,8 +175,11 @@ public class VentanaTabla extends JFrame{
 							10, (String) tabla.getValueAt(fila, 0),
 							LocalDate.parse(tabla.getColumnName(columna)), VentanaTabla.this);
 				} else {
+					System.out.println(usuario.getlActividades());
+					usuario.eliminarActividadDeLista((Actividad) getTabla().getValueAt(fila, columna));
 					BaseDeDatos.getActividadesSemanales()[columna-1][fila] = null;
 					getTabla().setValueAt(null, fila, columna);
+					System.out.println(usuario.getlActividades());
 				}
 				e.consume();
 				logger.info("Se ha pulsado la celda en la fila: " + fila + " y columna: " + columna);
