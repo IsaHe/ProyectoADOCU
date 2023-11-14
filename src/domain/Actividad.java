@@ -38,7 +38,22 @@ public class Actividad {
 	}
 
 	public String toStringBd() {
-		return nombre + "," + numeroParticipantes+","+precio;
+		return nombre + "," + numeroParticipantes + "," + precio;
+	}
+
+	public static Actividad[][] shiftArray(Actividad[][] actividadesSemanales) {
+		Actividad[][] actividadesSemanalesAux = new Actividad[6][10];
+		for (int i = 0; i < actividadesSemanales.length; i++) {
+			actividadesSemanalesAux[i] = getActividadesDiaSiguente(actividadesSemanales, i);
+		}
+		return actividadesSemanalesAux;
+	}
+
+	private static Actividad[] getActividadesDiaSiguente(Actividad[][] actividadesSemanales, int i) {
+		if (i == actividadesSemanales.length-1) {
+			return new Actividad[10];
+		}
+		return actividadesSemanales[i+1];
 	}
 
 	@Override

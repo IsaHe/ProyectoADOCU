@@ -8,6 +8,7 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.PrintWriter;
 import java.nio.file.Path;
+import java.time.LocalDate;
 import java.util.*;
 import java.util.logging.Logger;
 
@@ -16,6 +17,7 @@ public class BaseDeDatos {
 	private static List<Usuario> usuarios = new ArrayList<>();
 	private static Map<String, Set<Actividad>> actividades = new HashMap<>();
 	private static Actividad[][] actividadesSemanales = new Actividad[6][10];
+	private static LocalDate ultimoAccesoAtabla;
 	static Logger logger = Logger.getLogger(BaseDeDatos.class.getName());
 
 	public static void cargarUsuariosEnFichero(Path ruta) {
@@ -78,6 +80,7 @@ public class BaseDeDatos {
 
         try {
 			PrintWriter pw = new PrintWriter(new FileOutputStream(ruta.toFile()));
+			pw.write(ultimoAccesoAtabla.toString() + "\n");
 			for (int i = 0; i < 6; i++) {
 				for (int j = 0; j < 10; j++) {
 					if (actividadesSemanales[i][j] != null) {
@@ -98,6 +101,7 @@ public class BaseDeDatos {
 		actividadesSemanales = new Actividad[6][10];
 		try {
 			Scanner sc = new Scanner(new FileInputStream(ruta.toFile()));
+			ultimoAccesoAtabla = LocalDate.parse(sc.next());
 			int i = 0;
 			while (sc.hasNext()) {
 				String linea = sc.next();
@@ -136,5 +140,17 @@ public class BaseDeDatos {
 
 	public static void setActividad(Actividad a, int i, int j) {
 		actividadesSemanales[i][j] = a;
+	}
+
+	public static void setUltimoAccesoAtabla(LocalDate ultimoAccesoAtabla) {
+		BaseDeDatos.ultimoAccesoAtabla = ultimoAccesoAtabla;
+	}
+
+	public static void actualizarActividadesSemanales() {
+		if (ultimoAccesoAtabla.getDayOfYear() < LocalDate.now().getDayOfYear()) {
+			for (int i = 0; i < LocalDate.now().getDayOfYear() - ultimoAccesoAtabla.getDayOfYear(); i++) {
+				actividadesSemanales = Actividad.shiftArray(actividadesSemanales);
+			}
+		}
 	}
 }

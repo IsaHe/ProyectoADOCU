@@ -60,6 +60,7 @@ public class VentanaTabla extends JFrame{
 			@Override
 			public void setValueAt(Object aValue, int rowIndex, int columnIndex) {
 				BaseDeDatos.setActividad((Actividad) aValue, columnIndex, rowIndex);
+				BaseDeDatos.setUltimoAccesoAtabla(LocalDate.now());
 				BaseDeDatos.cargarActividadesSemanalesEnFichero(Paths.get("src/io/ActividadesSemanales.txt"));
 				fireTableCellUpdated(rowIndex, columnIndex);
 			}
