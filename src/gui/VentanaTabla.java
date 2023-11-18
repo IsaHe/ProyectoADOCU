@@ -1,9 +1,9 @@
 package gui;
 
 import db.BaseDeDatos;
-import db.GestorFicheros;
 import domain.Actividad;
 import domain.Usuario;
+import io.GestorFicheros;
 
 import javax.swing.*;
 import javax.swing.table.AbstractTableModel;

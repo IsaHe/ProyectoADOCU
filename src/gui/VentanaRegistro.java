@@ -9,6 +9,7 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.sql.Connection;
 import java.util.Vector;
 import java.util.logging.Logger;
 
@@ -25,11 +26,13 @@ public class VentanaRegistro extends JFrame{
 	private JPasswordField txtContra;
 	private JComboBox<Integer> cEdad;
 	private JButton btnRegistro, btnVolver, btnSalir;
-	private Path ruta = Paths.get("src/io/UsuariosRegistrados.txt"); 
+	private Connection con = BaseDeDatos.iniciarBaseDeDatos("usuarios.db");
 		
 	public VentanaRegistro(){
 		super();
 	
+		
+		
 		//TAMAÑO Y FORMA DE LA VENTANA
 		
 		setExtendedState(MAXIMIZED_BOTH);
@@ -219,7 +222,7 @@ public class VentanaRegistro extends JFrame{
 			Usuario usuario = new Usuario(txtNombre.getText(), txtApellidos.getText(), (int)cEdad.getSelectedItem(), txtUsuario.getText(), txtContra.getText(), null);
 			if (!BaseDeDatos.comprobarUsuario(usuario)) {
 				BaseDeDatos.getUsuarios().add(usuario);
-				BaseDeDatos.cargarUsuariosEnFichero(ruta);
+				BaseDeDatos.cargarUsuariosEnBaseDeDatos(con);
 				JOptionPane.showMessageDialog(null, "Usuario Registrado Correctamente");
 				logger.info("Usuario Registrado Correctamente");
 				new VentanaInicioSesion();

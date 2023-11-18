@@ -1,8 +1,8 @@
 package gui;
 
 import db.BaseDeDatos;
-import db.GestorFicheros;
 import domain.Actividad;
+import io.GestorFicheros;
 
 import javax.swing.*;
 import java.awt.*;

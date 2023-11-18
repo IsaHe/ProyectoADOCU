@@ -2,13 +2,14 @@ package gui;
 
 
 import db.BaseDeDatos;
-import db.GestorFicheros;
 import domain.Usuario;
+import io.GestorFicheros;
 
 import javax.swing.*;
 import java.awt.*;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.sql.Connection;
 import java.time.LocalDate;
 import java.util.logging.Logger;
 
@@ -21,7 +22,7 @@ public class VentanaInicioSesion extends JFrame{
 	private JPasswordField pasContrasena;
 	private JButton btnInicioSesion, btnRegistrarse, btnSalir;
 	private JFrame VentanaActual;
-	private Path ruta = Paths.get("src/io/UsuariosRegistrados.txt"); 
+	private Connection con = BaseDeDatos.iniciarBaseDeDatos("usuarios.db");
 	private static Usuario  usuario;
 	
 	public static Usuario getUsuario() {
@@ -31,7 +32,7 @@ public class VentanaInicioSesion extends JFrame{
 	public VentanaInicioSesion () {
 		
 		VentanaActual = this;
-		BaseDeDatos.obtenerUsuariosDeFichero(ruta);
+		BaseDeDatos.obtenerUsuariosDeBaseDeDatos(con);
 		GestorFicheros.obtenerActividadesDeFichero(Paths.get("src/io/ListaActividades.txt"));
 		GestorFicheros.obtenerActividadesSemanalesDeFichero(Paths.get("src/io/ActividadesSemanales.txt"));
 		GestorFicheros.actualizarActividadesSemanales();

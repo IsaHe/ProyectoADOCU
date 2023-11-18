@@ -1,4 +1,0 @@
-Aitor;Peral;18;PeralAitor;111
-Isaac;Herbozo;19;Isaac;111
-Xabier;Urrutia;20;Xabi_U;111
-Admin;Admin;20;Admin;111
