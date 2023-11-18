@@ -26,7 +26,7 @@ public class VentanaRegistro extends JFrame{
 	private JPasswordField txtContra;
 	private JComboBox<Integer> cEdad;
 	private JButton btnRegistro, btnVolver, btnSalir;
-	private Connection con = BaseDeDatos.iniciarBaseDeDatos("usuarios.db");
+	private Connection con = BaseDeDatos.iniciarBaseDeDatos("src/db/usuarios.db");
 		
 	public VentanaRegistro(){
 		super();

@@ -22,7 +22,7 @@ public class VentanaInicioSesion extends JFrame{
 	private JPasswordField pasContrasena;
 	private JButton btnInicioSesion, btnRegistrarse, btnSalir;
 	private JFrame VentanaActual;
-	private Connection con = BaseDeDatos.iniciarBaseDeDatos("usuarios.db");
+	private Connection con = BaseDeDatos.iniciarBaseDeDatos("src/db/usuarios.db");
 	private static Usuario  usuario;
 	
 	public static Usuario getUsuario() {

@@ -17,7 +17,7 @@ import java.util.logging.Logger;
 
 public class BaseDeDatos {
 
-	private static List<Usuario> usuarios = new ArrayList<>();
+	private static List<Usuario> usuarios;
 	static Logger logger = Logger.getLogger(BaseDeDatos.class.getName());
 	
 
@@ -42,6 +42,9 @@ public class BaseDeDatos {
 	}
 	
 	public static void obtenerUsuariosDeBaseDeDatos (Connection con) {
+		
+		usuarios = new ArrayList<>();
+		
 		try {
 			PreparedStatement prepSt = con.prepareStatement("SELECT * FROM usuarios");
 			ResultSet rs = prepSt.executeQuery();
@@ -72,6 +75,16 @@ public class BaseDeDatos {
 	
 	public static void cargarUsuariosEnBaseDeDatos (Connection con) {
 		
+		try {
+			PreparedStatement prpSt = con.prepareStatement("DELETE FROM usuarios");
+			
+			prpSt.executeUpdate();
+			prpSt.close();
+			
+		} catch (SQLException e1) {
+			logger.warning("No se ha podido eliminar la Base De Datos");
+		}
+		
 		for (Usuario u : usuarios) {
 			String nombre = u.getNom();
 			String apellido = u.getApellido();
@@ -79,7 +92,8 @@ public class BaseDeDatos {
 			String usuario = u.getUsuario();
 			String cont = u.getContraseña();
 			try {
-				PreparedStatement prepSt = con.prepareStatement("INSERT INTO usuarios VALUES (?,?,?,?,?)");
+				PreparedStatement prepSt = con.prepareStatement("INSERT INTO usuarios (nombre, apellido, edad, usuario, contrasenia) VALUES (?,?,?,?,?)");
+				
 				prepSt.setString(1, nombre);
 				prepSt.setString(2, apellido);
 				prepSt.setInt(3, edad);
@@ -91,7 +105,7 @@ public class BaseDeDatos {
 				prepSt.close();
 				
 			} catch (SQLException e) {
-				logger.warning("No se ha metido el usuario En la Base De Datos");
+				logger.warning("No se ha podido guardar el usuario en la Base De Datos");
 			}
 			
 		}
