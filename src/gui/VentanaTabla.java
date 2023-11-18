@@ -64,7 +64,6 @@ public class VentanaTabla extends JFrame{
 			@Override
 			public void setValueAt(Object aValue, int rowIndex, int columnIndex) {
 				GestorFicheros.setActividad((Actividad) aValue, columnIndex, rowIndex);
-				GestorFicheros.setUltimoAccesoAtabla(LocalDate.now());
 				GestorFicheros.cargarActividadesSemanalesEnFichero(Paths.get("src/io/ActividadesSemanales.txt"));
 				fireTableCellUpdated(rowIndex, columnIndex);
 			}

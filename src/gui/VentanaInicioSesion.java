@@ -9,6 +9,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.time.LocalDate;
 import java.util.logging.Logger;
 
 public class VentanaInicioSesion extends JFrame{
@@ -34,6 +35,7 @@ public class VentanaInicioSesion extends JFrame{
 		GestorFicheros.obtenerActividadesDeFichero(Paths.get("src/io/ListaActividades.txt"));
 		GestorFicheros.obtenerActividadesSemanalesDeFichero(Paths.get("src/io/ActividadesSemanales.txt"));
 		GestorFicheros.actualizarActividadesSemanales();
+		GestorFicheros.setUltimoAccesoAtabla(LocalDate.now());
 
 		//FUNCIONES VENTANA
 		setExtendedState(MAXIMIZED_BOTH);
