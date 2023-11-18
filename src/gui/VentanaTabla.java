@@ -1,6 +1,7 @@
 package gui;
 
 import db.BaseDeDatos;
+import db.GestorFicheros;
 import domain.Actividad;
 import domain.Usuario;
 
@@ -62,9 +63,9 @@ public class VentanaTabla extends JFrame{
 
 			@Override
 			public void setValueAt(Object aValue, int rowIndex, int columnIndex) {
-				BaseDeDatos.setActividad((Actividad) aValue, columnIndex, rowIndex);
-				BaseDeDatos.setUltimoAccesoAtabla(LocalDate.now());
-				BaseDeDatos.cargarActividadesSemanalesEnFichero(Paths.get("src/io/ActividadesSemanales.txt"));
+				GestorFicheros.setActividad((Actividad) aValue, columnIndex, rowIndex);
+				GestorFicheros.setUltimoAccesoAtabla(LocalDate.now());
+				GestorFicheros.cargarActividadesSemanalesEnFichero(Paths.get("src/io/ActividadesSemanales.txt"));
 				fireTableCellUpdated(rowIndex, columnIndex);
 			}
 
@@ -72,8 +73,8 @@ public class VentanaTabla extends JFrame{
 			@Override
 			public Object getValueAt(int rowIndex, int columnIndex) {
 				if (columnIndex != 0) {
-					if (BaseDeDatos.getActividadesSemanales()[columnIndex-1][rowIndex] != null) {
-						return BaseDeDatos.getActividadesSemanales()[columnIndex-1][rowIndex];
+					if (GestorFicheros.getActividadesSemanales()[columnIndex-1][rowIndex] != null) {
+						return GestorFicheros.getActividadesSemanales()[columnIndex-1][rowIndex];
 					}
 					return "";
 				}
@@ -175,11 +176,9 @@ public class VentanaTabla extends JFrame{
 							10, (String) tabla.getValueAt(fila, 0),
 							LocalDate.parse(tabla.getColumnName(columna)), VentanaTabla.this);
 				} else {
-					System.out.println(usuario.getlActividades());
 					usuario.eliminarActividadDeLista((Actividad) getTabla().getValueAt(fila, columna));
-					BaseDeDatos.getActividadesSemanales()[columna-1][fila] = null;
+					GestorFicheros.getActividadesSemanales()[columna-1][fila] = null;
 					getTabla().setValueAt(null, fila, columna);
-					System.out.println(usuario.getlActividades());
 				}
 				e.consume();
 				logger.info("Se ha pulsado la celda en la fila: " + fila + " y columna: " + columna);

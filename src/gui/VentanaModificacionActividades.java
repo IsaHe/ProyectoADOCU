@@ -1,6 +1,7 @@
 package gui;
 
 import db.BaseDeDatos;
+import db.GestorFicheros;
 import domain.Actividad;
 
 import javax.swing.*;
@@ -35,7 +36,7 @@ public class VentanaModificacionActividades extends JFrame {
 
         //CREACION Y CONFIGURACION DE LOS ELEMENTOS CON LOS QUE PUEDE INTERACTUAR EL USUARIO
         String dia = convertirDiaSemana(fechaActividad.getDayOfWeek().toString());
-        listaActividades = BaseDeDatos.getActividades().get(dia).toArray(new Actividad[0]);
+        listaActividades = GestorFicheros.getActividades().get(dia).toArray(new Actividad[0]);
 
         JComboBox<Actividad> actividades = new JComboBox<>(listaActividades);
         actividades.addActionListener(e -> {

@@ -2,6 +2,7 @@ package gui;
 
 
 import db.BaseDeDatos;
+import db.GestorFicheros;
 import domain.Usuario;
 
 import javax.swing.*;
@@ -30,9 +31,9 @@ public class VentanaInicioSesion extends JFrame{
 		
 		VentanaActual = this;
 		BaseDeDatos.obtenerUsuariosDeFichero(ruta);
-		BaseDeDatos.obtenerActividadesDeFichero(Paths.get("src/io/ListaActividades.txt"));
-		BaseDeDatos.obtenerActividadesSemanalesDeFichero(Paths.get("src/io/ActividadesSemanales.txt"));
-		BaseDeDatos.actualizarActividadesSemanales();
+		GestorFicheros.obtenerActividadesDeFichero(Paths.get("src/io/ListaActividades.txt"));
+		GestorFicheros.obtenerActividadesSemanalesDeFichero(Paths.get("src/io/ActividadesSemanales.txt"));
+		GestorFicheros.actualizarActividadesSemanales();
 
 		//FUNCIONES VENTANA
 		setExtendedState(MAXIMIZED_BOTH);
