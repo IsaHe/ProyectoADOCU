@@ -7,10 +7,19 @@ import java.awt.GridLayout;
 import java.awt.ScrollPane;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.net.URL;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.sql.Connection;
+import java.util.Collection;
+import java.util.Objects;
+import java.util.Scanner;
 import java.util.logging.Logger;
 
 import javax.swing.DefaultListModel;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JEditorPane;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JList;
@@ -23,8 +32,10 @@ import javax.swing.tree.DefaultTreeModel;
 import javax.swing.tree.TreeModel;
 import javax.swing.tree.TreePath;
 
+import db.BaseDeDatos;
 import domain.Actividad;
 import domain.Usuario;
+import io.GestorFicheros;
 
 public class VentanaAdmin extends JFrame{
 	
@@ -33,7 +44,7 @@ public class VentanaAdmin extends JFrame{
 	private final Logger logger = Logger.getLogger(VentanaAdmin.class.getName());
 	JFrame ventanaActual = this;
 	private JPanel pSur,pCentro, pCentroC, pNorte, pOeste;
-	private JLabel lblTitulo, lblTextoIzq;
+	private JLabel lblTitulo, lblFoto;
 	private JButton btnVolver, btnSalir;
 	private JTree arbol;
 	private DefaultMutableTreeNode nRaiz;
@@ -48,10 +59,10 @@ public class VentanaAdmin extends JFrame{
 	
 
 	public VentanaAdmin(){
-		super();
 		
 		setExtendedState(MAXIMIZED_BOTH);
 		setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
+		setIconImage(new ImageIcon(Objects.requireNonNull(getClass().getResource("/resources/images//ADOCU.png"))).getImage());
 		
 		pSur = new JPanel();
 		pCentro = new JPanel();
@@ -61,7 +72,7 @@ public class VentanaAdmin extends JFrame{
 		
 		
 		pCentro.setLayout(new GridLayout(3, 3));
-		pOeste.setLayout(new GridLayout(5, 0));
+		pOeste.setLayout(new GridLayout(3, 0));
 		
 		
 		getContentPane().add(pSur, BorderLayout.SOUTH);
@@ -72,9 +83,18 @@ public class VentanaAdmin extends JFrame{
 		lblTitulo = new JLabel("ADMINISTRADOR");
 		lblTitulo.setFont(new Font(Font.SERIF, Font.PLAIN, 30));
 		lblTitulo.setForeground(Color.BLACK);
-		lblTextoIzq = new JLabel("Esta es una ventana para el admistrador y en esta, puedes hacer diferentes funciones como administrador. \n");
-		//+ "Bienvenido Administrador, en esta ventana puedes ver los diferentes usuarios, las diferentes actividades y los diferentes pagos.");
+		lblFoto = new JLabel(new ImageIcon(getClass().getResource("/resources/images//ADOCU.png")));
 		
+		String textoExplicacionValoracionHTML =
+                "<h1>¡Bienvendido a la ventana de administrador!</h1>" +
+                "<p>Esta ventana alverga un monton de interacciones como administrador, como por ejemplo:</p>" +
+                "<p>Ver los diferentes usuarios en una lista, ver las actividades de cada usuario y los pagos realizados por el usuario.</p>" ;
+		JEditorPane etiqueta = new JEditorPane("text/html", textoExplicacionValoracionHTML);
+		etiqueta.setEditable(false);
+        etiqueta.setOpaque(false);
+        
+        
+        
 		btnSalir = new JButton("SALIR");
 		btnVolver = new JButton("VOLVER");
 		
@@ -87,7 +107,8 @@ public class VentanaAdmin extends JFrame{
 		
 		
 		pOeste.add(arbol);
-		pOeste.add(lblTextoIzq);
+		pOeste.add(etiqueta);
+		pOeste.add(lblFoto);
 		pNorte.add(lblTitulo);
 		pSur.add(btnSalir);
 		pSur.add(btnVolver);
@@ -105,13 +126,13 @@ public class VentanaAdmin extends JFrame{
 					pCentroC.removeAll();
 					
 					modeloListaUsu = new DefaultListModel<Usuario>();
+					modeloListaUsu.addAll(BaseDeDatos.getUsuarios());
 					lUsu = new JList<Usuario>(modeloListaUsu);
 					scrollUsu = new ScrollPane();
 					scrollUsu.add(lUsu);
 					
 					pCentro.add(new JPanel());
-					pCentro.add(pCentroC);
-					pCentroC.add(scrollUsu);
+					pCentro.add(scrollUsu);
 					pCentro.add(new JPanel());
 					
 				}else if(ultimo.equals("Ver Actividades")) {
@@ -168,8 +189,7 @@ public class VentanaAdmin extends JFrame{
 			}
 		});
 		
-		
 		setVisible(true);
-	}
+	}	
 	
 }
