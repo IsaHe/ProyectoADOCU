@@ -69,6 +69,9 @@ public class Actividad {
 	@Override
 	public boolean equals(Object obj) {
 		if (obj instanceof Actividad){
+			if (((Actividad) obj).getNombre() == null) {
+				return true;
+			}
 			return nombre.equals(((Actividad) obj).getNombre());
 		}
 		return false;

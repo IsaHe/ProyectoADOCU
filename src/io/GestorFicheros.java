@@ -12,7 +12,7 @@ import java.util.*;
 import java.util.logging.Logger;
 
 public class GestorFicheros {
-    private static Map<String, Set<Actividad>> actividades = new HashMap<>();
+    private static final Map<String, Set<Actividad>> actividades = new HashMap<>();
     private static Actividad[][] actividadesSemanales = new Actividad[6][10];
     private static LocalDate ultimoAccesoAtabla;
 
@@ -98,6 +98,10 @@ public class GestorFicheros {
 
     public static void setActividad(Actividad a, int i, int j) {
         actividadesSemanales[i][j] = a;
+    }
+
+    public static LocalDate getUltimoAccesoAtabla() {
+        return ultimoAccesoAtabla;
     }
 
     public static void setUltimoAccesoAtabla(LocalDate ultimoAccesoAtabla) {
