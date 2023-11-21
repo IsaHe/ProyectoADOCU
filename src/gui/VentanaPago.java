@@ -5,10 +5,12 @@ import javax.swing.*;
 
 import domain.Actividad;
 import domain.Usuario;
+import io.GestorFicheros;
 
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.nio.file.Paths;
 import java.util.logging.Logger;
 
 public class VentanaPago extends JFrame{
@@ -149,6 +151,7 @@ public class VentanaPago extends JFrame{
 				for (int i = modeloPagada.size()-1; i>=0; i--) {
 					usuario.getlActividades().remove(i);
 				}
+				GestorFicheros.cargarActividadesUsuarioEnFicheroBinario(usuario, Paths.get("src/io/ActividadesUsuario.dat"));
 				modeloPagada.removeAllElements();
 				new VentanaProcesarPago();
 				this.dispose();

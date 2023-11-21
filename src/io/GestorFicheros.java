@@ -1,10 +1,14 @@
 package io;
 
 import domain.Actividad;
+import domain.Usuario;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.io.PrintWriter;
 import java.nio.file.Path;
 import java.time.LocalDate;
@@ -15,6 +19,7 @@ public class GestorFicheros {
     private static final Map<String, Set<Actividad>> actividades = new HashMap<>();
     private static Actividad[][] actividadesSemanales = new Actividad[6][10];
     private static LocalDate ultimoAccesoAtabla;
+    private static Map<String, ArrayList<Actividad>> mapaActividadesUsuario = new HashMap<>();
 
     static Logger logger = Logger.getLogger(GestorFicheros.class.getName());
 
@@ -114,5 +119,36 @@ public class GestorFicheros {
                 actividadesSemanales = Actividad.shiftArray(actividadesSemanales);
             }
         }
+    }	
+    
+    public static void obtenerActividadesUsuarioEnFicheroBinario (Usuario u, Path ruta) {
+    	
+    	try {
+			ObjectInputStream ois = new ObjectInputStream(new FileInputStream(ruta.toFile()));
+			mapaActividadesUsuario = (Map<String, ArrayList<Actividad>>) ois.readObject();
+			ois.close();
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		}
+    	mapaActividadesUsuario.putIfAbsent(u.getUsuario(), new ArrayList<>());
+    	u.setlActividades(mapaActividadesUsuario.get(u.getUsuario()));
+    	
+    }
+    
+    public static void cargarActividadesUsuarioEnFicheroBinario (Usuario u, Path ruta) {
+    	
+    	mapaActividadesUsuario.putIfAbsent(u.getUsuario(), new ArrayList<>());
+    	
+    	try {
+			ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(ruta.toFile()));
+			oos.writeObject(mapaActividadesUsuario);
+			oos.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
     }
 }

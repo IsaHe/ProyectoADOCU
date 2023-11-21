@@ -125,6 +125,7 @@ public class VentanaAdmin extends JFrame{
 					pCentro.removeAll();
 					pCentroC.removeAll();
 					
+					
 					modeloListaUsu = new DefaultListModel<Usuario>();
 					modeloListaUsu.addAll(BaseDeDatos.getUsuarios());
 					lUsu = new JList<Usuario>(modeloListaUsu);

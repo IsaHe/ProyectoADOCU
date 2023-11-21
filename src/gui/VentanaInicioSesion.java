@@ -11,6 +11,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.sql.Connection;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.logging.Logger;
 
 public class VentanaInicioSesion extends JFrame{
@@ -122,6 +123,7 @@ public class VentanaInicioSesion extends JFrame{
 				usuario.setNom(BaseDeDatos.getUsuarios().get(pos).getNom());
 				usuario.setApellido(BaseDeDatos.getUsuarios().get(pos).getApellido());
 				usuario.setEdad(BaseDeDatos.getUsuarios().get(pos).getEdad());
+				GestorFicheros.obtenerActividadesUsuarioEnFicheroBinario(usuario, Paths.get("src/io/ActividadesUsuario.dat"));
 				logger.info("Se ha iniciado sesion");
 				new VentanaTabla();
 				this.dispose();

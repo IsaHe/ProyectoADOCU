@@ -6,6 +6,7 @@ import io.GestorFicheros;
 
 import javax.swing.*;
 import java.awt.*;
+import java.nio.file.Paths;
 import java.time.LocalDate;
 import java.util.Objects;
 import java.util.logging.Logger;
@@ -68,6 +69,7 @@ public class VentanaModificacionActividades extends JFrame {
         btnRegistrarHora.addActionListener(e -> {
             ventanaTabla.getTabla().setValueAt(actividades.getSelectedItem(), localizarHoraEnTabla(horaActividad), localizarFechaEnTabla(fechaActividad));
             VentanaInicioSesion.getUsuario().getlActividades().add((Actividad) actividades.getSelectedItem());
+            GestorFicheros.cargarActividadesUsuarioEnFicheroBinario(VentanaInicioSesion.getUsuario(), Paths.get("src/io/ActividadesUsuario.dat"));
             logger.info("Se ha pulsado el botón Registrar hora");
             this.dispose();
         });
