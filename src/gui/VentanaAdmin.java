@@ -4,16 +4,10 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.GridLayout;
-import java.awt.ScrollPane;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.net.URL;
-import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.sql.Connection;
-import java.util.Collection;
 import java.util.Objects;
-import java.util.Scanner;
 import java.util.logging.Logger;
 
 import javax.swing.DefaultListModel;
@@ -24,12 +18,14 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
 import javax.swing.JTree;
 import javax.swing.event.TreeSelectionEvent;
 import javax.swing.event.TreeSelectionListener;
+import javax.swing.table.DefaultTableModel;
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.DefaultTreeModel;
-import javax.swing.tree.TreeModel;
 import javax.swing.tree.TreePath;
 
 import db.BaseDeDatos;
@@ -49,13 +45,14 @@ public class VentanaAdmin extends JFrame{
 	private JTree arbol;
 	private DefaultMutableTreeNode nRaiz;
 	private DefaultTreeModel modeloArbol;
-	private JList<Usuario> lUsu;
+	private JTable tablaUsu;
 	private JList<Actividad> lAct;
 	private JList<Integer> lPag;
-	private DefaultListModel<Usuario> modeloListaUsu;
+	private DefaultTableModel modeloTablaUsu;
+	private String [] titulos = {"NOMBRE","APELLIDO","EDAD", "USUARIO", "CONTRASEÑA"};
 	private DefaultListModel<Actividad> modeloListaAct;
 	private DefaultListModel<Integer> modeloListaPag;
-	private ScrollPane scrollUsu, scrollAct, scrollPag;
+	private JScrollPane scrollUsu, scrollAct, scrollPag;
 	
 
 	public VentanaAdmin(){
@@ -125,12 +122,23 @@ public class VentanaAdmin extends JFrame{
 					pCentro.removeAll();
 					pCentroC.removeAll();
 					
-					
-					modeloListaUsu = new DefaultListModel<Usuario>();
-					modeloListaUsu.addAll(BaseDeDatos.getUsuarios());
-					lUsu = new JList<Usuario>(modeloListaUsu);
-					scrollUsu = new ScrollPane();
-					scrollUsu.add(lUsu);
+					BaseDeDatos.getUsuarios();
+					int pos = 0;
+					modeloTablaUsu = new DefaultTableModel();
+					modeloTablaUsu.setColumnIdentifiers(titulos);
+					for(Usuario u : BaseDeDatos.getUsuarios()) {
+						if(u.getUsuario() == "Admin"){
+							pos = BaseDeDatos.getUsuarios().indexOf(u);
+								
+						}else {
+							Object [] contenido = {u.getNom(), u.getApellido(), u.getEdad(), u.getUsuario(), u.getContraseña()};
+							modeloTablaUsu.addRow(contenido);
+						}
+						
+					}
+					modeloTablaUsu.removeRow(pos + 1);
+					tablaUsu = new JTable(modeloTablaUsu);
+					scrollUsu = new JScrollPane(tablaUsu);
 					
 					pCentro.add(new JPanel());
 					pCentro.add(scrollUsu);
@@ -141,9 +149,22 @@ public class VentanaAdmin extends JFrame{
 					pCentro.removeAll();
 					pCentroC.removeAll();
 					
+					GestorFicheros.obtenerActividadesSemanalesDeFichero(Paths.get("io/ActividadesSemanales.txt"));
+					Actividad[][] actividad = GestorFicheros.getActividadesSemanales();
+					
 					modeloListaAct = new DefaultListModel<Actividad>();
+					 for (int i = 0; i < 6; i++) {
+						 for (int j = 0; j < 10; j++) {
+							 if(actividad[i][j] != null) {
+								 modeloListaAct.addElement(actividad[i][j]);
+								 System.out.println(actividad[i][j]);
+							 }
+							 
+						 }
+						 
+					 }					
 					lAct = new JList<Actividad>(modeloListaAct);
-					scrollAct = new ScrollPane();
+					scrollAct = new JScrollPane();
 					scrollAct.add(lAct);
 					
 					pCentro.add(new JPanel());
@@ -158,7 +179,7 @@ public class VentanaAdmin extends JFrame{
 					
 					modeloListaPag = new DefaultListModel<Integer>();
 					lPag = new JList<Integer>(modeloListaPag);
-					scrollPag = new ScrollPane();
+					scrollPag = new JScrollPane();
 					scrollPag.add(lPag);
 					
 					pCentro.add(new JPanel());
