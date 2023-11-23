@@ -149,7 +149,7 @@ public class VentanaAdmin extends JFrame{
 					pCentro.removeAll();
 					pCentroC.removeAll();
 					
-					GestorFicheros.obtenerActividadesSemanalesDeFichero(Paths.get("io/ActividadesSemanales.txt"));
+					GestorFicheros.obtenerActividadesSemanalesDeFichero(Paths.get("src/io/ActividadesSemanales.txt"));
 					Actividad[][] actividad = GestorFicheros.getActividadesSemanales();
 					
 					modeloListaAct = new DefaultListModel<Actividad>();
@@ -164,12 +164,10 @@ public class VentanaAdmin extends JFrame{
 						 
 					 }					
 					lAct = new JList<Actividad>(modeloListaAct);
-					scrollAct = new JScrollPane();
-					scrollAct.add(lAct);
+					scrollAct = new JScrollPane(lAct);
 					
 					pCentro.add(new JPanel());
-					pCentro.add(pCentroC);
-					pCentroC.add(scrollAct);
+					pCentro.add(scrollAct);
 					pCentro.add(new JPanel());
 					
 				}else if(ultimo.equals("Ver Pagos")) {
