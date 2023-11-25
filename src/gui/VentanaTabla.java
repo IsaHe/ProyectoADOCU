@@ -111,6 +111,8 @@ public class VentanaTabla extends JFrame{
 				label.setOpaque(true);
 				label.setText(value.toString());
 				
+					
+				
 				return label;
 			}
 		}
@@ -174,11 +176,7 @@ public class VentanaTabla extends JFrame{
 					new VentanaModificacionActividades(
 							10, (String) tabla.getValueAt(fila, 0),
 							LocalDate.parse(tabla.getColumnName(columna)), VentanaTabla.this);
-				} else {
-					usuario.eliminarActividadDeLista((Actividad) getTabla().getValueAt(fila, columna));
-					GestorFicheros.getActividadesSemanales()[columna-1][fila] = null;
-					getTabla().setValueAt(null, fila, columna);
-				}
+				} 
 				e.consume();
 				logger.info("Se ha pulsado la celda en la fila: " + fila + " y columna: " + columna);
 			}

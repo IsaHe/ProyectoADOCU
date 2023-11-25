@@ -157,7 +157,6 @@ public class VentanaAdmin extends JFrame{
 						 for (int j = 0; j < 10; j++) {
 							 if(actividad[i][j] != null) {
 								 modeloListaAct.addElement(actividad[i][j]);
-								 System.out.println(actividad[i][j]);
 							 }
 							 
 						 }

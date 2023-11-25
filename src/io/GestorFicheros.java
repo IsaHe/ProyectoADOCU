@@ -35,7 +35,7 @@ public class GestorFicheros {
                 String dia = partes[0];
                 for (int i = 1; i < partes.length; i++) {
                     String[] partesActividad = partes[i].split(",");
-                    Actividad actividad = new Actividad(partesActividad[0], Integer.parseInt(partesActividad[1]), Float.parseFloat(partesActividad[2]));
+                    Actividad actividad = new Actividad(partesActividad[0], Integer.parseInt(partesActividad[1]), Float.parseFloat(partesActividad[2]), false, null);
                     listaActividades.add(actividad);
                 }
                 actividades.put(dia, listaActividades);
@@ -80,7 +80,7 @@ public class GestorFicheros {
                 for (int j = 0; j < partes.length; j++) {
                     if (!partes[j].isEmpty()) {
                         String[] partesActividad = partes[j].split(",");
-                        Actividad actividad = new Actividad(partesActividad[0], Integer.parseInt(partesActividad[1]),Float.parseFloat(partesActividad[2]));
+                        Actividad actividad = new Actividad(partesActividad[0], Integer.parseInt(partesActividad[1]),Float.parseFloat(partesActividad[2]),Boolean.parseBoolean(partesActividad[3].toString()) , partesActividad[4].toString());
                         actividadesSemanales[i][j] = actividad;
                     }
                 }
@@ -91,6 +91,27 @@ public class GestorFicheros {
             logger.warning("Error al obtener las actividades semanales del fichero");
         }
 
+    }
+    
+    public static void cambiarEstadoDePagoEnActividadSemanal (Actividad a) {
+    	 for (int i = 0; i < 6; i++) {
+             for (int j = 0; j < 10; j++) {
+            	 if (actividadesSemanales[i][j] == a) {
+            		 actividadesSemanales[i][j].setPagada(true);
+            	 }
+             }
+         }
+                 
+    }
+    
+    public static void asignarUsuarioAActividadSemanal (Actividad a, String usuario) {
+    	for (int i = 0; i < 6; i++) {
+            for (int j = 0; j < 10; j++) {
+           	 if (actividadesSemanales[i][j] == a) {
+           		 actividadesSemanales[i][j].setUsuario(usuario);
+           	 }
+         }
+      }
     }
 
     public static Map<String, Set<Actividad>> getActividades() {

@@ -70,6 +70,8 @@ public class VentanaModificacionActividades extends JFrame {
             ventanaTabla.getTabla().setValueAt(actividades.getSelectedItem(), localizarHoraEnTabla(horaActividad), localizarFechaEnTabla(fechaActividad));
             VentanaInicioSesion.getUsuario().getlActividades().add((Actividad) actividades.getSelectedItem());
             GestorFicheros.cargarActividadesUsuarioEnFicheroBinario(VentanaInicioSesion.getUsuario(), Paths.get("src/io/ActividadesUsuario.dat"));
+            GestorFicheros.asignarUsuarioAActividadSemanal((Actividad) actividades.getSelectedItem(), VentanaInicioSesion.getUsuario().getUsuario());
+            GestorFicheros.cargarActividadesSemanalesEnFichero(Paths.get("src/io/ActividadesSemanales.txt"));
             logger.info("Se ha pulsado el botón Registrar hora");
             this.dispose();
         });

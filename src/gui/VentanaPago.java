@@ -26,6 +26,7 @@ public class VentanaPago extends JFrame{
 	private JButton btnPagar, btnVolver, btnPasarAPagada, btnPasarAPendiente, btnPasarTodosAPagar, btnPasarTodosAPendiente;
 	private JPasswordField pasContrasena;
 	private float precio = 0;
+	private VentanaTabla ventanaTabla;
 
 	public VentanaPago(){
 		super();
@@ -150,7 +151,10 @@ public class VentanaPago extends JFrame{
 				lblImporteAPagar.setText("0");
 				for (int i = modeloPagada.size()-1; i>=0; i--) {
 					usuario.getlActividades().remove(i);
+					GestorFicheros.cambiarEstadoDePagoEnActividadSemanal(modeloPagada.get(i));
 				}
+				GestorFicheros.cargarActividadesSemanalesEnFichero(Paths.get("src/io/ActividadesSemanales.txt"));
+				
 				GestorFicheros.cargarActividadesUsuarioEnFicheroBinario(usuario, Paths.get("src/io/ActividadesUsuario.dat"));
 				modeloPagada.removeAllElements();
 				new VentanaProcesarPago();

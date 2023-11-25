@@ -8,9 +8,11 @@ import java.util.logging.Logger;
 
 public class VentanaValoracion extends JFrame {
     Logger logger = Logger.getLogger(VentanaValoracion.class.getName());
+    
     enum Valoracion {
         MUY_MAL, MAL, REGULAR, BIEN, MUY_BIEN
     }
+    
     public VentanaValoracion() {
         setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
         setTitle("Valoración");
