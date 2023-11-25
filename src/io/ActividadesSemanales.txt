@@ -1,7 +1,7 @@
 2023-11-25
-;;Buceo,0,99.9,false,Isaac;;;;;;;;
-;Gimnasia,7,70.0,false,null;;;;;;;;;
-;Parapente,3,56.6,true,Isaac;;Parapente,3,56.6,true,Isaac;Parapente,3,56.6,false,null;;;;;;
-;;;Golf,3,86.5,false,null;;;;;;;
-;;Gimnasia,8,50.0,true,Isaac;;;;;;;;
-;;;;;;;;;;
+;;;;Buceo,0,99.9,false,AA;;;;;;
+;Gimnasia,7,70.0,true,Isaac;Gimnasia,7,70.0,true,AA;Gimnasia,7,70.0,true,Isaac;;;;;;;
+;Zumba,4,45.0,false,Isaac;Parapente,3,56.6,true,AA;;Parapente,3,56.6,false,AA;;;;;;
+;;;Golf,3,86.5,false,Isaac;;;;;;;
+;Gimnasia,8,50.0,true,Isaac;;Gimnasia,8,50.0,true,AA;;;;;;;
+;;;;Escalada,5,67.9,false,Isaac;;;;;;

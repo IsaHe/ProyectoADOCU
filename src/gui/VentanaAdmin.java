@@ -2,6 +2,7 @@ package gui;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Component;
 import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
@@ -17,10 +18,14 @@ import javax.swing.JEditorPane;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JList;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import javax.swing.JTextArea;
+import javax.swing.JTextField;
 import javax.swing.JTree;
+import javax.swing.ListCellRenderer;
 import javax.swing.event.TreeSelectionEvent;
 import javax.swing.event.TreeSelectionListener;
 import javax.swing.table.DefaultTableModel;
@@ -41,7 +46,7 @@ public class VentanaAdmin extends JFrame{
 	JFrame ventanaActual = this;
 	private JPanel pSur,pCentro, pCentroC, pNorte, pOeste;
 	private JLabel lblTitulo, lblFoto;
-	private JButton btnVolver, btnSalir;
+	private JButton btnVolver, btnSalir, btnBorrarAct;
 	private JTree arbol;
 	private DefaultMutableTreeNode nRaiz;
 	private DefaultTreeModel modeloArbol;
@@ -149,6 +154,19 @@ public class VentanaAdmin extends JFrame{
 					pCentro.removeAll();
 					pCentroC.removeAll();
 					
+					JPanel panelTxt = new JPanel();
+					JPanel panelBtn = new JPanel();
+					JTextArea txtAct = new JTextArea("- Si la actividad está en Rojo: NO ESTA PAGADA." + "\n"
+							+ "\n" + "- Si la actividad está en Verde: SI ESTA PAGADA." + "\n" 
+							+ "\n" + "- Al seleccionar una actividad el fondo se pone Blanco." + "\n" 
+							+ "\n" + "- Para borrar una actividad primero se debe seleccionar una." + "\n" 
+							+ "\n" + "- El usuario que aparece es responsable de pagar las actividades.");
+					
+					txtAct.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 15));
+					panelTxt.add(txtAct, BorderLayout.CENTER);
+					
+					btnBorrarAct = new JButton("Borrar Actividad");
+					panelBtn.add(btnBorrarAct);
 					GestorFicheros.obtenerActividadesSemanalesDeFichero(Paths.get("src/io/ActividadesSemanales.txt"));
 					Actividad[][] actividad = GestorFicheros.getActividadesSemanales();
 					
@@ -165,9 +183,54 @@ public class VentanaAdmin extends JFrame{
 					lAct = new JList<Actividad>(modeloListaAct);
 					scrollAct = new JScrollPane(lAct);
 					
-					pCentro.add(new JPanel());
+					lAct.setCellRenderer(new ListCellRenderer<Actividad>() {
+
+						@Override
+						public Component getListCellRendererComponent(JList<? extends Actividad> list, Actividad value,
+								int index, boolean isSelected, boolean cellHasFocus) {
+							JLabel label = new JLabel(((Actividad) value).toStringAdmin());
+							label.setOpaque(true);
+							label.setFont(new Font(Font.SANS_SERIF, Font.ITALIC, 14));
+							
+							if (((Actividad)value).isPagada()) {
+								label.setBackground(Color.green);
+							}else if (!((Actividad)value).isPagada()) {
+								label.setBackground(Color.red);
+							}
+							
+							if (isSelected) {
+								label.setBackground(list.getBackground());
+							}
+							
+							return label;
+						}
+					});
+					
+					btnBorrarAct.addActionListener(new ActionListener() {
+						
+						@Override
+						public void actionPerformed(ActionEvent e) {
+						
+							Actividad a = lAct.getSelectedValue();
+							if (a == null) {
+								JOptionPane.showMessageDialog(null, "Debes selecionar una actividad antes de borrarla");
+							}else {
+								if (a.isPagada()) {
+									JOptionPane.showMessageDialog(null, "No puedes eliminar una Actividad Pagada");
+								}else {
+									GestorFicheros.eliminarActividadDeActividadSemanal(a);	
+									GestorFicheros.cargarActividadesSemanalesEnFichero(Paths.get("src/io/ActividadesSemanales.txt"));
+									GestorFicheros.eliminarActividadUsuarioDeMapa(a.getUsuario(), a);
+									GestorFicheros.cargarActividadesUsuarioEnFicheroBinario2(a.getUsuario(), Paths.get("src/io/ActividadesUsuario.dat"));
+									modeloListaAct.removeElement(a);
+								}
+							}
+						}
+					});
+					
+					pCentro.add(panelTxt);
 					pCentro.add(scrollAct);
-					pCentro.add(new JPanel());
+					pCentro.add(panelBtn);
 					
 				}else if(ultimo.equals("Ver Pagos")) {
 					

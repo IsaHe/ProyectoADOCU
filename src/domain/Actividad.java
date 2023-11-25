@@ -65,6 +65,11 @@ public class Actividad implements Serializable{
 		return nombre + "," + numeroParticipantes + "," + precio + "," + pagada + "," + usuario;
 	}
 
+	public String toStringAdmin() {
+		return "Actividad: " + nombre + " - Usuario: " + usuario;
+	}
+
+	
 	public static Actividad[][] shiftArray(Actividad[][] actividadesSemanales) {
 		Actividad[][] actividadesSemanalesAux = new Actividad[6][10];
 		for (int i = 0; i < actividadesSemanales.length; i++) {

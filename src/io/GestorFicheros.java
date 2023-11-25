@@ -113,6 +113,16 @@ public class GestorFicheros {
          }
       }
     }
+    
+    public static void eliminarActividadDeActividadSemanal (Actividad a) {
+    	for (int i = 0; i < 6; i++) {
+            for (int j = 0; j < 10; j++) {
+           	 	if (actividadesSemanales[i][j] == a) {
+           	 		actividadesSemanales[i][j] = null;
+           	 	}
+         }
+      }
+    }
 
     public static Map<String, Set<Actividad>> getActividades() {
         return actividades;
@@ -172,4 +182,23 @@ public class GestorFicheros {
 			e.printStackTrace();
 		}
     }
+    
+    public static void eliminarActividadUsuarioDeMapa (String usuario, Actividad a){
+    	ArrayList<Actividad> actividades = mapaActividadesUsuario.get(usuario);
+    	actividades.remove(a);
+    }
+    
+ public static void cargarActividadesUsuarioEnFicheroBinario2 (String u, Path ruta) {
+    	
+    	mapaActividadesUsuario.putIfAbsent(u, new ArrayList<>());
+    	
+    	try {
+			ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(ruta.toFile()));
+			oos.writeObject(mapaActividadesUsuario);
+			oos.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+    }
+    
 }

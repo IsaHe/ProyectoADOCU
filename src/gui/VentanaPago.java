@@ -26,10 +26,11 @@ public class VentanaPago extends JFrame{
 	private JButton btnPagar, btnVolver, btnPasarAPagada, btnPasarAPendiente, btnPasarTodosAPagar, btnPasarTodosAPendiente;
 	private JPasswordField pasContrasena;
 	private float precio = 0;
-	private VentanaTabla ventanaTabla;
 
 	public VentanaPago(){
 		super();
+		
+		
 		
 		//FUNCIONES VENTANA
 		setExtendedState(MAXIMIZED_BOTH);
