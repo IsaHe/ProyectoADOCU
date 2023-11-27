@@ -80,7 +80,7 @@ public class GestorFicheros {
                 for (int j = 0; j < partes.length; j++) {
                     if (!partes[j].isEmpty()) {
                         String[] partesActividad = partes[j].split(",");
-                        Actividad actividad = new Actividad(partesActividad[0], Integer.parseInt(partesActividad[1]),Float.parseFloat(partesActividad[2]),Boolean.parseBoolean(partesActividad[3].toString()) , partesActividad[4].toString());
+                        Actividad actividad = new Actividad(partesActividad[0], Integer.parseInt(partesActividad[1]),Float.parseFloat(partesActividad[2]),Boolean.parseBoolean(partesActividad[3]) , partesActividad[4]);
                         actividadesSemanales[i][j] = actividad;
                     }
                 }

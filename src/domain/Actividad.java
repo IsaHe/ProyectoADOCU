@@ -20,6 +20,15 @@ public class Actividad implements Serializable{
 		this.usuario = usuario;
 	}
 
+	public Actividad(String nombre, int numeroParticipantes, float precio) {
+		super();
+		this.nombre = nombre;
+		this.numeroParticipantes = numeroParticipantes;
+		this.precio = precio;
+		this.pagada = false;
+		this.usuario = null;
+	}
+
 	public Actividad() {
 		super();
 	}

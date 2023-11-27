@@ -15,6 +15,7 @@ import java.nio.file.Paths;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.logging.Logger;
 
 public class VentanaTabla extends JFrame{
@@ -126,124 +127,8 @@ public class VentanaTabla extends JFrame{
 							label.setBackground(Color.RED);
 						}
 					}else {
-						if (((Actividad)value).getNombre().equals("Gimnasia")) {
-							label.setIcon(new ImageIcon("src/images/Gimnasia.png"));
-							label.setText("");
-						}else if (((Actividad)value).getNombre().equals("Airsoft")) {
-							label.setIcon(new ImageIcon("src/images/Airsoft.jpg"));
-							label.setText("");
-						}else if (((Actividad)value).getNombre().equals("Ajedrez")) {
-							label.setIcon(new ImageIcon("src/images/Ajedrez.jpg"));
-							label.setText("");
-						}else if (((Actividad)value).getNombre().equals("Alpinismo")) {
-							label.setIcon(new ImageIcon("src/images/Alpinismo.jpg"));
-							label.setText("");
-						}else if (((Actividad)value).getNombre().equals("Atletismo")) {
-							label.setIcon(new ImageIcon("src/images/Atletismo.jpg"));
-							label.setText("");
-						}else if (((Actividad)value).getNombre().equals("Baloncesto")) {
-							label.setIcon(new ImageIcon("src/images/Baloncesto.jpg"));
-							label.setText("");
-						}else if (((Actividad)value).getNombre().equals("Balonvolea")) {
-							label.setIcon(new ImageIcon("src/images/balonvolea.jpg"));
-							label.setText("");
-						}else if (((Actividad)value).getNombre().equals("Barranquismo")) {
-							label.setIcon(new ImageIcon("src/images/Barranquismo.jpg"));
-							label.setText("");
-						}else if (((Actividad)value).getNombre().equals("Billar")) {
-							label.setIcon(new ImageIcon("src/images/Billar.jpg"));
-							label.setText("");
-						}else if (((Actividad)value).getNombre().equals("Boxeo")) {
-							label.setIcon(new ImageIcon("src/images/Boxeo.jpg"));
-							label.setText("");
-						}else if (((Actividad)value).getNombre().equals("Buceo")) {
-							label.setIcon(new ImageIcon("src/images/Buceo.jpg"));
-							label.setText("");
-						}else if (((Actividad)value).getNombre().equals("Ciclismo")) {
-							label.setIcon(new ImageIcon("src/images/Ciclismo.jpg"));
-							label.setText("");
-						}else if (((Actividad)value).getNombre().equals("Escalada")) {
-							label.setIcon(new ImageIcon("src/images/Escalada.jpg"));
-							label.setText("");
-						}else if (((Actividad)value).getNombre().equals("Espeleologia")) {
-							label.setIcon(new ImageIcon("src/images/Espeleologia.jpg"));
-							label.setText("");
-						}else if (((Actividad)value).getNombre().equals("Esqui")) {
-							label.setIcon(new ImageIcon("src/images/Esqui.jpg"));
-							label.setText("");
-						}else if (((Actividad)value).getNombre().equals("Golf")) {
-							label.setIcon(new ImageIcon("src/images/Golf.jpg"));
-							label.setText("");
-						}else if (((Actividad)value).getNombre().equals("Judo")) {
-							label.setIcon(new ImageIcon("src/images/Judo.jpg"));
-							label.setText("");
-						}else if (((Actividad)value).getNombre().equals("Lucha")) {
-							label.setIcon(new ImageIcon("src/images/Lucha.jpg"));
-							label.setText("");
-						}else if (((Actividad)value).getNombre().equals("Musculacion")) {
-							label.setIcon(new ImageIcon("src/images/Musculacion.jpg"));
-							label.setText("");
-						}else if (((Actividad)value).getNombre().equals("Natacion")) {
-							label.setIcon(new ImageIcon("src/images/Natacion.jpg"));
-							label.setText("");
-						}else if (((Actividad)value).getNombre().equals("Padel")) {
-							label.setIcon(new ImageIcon("src/images/Padel.jpg"));
-							label.setText("");
-						}else if (((Actividad)value).getNombre().equals("Paintball")) {
-							label.setIcon(new ImageIcon("src/images/Paintball.jpg"));
-							label.setText("");
-						}else if (((Actividad)value).getNombre().equals("Paracaidismo")) {
-							label.setIcon(new ImageIcon("src/images/Paracaidismo.jpg"));
-							label.setText("");
-						}else if (((Actividad)value).getNombre().equals("Parapente")) {
-							label.setIcon(new ImageIcon("src/images/Parapente.jpg"));
-							label.setText("");
-						}else if (((Actividad)value).getNombre().equals("Paseo")) {
-							label.setIcon(new ImageIcon("src/images/Paseo.jpg"));
-							label.setText("");
-						}else if (((Actividad)value).getNombre().equals("Patinaje")) {
-							label.setIcon(new ImageIcon("src/images/Patinaje.jpg"));
-							label.setText("");
-						}else if (((Actividad)value).getNombre().equals("Pesca")) {
-							label.setIcon(new ImageIcon("src/images/Pesca.jpg"));
-							label.setText("");
-						}else if (((Actividad)value).getNombre().equals("Pilates")) {
-							label.setIcon(new ImageIcon("src/images/Pilates.jpg"));
-							label.setText("");
-						}else if (((Actividad)value).getNombre().equals("Puenting")) {
-							label.setIcon(new ImageIcon("src/images/Puenting.jpg"));
-							label.setText("");
-						}else if (((Actividad)value).getNombre().equals("Running")) {
-							label.setIcon(new ImageIcon("src/images/Running.jpg"));
-							label.setText("");
-						}else if (((Actividad)value).getNombre().equals("Senderismo")) {
-							label.setIcon(new ImageIcon("src/images/Senderismo.jpg"));
-							label.setText("");
-						}else if (((Actividad)value).getNombre().equals("Snowboard")) {
-							label.setIcon(new ImageIcon("src/images/Snowboard.jpg"));
-							label.setText("");
-						}else if (((Actividad)value).getNombre().equals("Taekwondo")) {
-							label.setIcon(new ImageIcon("src/images/Taekwondo.jpg"));
-							label.setText("");
-						}else if (((Actividad)value).getNombre().equals("Tenis")) {
-							label.setIcon(new ImageIcon("src/images/Tenis.jpg"));
-							label.setText("");
-						}else if (((Actividad)value).getNombre().equals("Triatlon")) {
-							label.setIcon(new ImageIcon("src/images/Triatlon.jpg"));
-							label.setText("");
-						}else if (((Actividad)value).getNombre().equals("Vela")) {
-							label.setIcon(new ImageIcon("src/images/Vela.jpg"));
-							label.setText("");
-						}else if (((Actividad)value).getNombre().equals("Voleibol")) {
-							label.setIcon(new ImageIcon("src/images/Voleibol.jpg"));
-							label.setText("");
-						}else if (((Actividad)value).getNombre().equals("Yoga")) {
-							label.setIcon(new ImageIcon("src/images/Yoga.jpg"));
-							label.setText("");
-						}else if (((Actividad)value).getNombre().equals("Zumba")) {
-							label.setIcon(new ImageIcon("src/images/Zumba.jpg"));
-							label.setText("");
-						}
+                        label.setIcon(new ImageIcon(Objects.requireNonNull(getClass().getResource("/resources/images//" + ((Actividad) value).getNombre() + ".jpg"))));
+                        label.setText("");
 					}
 					
 				}
