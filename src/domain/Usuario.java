@@ -94,6 +94,9 @@ public class Usuario {
 		if (!(obj instanceof Usuario)) {
 			return false;
 		}
+		if (((Usuario) obj).getUsuario() == null){
+			return true;
+		}
 		return this.getUsuario().equals(((Usuario) obj).getUsuario());
 	}
 	

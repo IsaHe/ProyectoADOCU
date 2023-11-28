@@ -1,7 +1,6 @@
 package domain;
 
 import io.GestorFicheros;
-import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -18,16 +17,31 @@ public class ActividadTest {
     Actividad a5;
     Actividad a6;
 
+    Actividad a7;
+    Actividad a8;
+    Actividad a9;
+    Actividad a10;
+    Actividad a11;
+    Actividad a12;
+
     Actividad[][] arrayActividades;
 
     @Before
     public void setUp() {
         a1 = new Actividad();
         a2 = new Actividad("a", 1, 1.005F);
-        a3 = new Actividad("a", 582, 15000.8548F);
-        a4 = new Actividad("b", 41, 878.434343F);
-        a5 = new Actividad("a", 240, 30.342323F);
-        a6 = new Actividad("a", 147, 10.454874548724548F);
+        a3 = new Actividad("a", 582, 15000.8548F, false, "usuario");
+        a4 = new Actividad("b", 41, 878.434343F, true, "usuario");
+        a5 = new Actividad("a", 240, 30.342323F, false, "usuario");
+        a6 = new Actividad("a", 147, 10.454874548724548F, true, "usuario");
+
+        a7 = new Actividad();
+        a8 = new Actividad("a", 1, 1.005F);
+        a9 = new Actividad("a", 582, 15000.8548F);
+        a10 = new Actividad("b", 41, 878.434343F);
+        a11 = new Actividad("a", 240, 30.342323F);
+        a12 = new Actividad("a", 147, 10.454874548724548F);
+
     }
 
     @Test
@@ -110,12 +124,12 @@ public class ActividadTest {
 
     @Test
     public void toStringBd() {
-        assertEquals("null,0,0.0", a1.toStringBd());
-        assertEquals("a,1,1.005", a2.toStringBd());
-        assertEquals("a,582,15000.8545", a3.toStringBd());
-        assertEquals("b,41,878.4343", a4.toStringBd());
-        assertEquals("a,240,30.342323", a5.toStringBd());
-        assertEquals("a,147,10.454875", a6.toStringBd());
+        assertEquals("null,0,0.0,false,null", a1.toStringBd());
+        assertEquals("a,1,1.005,false,null", a2.toStringBd());
+        assertEquals("a,582,15000.8545,false,usuario", a3.toStringBd());
+        assertEquals("b,41,878.4343,true,usuario", a4.toStringBd());
+        assertEquals("a,240,30.342323,false,usuario", a5.toStringBd());
+        assertEquals("a,147,10.454875,true,usuario", a6.toStringBd());
     }
 
     @Test
@@ -145,18 +159,49 @@ public class ActividadTest {
 
     @Test
     public void testEquals() {
-        Actividad a7 = new Actividad();
-        Actividad a8 = new Actividad("a", 1, 1.005F);
-        Actividad a9 = new Actividad("a", 582, 15000.8548F);
-        Actividad a10 = new Actividad("b", 41, 878.434343F);
-        Actividad a11 = new Actividad("a", 240, 30.342323F);
-        Actividad a12 = new Actividad("a", 147, 10.454874548724548F);
+        assertEquals(a1, new Actividad());
+        assertEquals(a2, new Actividad("a", 1, 1.005F));
+        assertEquals(a3, new Actividad("a", 582, 15000.8548F, false, "usuario"));
+        assertNotEquals(a4, new Actividad("h", 41, 878.434343F, true, "usuario"));
+        assertNotEquals(a5, new Actividad("g", 240, 30.342323F, false, "usuario"));
+    }
 
-        Assert.assertEquals(a1, a7);
-        Assert.assertEquals(a2, a8);
-        Assert.assertEquals(a3, a9);
-        Assert.assertEquals(a4, a10);
-        Assert.assertEquals(a5, a11);
-        Assert.assertEquals(a6, a12);
+    @Test
+    public void testSetPagada() {
+        	a1.setPagada(true);
+        	assertTrue(a1.isPagada());
+        	a2.setPagada(true);
+        	assertTrue(a2.isPagada());
+        	a3.setPagada(true);
+        	assertTrue(a3.isPagada());
+        	a4.setPagada(false);
+        	assertFalse(a4.isPagada());
+        	a5.setPagada(true);
+        	assertTrue(a5.isPagada());
+        	a6.setPagada(false);
+        	assertFalse(a6.isPagada());
+    }
+
+    @Test
+    public void testSetUsuario() {
+        	a1.setUsuario("usuario1");
+        	assertEquals("usuario1", a1.getUsuario());
+        	a2.setUsuario("usuario1815");
+        	assertEquals("usuario1815", a2.getUsuario());
+        	a3.setUsuario("usuario4815");
+        	assertEquals("usuario4815", a3.getUsuario());
+        	a4.setUsuario("usu485ario");
+        	assertEquals("usu485ario", a4.getUsuario());
+        	a5.setUsuario("usu79779ario");
+        	assertEquals("usu79779ario", a5.getUsuario());
+        	a6.setUsuario("usuari1515o");
+        	assertEquals("usuari1515o", a6.getUsuario());
+    }
+
+    @Test
+    public void testToStringAdmin() {
+        	assertEquals("Actividad: null - Usuario: null", a1.toStringAdmin());
+            assertEquals("Actividad: a - Usuario: null", a2.toStringAdmin());
+            assertEquals("Actividad: a - Usuario: usuario", a3.toStringAdmin());
     }
 }

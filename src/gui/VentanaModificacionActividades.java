@@ -1,6 +1,5 @@
 package gui;
 
-import db.BaseDeDatos;
 import domain.Actividad;
 import io.GestorFicheros;
 

@@ -106,12 +106,12 @@ public class Actividad implements Serializable{
 
 	@Override
 	public boolean equals(Object obj) {
-		if (obj instanceof Actividad){
-			if (((Actividad) obj).getNombre() == null) {
-				return true;
-			}
-			return nombre.equals(((Actividad) obj).getNombre());
+		if (!(obj instanceof Actividad)){
+			return false;
 		}
-		return false;
+		if (((Actividad) obj).getNombre() == null) {
+			return true;
+		}
+		return nombre.equals(((Actividad) obj).getNombre());
 	}
 }

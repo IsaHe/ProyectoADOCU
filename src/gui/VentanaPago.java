@@ -1,12 +1,11 @@
 
 package gui;
 
-import javax.swing.*;
-
 import domain.Actividad;
 import domain.Usuario;
 import io.GestorFicheros;
 
+import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;

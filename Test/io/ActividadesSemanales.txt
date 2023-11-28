@@ -1,7 +1,7 @@
 2023-11-19
-;a,7,70.0;;;;b,7,70.0;;;;;
-c,3,56.6;;;d,3,56.6;;e,3,56.6;;;f,3,56.6;;
-;;g,3,86.5;;;;;h,3,86.5;;i,3,86.5;
-;j,8,50.0;k,8,50.0;l,8,50.0;;;;;;;
-m,9,76.6;;;n,9,76.6;;;;;;o,9,76.6;
+;a,7,70.0,false,usuario;;;;b,7,70.0,false,usuario;;;;;
+c,3,56.6,false,usuario;;;d,3,56.6,false,usuario;;e,3,56.6,false,usuario;;;f,3,56.6,false,usuario;;
+;;g,3,86.5,false,usuario;;;;;h,3,86.5,false,usuario;;i,3,86.5,false,usuario;
+;j,8,50.0,false,usuario;k,8,50.0,false,usuario;l,8,50.0,false,usuario;;;;;;;
+m,9,76.6,false,usuario;;;n,9,76.6,false,usuario;;;;;;o,9,76.6,false,usuario;
 ;;;;;;;;;;

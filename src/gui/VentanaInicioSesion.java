@@ -7,11 +7,9 @@ import io.GestorFicheros;
 
 import javax.swing.*;
 import java.awt.*;
-import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.sql.Connection;
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.logging.Logger;
 
 public class VentanaInicioSesion extends JFrame{
