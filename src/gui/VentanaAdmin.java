@@ -16,6 +16,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.nio.file.Paths;
+import java.sql.Connection;
 import java.util.Objects;
 import java.util.logging.Logger;
 
@@ -27,7 +28,7 @@ public class VentanaAdmin extends JFrame{
 	JFrame ventanaActual = this;
 	private JPanel pSur,pCentro, pCentroC, pNorte, pOeste;
 	private JLabel lblTitulo, lblFoto;
-	private JButton btnVolver, btnSalir, btnBorrarAct;
+	private JButton btnVolver, btnSalir, btnBorrarAct, btnBorrarUsu;
 	private JTree arbol;
 	private DefaultMutableTreeNode nRaiz;
 	private DefaultTreeModel modeloArbol;
@@ -39,6 +40,7 @@ public class VentanaAdmin extends JFrame{
 	private DefaultListModel<Actividad> modeloListaAct;
 	private DefaultListModel<Integer> modeloListaPag;
 	private JScrollPane scrollUsu, scrollAct, scrollPag;
+	private Connection conn = BaseDeDatos.iniciarBaseDeDatos("src/db/usuarios.db");
 	
 
 	public VentanaAdmin(){
@@ -80,6 +82,7 @@ public class VentanaAdmin extends JFrame{
         
 		btnSalir = new JButton("SALIR");
 		btnVolver = new JButton("VOLVER");
+		btnBorrarUsu = new JButton("Borrar Usuario");
 		
 		nRaiz = new DefaultMutableTreeNode("Administrador");
 		modeloArbol = new DefaultTreeModel(nRaiz);
@@ -126,9 +129,33 @@ public class VentanaAdmin extends JFrame{
 					tablaUsu = new JTable(modeloTablaUsu);
 					scrollUsu = new JScrollPane(tablaUsu);
 					
+					btnBorrarUsu.addActionListener(new ActionListener() {
+						
+						@Override
+						public void actionPerformed(ActionEvent e) {
+							conn = BaseDeDatos.iniciarBaseDeDatos("src/db/usuarios.db");
+							int fila = tablaUsu.getSelectedRow();
+							
+							String usuUsu = (String) tablaUsu.getValueAt(fila, 3);
+							
+							
+							
+							if (fila != -1) {
+								
+								BaseDeDatos.borrarUsuarioEnBD(conn, usuUsu);
+								modeloTablaUsu.removeRow(fila);
+								tablaUsu.repaint();
+							}else {
+								JOptionPane.showMessageDialog(null, "Seleccione una fila para eliminar", "Error", JOptionPane.ERROR_MESSAGE);
+							}
+							
+						}
+					});
+					
 					pCentro.add(new JPanel());
 					pCentro.add(scrollUsu);
-					pCentro.add(new JPanel());
+					pCentro.add(pCentroC);
+					pCentroC.add(btnBorrarUsu);
 					
 				}else if(ultimo.equals("Ver Actividades")) {
 					

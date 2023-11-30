@@ -7,6 +7,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Logger;
 
+import javax.swing.JOptionPane;
+
 public class BaseDeDatos {
 
 	private static List<Usuario> usuarios;
@@ -106,5 +108,23 @@ public class BaseDeDatos {
 		} catch (SQLException e) {
 			logger.warning("Error al cerrar conexion en Base De Datos");
 		}
+	}
+	
+	public static void borrarUsuarioEnBD(Connection conn, String usuario) {
+		 try {     
+				PreparedStatement prepSt = conn.prepareStatement("DELETE FROM usuarios WHERE usuario = ?");
+				prepSt.setString(1, usuario);
+				prepSt.executeUpdate();
+	            prepSt.close();
+		 }catch (SQLException e) {
+	            e.printStackTrace();
+	            JOptionPane.showMessageDialog(null, "Error al eliminar fila de la base de datos", "Error", JOptionPane.ERROR_MESSAGE);
+	     }
+		 try {
+			conn.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		 
 	}
 }
