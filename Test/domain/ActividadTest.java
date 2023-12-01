@@ -5,6 +5,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import java.nio.file.Paths;
+import java.util.Arrays;
 
 import static org.junit.Assert.*;
 
@@ -45,7 +46,7 @@ public class ActividadTest {
     }
 
     @Test
-    public void getPrecio() {
+    public void testgetPrecio() {
         assertEquals(0, a1.getPrecio(), 0);
         assertEquals(1.005F, a2.getPrecio(), 0);
         assertEquals(15000.8548F, a3.getPrecio(), 0);
@@ -55,7 +56,7 @@ public class ActividadTest {
     }
 
     @Test
-    public void setPrecio() {
+    public void testsetPrecio() {
         a1.setPrecio(1.005F);
         assertEquals(1.005F, a1.getPrecio(), 0);
         a2.setPrecio(15000.8548F);
@@ -71,7 +72,7 @@ public class ActividadTest {
     }
 
     @Test
-    public void getNombre() {
+    public void testgetNombre() {
         assertNull(a1.getNombre());
         assertEquals("a", a2.getNombre());
         assertEquals("a", a3.getNombre());
@@ -81,7 +82,7 @@ public class ActividadTest {
     }
 
     @Test
-    public void setNombre() {
+    public void testsetNombre() {
         a1.setNombre("a");
         assertEquals("a", a1.getNombre());
         a2.setNombre("b");
@@ -97,7 +98,7 @@ public class ActividadTest {
     }
 
     @Test
-    public void getNumeroParticipantes() {
+    public void testgetNumeroParticipantes() {
         assertEquals(0, a1.getNumeroParticipantes());
         assertEquals(1, a2.getNumeroParticipantes());
         assertEquals(582, a3.getNumeroParticipantes());
@@ -107,7 +108,7 @@ public class ActividadTest {
     }
 
     @Test
-    public void setNumeroParticipantes() {
+    public void testsetNumeroParticipantes() {
         a1.setNumeroParticipantes(1);
         assertEquals(1, a1.getNumeroParticipantes());
         a2.setNumeroParticipantes(582);
@@ -123,7 +124,7 @@ public class ActividadTest {
     }
 
     @Test
-    public void toStringBd() {
+    public void testtoStringBd() {
         assertEquals("null,0,0.0,false,null", a1.toStringBd());
         assertEquals("a,1,1.005,false,null", a2.toStringBd());
         assertEquals("a,582,15000.8545,false,usuario", a3.toStringBd());
@@ -133,10 +134,12 @@ public class ActividadTest {
     }
 
     @Test
-    public void shiftArray() {
+    public void testshiftArray() {
         GestorFicheros.obtenerActividadesSemanalesDeFichero(Paths.get("Test/io/ActividadesSemanales.txt"));
         arrayActividades = GestorFicheros.getActividadesSemanales();
         Actividad[][] shiftedArray = Actividad.shiftArray(arrayActividades);
+        System.out.println(Arrays.deepToString(shiftedArray));
+        System.out.println(Arrays.deepToString(arrayActividades));
 
         assertArrayEquals(arrayActividades[1], shiftedArray[0]);
         assertArrayEquals(arrayActividades[2], shiftedArray[1]);

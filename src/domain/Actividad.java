@@ -80,11 +80,16 @@ public class Actividad implements Serializable{
 
 	
 	public static Actividad[][] shiftArray(Actividad[][] actividadesSemanales) {
-		Actividad[][] actividadesSemanalesAux = new Actividad[6][10];
-		for (int i = 0; i < actividadesSemanales.length; i++) {
-			actividadesSemanalesAux[i] = getActividadesDiaSiguente(actividadesSemanales, i);
+		return shiftArrayRecursivo(actividadesSemanales, 0, new Actividad[6][10]);
+	}
+
+	public static Actividad[][] shiftArrayRecursivo(Actividad[][] actividadesSemanales, int i, Actividad[][] resultado) {
+		if (i == actividadesSemanales.length-1) {
+			resultado[i] = new Actividad[10];
+			return resultado;
 		}
-		return actividadesSemanalesAux;
+		resultado[i] = getActividadesDiaSiguente(actividadesSemanales, i);
+		return shiftArrayRecursivo(actividadesSemanales, i+1, resultado);
 	}
 
 	private static Actividad[] getActividadesDiaSiguente(Actividad[][] actividadesSemanales, int i) {
