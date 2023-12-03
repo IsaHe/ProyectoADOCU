@@ -127,7 +127,9 @@ public class VentanaTabla extends JFrame{
 							label.setBackground(Color.RED);
 						}
 					}else {
-                        label.setIcon(new ImageIcon(Objects.requireNonNull(getClass().getResource("/resources/images//" + ((Actividad) value).getNombre() + ".jpg"))));
+						ImageIcon imagen = new ImageIcon(Objects.requireNonNull(getClass().getResource("/resources/images//" + ((Actividad) value).getNombre() + ".jpg")));
+						ImageIcon imagenConDimensiones = new ImageIcon(imagen.getImage().getScaledInstance(180, 100, Image.SCALE_DEFAULT));
+                        label.setIcon(imagenConDimensiones);
                         label.setText("");
 					}
 					
