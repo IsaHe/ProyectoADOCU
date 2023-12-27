@@ -1,14 +1,19 @@
 package gui;
 
 import javax.swing.*;
+
+import db.BaseDeDatos;
+
 import java.awt.*;
 import java.net.URL;
+import java.sql.Connection;
 import java.util.Objects;
 import java.util.logging.Logger;
 
 public class VentanaValoracion extends JFrame {
+	
     Logger logger = Logger.getLogger(VentanaValoracion.class.getName());
-    
+    Connection con = BaseDeDatos.iniciarBaseDeDatosValoraciones("src/db/valoraciones.db");
     enum Valoracion {
         MUY_MAL, MAL, REGULAR, BIEN, MUY_BIEN
     }
@@ -43,7 +48,34 @@ public class VentanaValoracion extends JFrame {
         JButton btnEnviar = new JButton("Enviar");
         btnEnviar.addActionListener(e -> {
             logger.info("Se ha pulsado el botón Enviar");
-            System.exit(0);
+            
+            String valor = valoracion.getSelectedItem().toString();
+            System.out.println(valor);
+            if (valor != null) {
+            	if (valor == Valoracion.MUY_MAL.toString()) {
+            		Integer valorInt = 0; 
+            		BaseDeDatos.getValoraciones().add(valorInt);
+            	}else if(valor == Valoracion.MAL.toString()){
+            		Integer valorInt = 2; 
+            		BaseDeDatos.getValoraciones().add(valorInt);
+            	}else if (valor == Valoracion.REGULAR.toString()) {
+            		Integer valorInt = 5; 
+            		BaseDeDatos.getValoraciones().add(valorInt);
+            	}else if (valor == Valoracion.BIEN.toString()) {
+            		Integer valorInt = 8; 
+            		BaseDeDatos.getValoraciones().add(valorInt);
+            	}else {
+            		Integer valorInt = 10; 
+            		BaseDeDatos.getValoraciones().add(valorInt);
+            	}
+            	
+            	System.out.println(BaseDeDatos.getValoraciones());
+            	BaseDeDatos.cargarValoracionEnBaseDeDatos(con);
+            	 System.exit(0);
+            }else {
+            	JOptionPane.showMessageDialog(null, "Seleccione una Valoracion");
+            }
+           
         });
 
         //ADICION DE ELEMENTOS A LOS CONTENEDORES

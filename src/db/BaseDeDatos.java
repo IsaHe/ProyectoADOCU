@@ -12,6 +12,7 @@ import javax.swing.JOptionPane;
 public class BaseDeDatos {
 
 	private static List<Usuario> usuarios;
+	private static List<Integer> valoraciones;
 	static Logger logger = Logger.getLogger(BaseDeDatos.class.getName());
 	
 
@@ -21,6 +22,10 @@ public class BaseDeDatos {
 
 	public static List<Usuario> getUsuarios() {
 		return usuarios;
+	}
+	
+	public static List<Integer> getValoraciones() {
+		return valoraciones;
 	}
 	
 	public static Connection iniciarBaseDeDatos (String nomBaseDatos) {
@@ -116,6 +121,7 @@ public class BaseDeDatos {
 				prepSt.setString(1, usuario);
 				prepSt.executeUpdate();
 	            prepSt.close();
+	            System.out.println(usuarios);
 		 }catch (SQLException e) {
 	            e.printStackTrace();
 	            JOptionPane.showMessageDialog(null, "Error al eliminar fila de la base de datos", "Error", JOptionPane.ERROR_MESSAGE);
@@ -127,4 +133,55 @@ public class BaseDeDatos {
 		}
 		 
 	}
+	
+	public static Connection iniciarBaseDeDatosValoraciones (String nomBD) {
+		Connection con = null;
+		try {
+			Class.forName("org.sqlite.JDBC");
+			con = DriverManager.getConnection("jdbc:sqlite:" + nomBD);
+		} catch (ClassNotFoundException | SQLException e) {
+			logger.warning("No se ha podido establecer conexion con la base de datos");
+		}
+		
+		return con;
+	}
+
+	public static void cargarValoracionEnBaseDeDatos (Connection con) {
+		try {
+			PreparedStatement prepSt = con.prepareStatement("DELETE FROM valoraciones");
+			prepSt.executeUpdate();
+			prepSt.close();
+			
+			for (Integer val : valoraciones) {
+				PreparedStatement prepStt = con.prepareStatement("INSERT INTO valoraciones (Valoracion) VALUES (?)");
+				prepStt.setInt(1, val);
+				prepStt.executeUpdate();
+				prepStt.close();
+			}
+			
+			con.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public static void obtenerValoracionesDeBaseDeDatos(Connection con){
+		
+		valoraciones = new ArrayList<>();
+		
+		try {
+			PreparedStatement prepSt = con.prepareStatement("SELECT * FROM valoraciones");
+			ResultSet rs = prepSt.executeQuery();
+			while (rs.next()) {
+				Integer valor = rs.getInt("Valoracion");
+				valoraciones.add(valor);
+			}
+			rs.close();
+			prepSt.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+	
+		
 }

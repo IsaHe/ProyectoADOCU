@@ -22,6 +22,7 @@ public class VentanaInicioSesion extends JFrame{
 	private JButton btnInicioSesion, btnRegistrarse, btnSalir;
 	private JFrame VentanaActual;
 	private Connection con = BaseDeDatos.iniciarBaseDeDatos("src/db/usuarios.db");
+	private Connection conn = BaseDeDatos.iniciarBaseDeDatos("src/db/valoraciones.db");
 	private static Usuario  usuario;
 	
 	public static Usuario getUsuario() {
@@ -32,6 +33,7 @@ public class VentanaInicioSesion extends JFrame{
 		
 		VentanaActual = this;
 		BaseDeDatos.obtenerUsuariosDeBaseDeDatos(con);
+		BaseDeDatos.obtenerValoracionesDeBaseDeDatos(conn);
 		GestorFicheros.obtenerActividadesDeFichero(Paths.get("src/io/ListaActividades.txt"));
 		GestorFicheros.obtenerActividadesSemanalesDeFichero(Paths.get("src/io/ActividadesSemanales.txt"));
 		GestorFicheros.actualizarActividadesSemanales();
