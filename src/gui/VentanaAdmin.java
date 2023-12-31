@@ -34,12 +34,10 @@ public class VentanaAdmin extends JFrame{
 	private DefaultTreeModel modeloArbol;
 	private JTable tablaUsu;
 	private JList<Actividad> lAct;
-	private JList<Integer> lPag;
 	private DefaultTableModel modeloTablaUsu;
 	private String [] titulos = {"NOMBRE","APELLIDO","EDAD", "USUARIO", "CONTRASEÑA"};
 	private DefaultListModel<Actividad> modeloListaAct;
-	private DefaultListModel<Integer> modeloListaPag;
-	private JScrollPane scrollUsu, scrollAct, scrollPag;
+	private JScrollPane scrollUsu, scrollAct;
 	private Connection conn = BaseDeDatos.iniciarBaseDeDatos("src/db/usuarios.db");
 	
 
@@ -89,7 +87,7 @@ public class VentanaAdmin extends JFrame{
 		arbol = new JTree(nRaiz);
 		modeloArbol.insertNodeInto(new DefaultMutableTreeNode("Ver Usuarios"), nRaiz, 0);
 		modeloArbol.insertNodeInto(new DefaultMutableTreeNode("Ver Actividades"), nRaiz, 1);
-		modeloArbol.insertNodeInto(new DefaultMutableTreeNode("Ver Pagos"), nRaiz, 2);
+		modeloArbol.insertNodeInto(new DefaultMutableTreeNode("Ver Valoraciones"), nRaiz, 2);
 		
 		
 		pOeste.add(arbol);
@@ -136,12 +134,8 @@ public class VentanaAdmin extends JFrame{
 							conn = BaseDeDatos.iniciarBaseDeDatos("src/db/usuarios.db");
 							int fila = tablaUsu.getSelectedRow();
 							
-							String usuUsu = (String) tablaUsu.getValueAt(fila, 3);
-							
-							
-							
 							if (fila != -1) {
-								
+								String usuUsu = tablaUsu.getValueAt(fila, 3).toString();
 								BaseDeDatos.borrarUsuarioEnBD(conn, usuUsu);
 								modeloTablaUsu.removeRow(fila);
 								tablaUsu.repaint();
@@ -240,19 +234,24 @@ public class VentanaAdmin extends JFrame{
 					pCentro.add(scrollAct);
 					pCentro.add(panelBtn);
 					
-				}else if(ultimo.equals("Ver Pagos")) {
+				}else if(ultimo.equals("Ver Valoraciones")) {
 					
 					pCentro.removeAll();
 					pCentroC.removeAll();
 					
-					modeloListaPag = new DefaultListModel<Integer>();
-					lPag = new JList<Integer>(modeloListaPag);
-					scrollPag = new JScrollPane();
-					scrollPag.add(lPag);
+					JProgressBar pb = new JProgressBar(0,10);
+					Integer valorTotal = 0;
+					
+					for (Integer val : BaseDeDatos.getValoraciones()) {
+						valorTotal = valorTotal + val;
+					}
+					
+					valorTotal = valorTotal / BaseDeDatos.getValoraciones().size();
+					pb.setValue(valorTotal);
 					
 					pCentro.add(new JPanel());
 					pCentro.add(pCentroC);
-					pCentroC.add(scrollPag);
+					pCentroC.add(pb);
 					pCentro.add(new JPanel());
 				}
 				

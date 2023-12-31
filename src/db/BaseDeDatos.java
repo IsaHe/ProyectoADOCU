@@ -129,7 +129,7 @@ public class BaseDeDatos {
 		 try {
 			conn.close();
 		} catch (SQLException e) {
-			e.printStackTrace();
+			logger.warning("Error al cerrar conexion con la Base De Datos");
 		}
 		 
 	}
@@ -161,7 +161,7 @@ public class BaseDeDatos {
 			
 			con.close();
 		} catch (SQLException e) {
-			e.printStackTrace();
+			logger.warning("Error al cerrar la conexion con la Base De Datos");
 		}
 	}
 	
@@ -178,8 +178,9 @@ public class BaseDeDatos {
 			}
 			rs.close();
 			prepSt.close();
+			con.close();
 		} catch (SQLException e) {
-			e.printStackTrace();
+			logger.warning("Error al cerrar la conexion con la Base De Datos");
 		}
 	}
 	

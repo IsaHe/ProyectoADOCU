@@ -50,7 +50,6 @@ public class VentanaValoracion extends JFrame {
             logger.info("Se ha pulsado el botón Enviar");
             
             String valor = valoracion.getSelectedItem().toString();
-            System.out.println(valor);
             if (valor != null) {
             	if (valor == Valoracion.MUY_MAL.toString()) {
             		Integer valorInt = 0; 
@@ -69,9 +68,8 @@ public class VentanaValoracion extends JFrame {
             		BaseDeDatos.getValoraciones().add(valorInt);
             	}
             	
-            	System.out.println(BaseDeDatos.getValoraciones());
             	BaseDeDatos.cargarValoracionEnBaseDeDatos(con);
-            	 System.exit(0);
+            	System.exit(0);
             }else {
             	JOptionPane.showMessageDialog(null, "Seleccione una Valoracion");
             }

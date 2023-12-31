@@ -1,7 +1,7 @@
-2023-11-30
-;;Gimnasia,9,76.6,false,Isaac;;Escalada,5,67.9,false,Isaac;Paintball,0,78.9,false,Isaac;;;;;
+2023-12-31
 ;;;;;;;;;;
-;;Buceo,0,99.9,false,Isaac;;Buceo,0,99.9,true,AA;;;;;;
 ;;;;;;;;;;
-;;;;Parapente,3,56.6,false,AA;;;;;;
+;;;;;;;;;;
+;;;;;;;;;;
+;;;;;;;;;;
 ;;;;;;;;;;
