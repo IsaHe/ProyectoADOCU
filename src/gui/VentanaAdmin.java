@@ -6,6 +6,7 @@ import domain.Usuario;
 import io.GestorFicheros;
 
 import javax.swing.*;
+import javax.swing.border.BevelBorder;
 import javax.swing.event.TreeSelectionEvent;
 import javax.swing.event.TreeSelectionListener;
 import javax.swing.table.DefaultTableModel;
@@ -238,22 +239,36 @@ public class VentanaAdmin extends JFrame{
 					
 					pCentro.removeAll();
 					pCentroC.removeAll();
-					
+						
+					//Progress Bar Valoracion
 					JProgressBar pb = new JProgressBar(0,10);
 					Integer valorTotal = 0;
-					
+				
 					for (Integer val : BaseDeDatos.getValoraciones()) {
 						valorTotal = valorTotal + val;
 					}
 					
 					valorTotal = valorTotal / BaseDeDatos.getValoraciones().size();
-					pb.setValue(valorTotal);
 					
+					pb.setValue(valorTotal);
+					pb.setString(valorTotal.toString());
+					pb.setStringPainted(true);
+					pb.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 18));
+					pb.setBackground(Color.BLACK);
+					pb.setForeground(Color.GRAY);
+					
+					JTextArea txtArea = new JTextArea("*EN ESTA VENTANA ESTA DISPONIBLE LA MEDIA DE LAS VALORACIONES DE LOS CLIENTES*" + "\n" 
+							+ "\n" + "- Si la nota media es menor que 5 --> COLOR ROJO" + "\n" 
+							+ "\n" + "- Si la nota media esta entre [5 - 8] --> COLOR AMARILLO" + "\n"
+							+ "\n" + "- Si la nota media esta entre [8 - 10] --> COLOR VERDE");
+					
+					txtArea.setFont(new Font(Font.SANS_SERIF, Font.ITALIC, 14));
+					
+					pCentro.add(txtArea);
+					pCentro.add(pb);
 					pCentro.add(new JPanel());
-					pCentro.add(pCentroC);
-					pCentroC.add(pb);
-					pCentro.add(new JPanel());
-				}
+					
+		}
 				
 			}
 		});
