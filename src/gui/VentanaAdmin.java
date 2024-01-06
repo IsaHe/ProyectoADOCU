@@ -165,6 +165,7 @@ public class VentanaAdmin extends JFrame{
 							+ "\n" + "- Para borrar una actividad primero se debe seleccionar una." + "\n" 
 							+ "\n" + "- El usuario que aparece es responsable de pagar las actividades.");
 					
+					txtAct.setEditable(false);
 					txtAct.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 15));
 					panelTxt.add(txtAct, BorderLayout.CENTER);
 					
@@ -218,15 +219,11 @@ public class VentanaAdmin extends JFrame{
 							if (a == null) {
 								JOptionPane.showMessageDialog(null, "Debes selecionar una actividad antes de borrarla");
 							}else {
-								if (a.isPagada()) {
-									JOptionPane.showMessageDialog(null, "No puedes eliminar una Actividad Pagada");
-								}else {
-									GestorFicheros.eliminarActividadDeActividadSemanal(a);	
-									GestorFicheros.cargarActividadesSemanalesEnFichero(Paths.get("src/io/ActividadesSemanales.txt"));
-									GestorFicheros.eliminarActividadUsuarioDeMapa(a.getUsuario(), a);
-									GestorFicheros.cargarActividadesUsuarioEnFicheroBinario2(a.getUsuario(), Paths.get("src/io/ActividadesUsuario.dat"));
-									modeloListaAct.removeElement(a);
-								}
+								GestorFicheros.eliminarActividadDeActividadSemanal(a);	
+								GestorFicheros.cargarActividadesSemanalesEnFichero(Paths.get("src/io/ActividadesSemanales.txt"));
+								GestorFicheros.eliminarActividadUsuarioDeMapa(a.getUsuario(), a);
+								GestorFicheros.cargarActividadesUsuarioEnFicheroBinario2(a.getUsuario(), Paths.get("src/io/ActividadesUsuario.dat"));
+								modeloListaAct.removeElement(a);
 							}
 						}
 					});
@@ -242,27 +239,37 @@ public class VentanaAdmin extends JFrame{
 						
 					//Progress Bar Valoracion
 					JProgressBar pb = new JProgressBar(0,10);
-					Integer valorTotal = 0;
+					float valorTotal = 0;
 				
 					for (Integer val : BaseDeDatos.getValoraciones()) {
 						valorTotal = valorTotal + val;
 					}
 					
 					valorTotal = valorTotal / BaseDeDatos.getValoraciones().size();
-					
-					pb.setValue(valorTotal);
-					pb.setString(valorTotal.toString());
+					String valorStr = String.valueOf(valorTotal);
+					String primerNum = String.valueOf(valorStr.charAt(0));
+					pb.setValue(Integer.parseInt(primerNum));
+					pb.setString(valorStr);
 					pb.setStringPainted(true);
 					pb.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 18));
 					pb.setBackground(Color.BLACK);
-					pb.setForeground(Color.GRAY);
 					
+					if (valorTotal < 5) {
+						pb.setForeground(Color.RED);
+					}else if (valorTotal < 8) {
+						pb.setForeground(Color.ORANGE);
+					}else {
+						pb.setForeground(Color.GREEN);
+					}
+					
+					//TextArea De Explicación
 					JTextArea txtArea = new JTextArea("*EN ESTA VENTANA ESTA DISPONIBLE LA MEDIA DE LAS VALORACIONES DE LOS CLIENTES*" + "\n" 
-							+ "\n" + "- Si la nota media es menor que 5 --> COLOR ROJO" + "\n" 
-							+ "\n" + "- Si la nota media esta entre [5 - 8] --> COLOR AMARILLO" + "\n"
+							+ "\n" + "- Si la nota media esta entre [0 - 5) --> COLOR ROJO" + "\n" 
+							+ "\n" + "- Si la nota media esta entre [5 - 8) --> COLOR NARANJA" + "\n"
 							+ "\n" + "- Si la nota media esta entre [8 - 10] --> COLOR VERDE");
 					
 					txtArea.setFont(new Font(Font.SANS_SERIF, Font.ITALIC, 14));
+					txtArea.setEditable(false);
 					
 					pCentro.add(txtArea);
 					pCentro.add(pb);

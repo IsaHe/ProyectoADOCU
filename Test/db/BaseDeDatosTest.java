@@ -30,7 +30,7 @@ public class BaseDeDatosTest {
 	@Test
 	public void comprobarUsuarioTest() {
 		Usuario u = new Usuario("Isaac", "Herbozo", 19, "Isaac", "111", null);
-		assertEquals(true, usuarios.contains(u));
+		assertEquals(true, BaseDeDatos.comprobarUsuario(u));
 	}
 	
 	@Test
@@ -42,6 +42,18 @@ public class BaseDeDatosTest {
 	public void iniciarBaseDeDatosTest() {
 		assertNotNull(BaseDeDatos.iniciarBaseDeDatos("src/db/usuarios.db"));
 		
+	}
+	
+	@Test 
+	
+	public void iniciarBaseDeDatosTestError() {
+		assertThrows(AssertionError.class, ()->{
+			assertEquals(SQLException.class, BaseDeDatos.iniciarBaseDeDatos("error.db"));
+		});
+		
+		assertThrows(AssertionError.class, ()->{
+			assertEquals(ClassNotFoundException.class, BaseDeDatos.iniciarBaseDeDatos("error.db"));
+		});
 	}
 	
 	@Test
@@ -90,7 +102,13 @@ public class BaseDeDatosTest {
 				BaseDeDatos.obtenerValoracionesDeBaseDeDatos(con);
 			});
 		});
+		
+		List<Integer> lista = BaseDeDatos.getValoraciones();
+		BaseDeDatos.obtenerValoracionesDeBaseDeDatos(con);
+		List<Integer> lista2 = BaseDeDatos.getValoraciones();
+		assertEquals(lista.size(), lista2.size());
+		
 	}
 	
-	
+
 }

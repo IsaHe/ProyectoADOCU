@@ -68,8 +68,6 @@ public class BaseDeDatos {
 		} catch (SQLException e) {
 			logger.warning("Error al obtener los usuarios de la Base De Datos");
 		}
-		
-		
 	}
 	
 	public static void cargarUsuariosEnBaseDeDatos (Connection con) {
@@ -82,7 +80,7 @@ public class BaseDeDatos {
 			
 		} catch (SQLException e1) {
 			logger.warning("No se ha podido eliminar la Base De Datos");
-		}
+		}	
 		
 		for (Usuario u : usuarios) {
 			String nombre = u.getNom();
@@ -121,7 +119,6 @@ public class BaseDeDatos {
 				prepSt.setString(1, usuario);
 				prepSt.executeUpdate();
 	            prepSt.close();
-	            System.out.println(usuarios);
 		 }catch (SQLException e) {
 	            e.printStackTrace();
 	            JOptionPane.showMessageDialog(null, "Error al eliminar fila de la base de datos", "Error", JOptionPane.ERROR_MESSAGE);
@@ -183,6 +180,5 @@ public class BaseDeDatos {
 			logger.warning("Error al cerrar la conexion con la Base De Datos");
 		}
 	}
-	
 		
 }
