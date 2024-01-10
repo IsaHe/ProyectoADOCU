@@ -116,6 +116,7 @@ public class VentanaInicioSesion extends JFrame{
 				usuario.setNom("Admin");
 				usuario.setApellido("Admin");
 				usuario.setEdad(20);
+				GestorFicheros.obtenerActividadesUsuarioEnFicheroBinario(usuario, Paths.get("src/io/ActividadesUsuario.dat"));
 				new VentanaAdmin();
 				VentanaActual.setVisible(false);
 				logger.info("Se ha iniciado Sesion con el admin");

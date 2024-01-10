@@ -95,6 +95,7 @@ public class VentanaAdmin extends JFrame{
             TreePath tp = e.getPath();
             String ultimo = tp.getLastPathComponent().toString();
 
+
             switch (ultimo) {
                 case "Ver Usuarios" -> {
 
@@ -133,6 +134,7 @@ public class VentanaAdmin extends JFrame{
 						}
 
 						public void eliminarUsuario(int rowIndex) {
+                            conn = BaseDeDatos.iniciarBaseDeDatos("src/db/usuarios.db");
                             Usuario usuario = BaseDeDatos.getUsuariosSinAdmin().get(rowIndex);
                             try {
                                 GestorFicheros.obtenerActividadesSemanalesDeFichero(Paths.get("src/io/ActividadesSemanales.txt"));
@@ -149,7 +151,6 @@ public class VentanaAdmin extends JFrame{
                                 fireTableDataChanged();
                             } catch (Exception e) {
                                 logger.severe("Error al borrar el usuario " + usuario.getUsuario());
-                                e.printStackTrace();
                                 JOptionPane.showMessageDialog(null, "Error al borrar el usuario " + usuario.getUsuario(), "Error", JOptionPane.ERROR_MESSAGE);
                             }
 						}
@@ -160,7 +161,6 @@ public class VentanaAdmin extends JFrame{
                     scrollUsu = new JScrollPane(tablaUsu);
 
                     btnBorrarUsu.addActionListener(e1 -> {
-                        conn = BaseDeDatos.iniciarBaseDeDatos("src/db/usuarios.db");
                         int fila = tablaUsu.getSelectedRow();
 
                         if (fila != -1) {
