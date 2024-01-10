@@ -23,6 +23,12 @@ public class BaseDeDatos {
 	public static List<Usuario> getUsuarios() {
 		return usuarios;
 	}
+
+	public static List<Usuario> getUsuariosSinAdmin() {
+		List<Usuario> usuariosSinAdmin = usuarios;
+		usuariosSinAdmin.removeIf(u -> u.getUsuario().equals("Admin"));
+		return usuariosSinAdmin;
+	}
 	
 	public static List<Integer> getValoraciones() {
 		return valoraciones;
@@ -114,21 +120,16 @@ public class BaseDeDatos {
 	}
 	
 	public static void borrarUsuarioEnBD(Connection conn, String usuario) {
-		 try {     
-				PreparedStatement prepSt = conn.prepareStatement("DELETE FROM usuarios WHERE usuario = ?");
-				prepSt.setString(1, usuario);
-				prepSt.executeUpdate();
-	            prepSt.close();
-		 }catch (SQLException e) {
-	            e.printStackTrace();
-	            JOptionPane.showMessageDialog(null, "Error al eliminar fila de la base de datos", "Error", JOptionPane.ERROR_MESSAGE);
-	     }
-		 try {
+		try {
+			PreparedStatement prepSt = conn.prepareStatement("DELETE FROM usuarios WHERE usuario = ?");
+			prepSt.setString(1, usuario);
+			prepSt.executeUpdate();
+			prepSt.close();
 			conn.close();
 		} catch (SQLException e) {
-			logger.warning("Error al cerrar conexion con la Base De Datos");
+			logger.warning("No se ha podido borrar el usuario en la Base De Datos");
+			JOptionPane.showMessageDialog(null, "No se ha podido borrar el usuario en la Base De Datos", "Error", JOptionPane.ERROR_MESSAGE);
 		}
-		 
 	}
 	
 	public static Connection iniciarBaseDeDatosValoraciones (String nomBD) {

@@ -152,14 +152,10 @@ public class GestorFicheros {
 			ObjectInputStream ois = new ObjectInputStream(new FileInputStream(ruta.toFile()));
 			mapaActividadesUsuario = (Map<String, ArrayList<Actividad>>) ois.readObject();
 			ois.close();
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
-		} catch (ClassNotFoundException e) {
+		} catch (IOException | ClassNotFoundException e) {
 			e.printStackTrace();
 		}
-    	mapaActividadesUsuario.putIfAbsent(u.getUsuario(), new ArrayList<>());
+        mapaActividadesUsuario.putIfAbsent(u.getUsuario(), new ArrayList<>());
     	u.setlActividades(mapaActividadesUsuario.get(u.getUsuario()));
     	
     }

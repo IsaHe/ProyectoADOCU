@@ -2,20 +2,14 @@ package gui;
 
 import db.BaseDeDatos;
 import domain.Actividad;
-import domain.Usuario;
 import io.GestorFicheros;
 
 import javax.swing.*;
-import javax.swing.border.BevelBorder;
-import javax.swing.event.TreeSelectionEvent;
-import javax.swing.event.TreeSelectionListener;
-import javax.swing.table.DefaultTableModel;
+import javax.swing.table.AbstractTableModel;
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.DefaultTreeModel;
 import javax.swing.tree.TreePath;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.nio.file.Paths;
 import java.sql.Connection;
 import java.util.Objects;
@@ -35,8 +29,6 @@ public class VentanaAdmin extends JFrame{
 	private DefaultTreeModel modeloArbol;
 	private JTable tablaUsu;
 	private JList<Actividad> lAct;
-	private DefaultTableModel modeloTablaUsu;
-	private String [] titulos = {"NOMBRE","APELLIDO","EDAD", "USUARIO", "CONTRASEÑA"};
 	private DefaultListModel<Actividad> modeloListaAct;
 	private JScrollPane scrollUsu, scrollAct;
 	private Connection conn = BaseDeDatos.iniciarBaseDeDatos("src/db/usuarios.db");
@@ -67,7 +59,7 @@ public class VentanaAdmin extends JFrame{
 		lblTitulo = new JLabel("ADMINISTRADOR");
 		lblTitulo.setFont(new Font(Font.SERIF, Font.PLAIN, 30));
 		lblTitulo.setForeground(Color.BLACK);
-		lblFoto = new JLabel(new ImageIcon(getClass().getResource("/resources/images//ADOCU.png")));
+		lblFoto = new JLabel(new ImageIcon(Objects.requireNonNull(getClass().getResource("/resources/images//ADOCU.png"))));
 		
 		String textoExplicacionValoracionHTML =
                 "<h1>¡Bienvendido a la ventana de administrador!</h1>" +
@@ -98,207 +90,203 @@ public class VentanaAdmin extends JFrame{
 		pSur.add(btnSalir);
 		pSur.add(btnVolver);
 		
-		arbol.addTreeSelectionListener(new TreeSelectionListener() {
-			
-			@Override
-			public void valueChanged(TreeSelectionEvent e) {
-				TreePath tp = e.getPath();
-				String ultimo = tp.getLastPathComponent().toString();
-				
-				if (ultimo.equals("Ver Usuarios")){
-					
-					pCentro.removeAll();
-					pCentroC.removeAll();
-					
-					BaseDeDatos.getUsuarios();
-					int pos = 0;
-					modeloTablaUsu = new DefaultTableModel();
-					modeloTablaUsu.setColumnIdentifiers(titulos);
-					for(Usuario u : BaseDeDatos.getUsuarios()) {
-						if(u.getUsuario() == "Admin"){
-							pos = BaseDeDatos.getUsuarios().indexOf(u);
-								
-						}else {
-							Object [] contenido = {u.getNom(), u.getApellido(), u.getEdad(), u.getUsuario(), u.getContraseña()};
-							modeloTablaUsu.addRow(contenido);
-						}
-						
-					}
-					modeloTablaUsu.removeRow(pos + 1);
-					tablaUsu = new JTable(modeloTablaUsu);
-					scrollUsu = new JScrollPane(tablaUsu);
-					
-					btnBorrarUsu.addActionListener(new ActionListener() {
-						
-						@Override
-						public void actionPerformed(ActionEvent e) {
-							conn = BaseDeDatos.iniciarBaseDeDatos("src/db/usuarios.db");
-							int fila = tablaUsu.getSelectedRow();
-							
-							if (fila != -1) {
-								String usuUsu = tablaUsu.getValueAt(fila, 3).toString();
-								BaseDeDatos.borrarUsuarioEnBD(conn, usuUsu);
-								modeloTablaUsu.removeRow(fila);
-								tablaUsu.repaint();
-							}else {
-								JOptionPane.showMessageDialog(null, "Seleccione una fila para eliminar", "Error", JOptionPane.ERROR_MESSAGE);
-							}
-							
-						}
-					});
-					
-					pCentro.add(new JPanel());
-					pCentro.add(scrollUsu);
-					pCentro.add(pCentroC);
-					pCentroC.add(btnBorrarUsu);
-					
-				}else if(ultimo.equals("Ver Actividades")) {
-					
-					pCentro.removeAll();
-					pCentroC.removeAll();
-					
-					JPanel panelTxt = new JPanel();
-					JPanel panelBtn = new JPanel();
-					JTextArea txtAct = new JTextArea("- Si la actividad está en Rojo: NO ESTA PAGADA." + "\n"
-							+ "\n" + "- Si la actividad está en Verde: SI ESTA PAGADA." + "\n" 
-							+ "\n" + "- Al seleccionar una actividad el fondo se pone Blanco." + "\n" 
-							+ "\n" + "- Para borrar una actividad primero se debe seleccionar una." + "\n" 
-							+ "\n" + "- El usuario que aparece es responsable de pagar las actividades.");
-					
-					txtAct.setEditable(false);
-					txtAct.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 15));
-					panelTxt.add(txtAct, BorderLayout.CENTER);
-					
-					btnBorrarAct = new JButton("Borrar Actividad");
-					panelBtn.add(btnBorrarAct);
-					GestorFicheros.obtenerActividadesSemanalesDeFichero(Paths.get("src/io/ActividadesSemanales.txt"));
-					Actividad[][] actividad = GestorFicheros.getActividadesSemanales();
-					
-					modeloListaAct = new DefaultListModel<Actividad>();
-					 for (int i = 0; i < 6; i++) {
-						 for (int j = 0; j < 10; j++) {
-							 if(actividad[i][j] != null) {
-								 modeloListaAct.addElement(actividad[i][j]);
-							 }
-							 
-						 }
-						 
-					 }					
-					lAct = new JList<Actividad>(modeloListaAct);
-					scrollAct = new JScrollPane(lAct);
-					
-					lAct.setCellRenderer(new ListCellRenderer<Actividad>() {
+		arbol.addTreeSelectionListener(e -> {
+            TreePath tp = e.getPath();
+            String ultimo = tp.getLastPathComponent().toString();
+
+            switch (ultimo) {
+                case "Ver Usuarios" -> {
+
+                    pCentro.removeAll();
+                    pCentroC.removeAll();
+
+					class CustomUserTableModel extends AbstractTableModel {
+
+						private final String[] columnNames = {"Nombre", "Apellido", "Edad", "Usuario", "Contraseña"};
 
 						@Override
-						public Component getListCellRendererComponent(JList<? extends Actividad> list, Actividad value,
-								int index, boolean isSelected, boolean cellHasFocus) {
-							JLabel label = new JLabel(((Actividad) value).toStringAdmin());
-							label.setOpaque(true);
-							label.setFont(new Font(Font.SANS_SERIF, Font.ITALIC, 14));
-							
-							if (((Actividad)value).isPagada()) {
-								label.setBackground(Color.green);
-							}else if (!((Actividad)value).isPagada()) {
-								label.setBackground(Color.red);
-							}
-							
-							if (isSelected) {
-								label.setBackground(list.getBackground());
-							}
-							
-							return label;
+						public int getRowCount() {
+							return BaseDeDatos.getUsuariosSinAdmin().size();
 						}
-					});
-					
-					btnBorrarAct.addActionListener(new ActionListener() {
-						
+
 						@Override
-						public void actionPerformed(ActionEvent e) {
-						
-							Actividad a = lAct.getSelectedValue();
-							if (a == null) {
-								JOptionPane.showMessageDialog(null, "Debes selecionar una actividad antes de borrarla");
-							}else {
-								GestorFicheros.eliminarActividadDeActividadSemanal(a);	
-								GestorFicheros.cargarActividadesSemanalesEnFichero(Paths.get("src/io/ActividadesSemanales.txt"));
-								GestorFicheros.eliminarActividadUsuarioDeMapa(a.getUsuario(), a);
-								GestorFicheros.cargarActividadesUsuarioEnFicheroBinario2(a.getUsuario(), Paths.get("src/io/ActividadesUsuario.dat"));
-								modeloListaAct.removeElement(a);
-							}
+						public int getColumnCount() {
+							return columnNames.length;
 						}
-					});
-					
-					pCentro.add(panelTxt);
-					pCentro.add(scrollAct);
-					pCentro.add(panelBtn);
-					
-				}else if(ultimo.equals("Ver Valoraciones")) {
-					
-					pCentro.removeAll();
-					pCentroC.removeAll();
-						
-					//Progress Bar Valoracion
-					JProgressBar pb = new JProgressBar(0,10);
-					float valorTotal = 0;
-				
-					for (Integer val : BaseDeDatos.getValoraciones()) {
-						valorTotal = valorTotal + val;
+
+						@Override
+						public String getColumnName(int column) {
+							return columnNames[column];
+						}
+
+						@Override
+						public Object getValueAt(int rowIndex, int columnIndex) {
+                            return switch (columnIndex) {
+                                case 0 -> BaseDeDatos.getUsuariosSinAdmin().get(rowIndex).getNom();
+                                case 1 -> BaseDeDatos.getUsuariosSinAdmin().get(rowIndex).getApellido();
+                                case 2 -> BaseDeDatos.getUsuariosSinAdmin().get(rowIndex).getEdad();
+                                case 3 -> BaseDeDatos.getUsuariosSinAdmin().get(rowIndex).getUsuario();
+                                case 4 -> BaseDeDatos.getUsuariosSinAdmin().get(rowIndex).getContraseña();
+                                default -> null;
+                            };
+						}
+
+						public void eliminarUsuario(int rowIndex) {
+							BaseDeDatos.borrarUsuarioEnBD(conn, BaseDeDatos.getUsuariosSinAdmin().get(rowIndex).getUsuario());
+							fireTableRowsDeleted(rowIndex, rowIndex);
+						}
 					}
-					
-					valorTotal = valorTotal / BaseDeDatos.getValoraciones().size();
-					String valorStr = String.valueOf(valorTotal);
-					String primerNum = String.valueOf(valorStr.charAt(0));
-					pb.setValue(Integer.parseInt(primerNum));
-					pb.setString(valorStr);
-					pb.setStringPainted(true);
-					pb.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 18));
-					pb.setBackground(Color.BLACK);
-					
-					if (valorTotal < 5) {
-						pb.setForeground(Color.RED);
-					}else if (valorTotal < 8) {
-						pb.setForeground(Color.ORANGE);
-					}else {
-						pb.setForeground(Color.GREEN);
-					}
-					
-					//TextArea De Explicación
-					JTextArea txtArea = new JTextArea("*EN ESTA VENTANA ESTA DISPONIBLE LA MEDIA DE LAS VALORACIONES DE LOS CLIENTES*" + "\n" 
-							+ "\n" + "- Si la nota media esta entre [0 - 5) --> COLOR ROJO" + "\n" 
-							+ "\n" + "- Si la nota media esta entre [5 - 8) --> COLOR NARANJA" + "\n"
-							+ "\n" + "- Si la nota media esta entre [8 - 10] --> COLOR VERDE");
-					
-					txtArea.setFont(new Font(Font.SANS_SERIF, Font.ITALIC, 14));
-					txtArea.setEditable(false);
-					
-					pCentro.add(txtArea);
-					pCentro.add(pb);
-					pCentro.add(new JPanel());
-					
-		}
-				
-			}
-		});
+
+					CustomUserTableModel modeloTablaUsu = new CustomUserTableModel();
+                    tablaUsu = new JTable(modeloTablaUsu);
+                    scrollUsu = new JScrollPane(tablaUsu);
+
+                    btnBorrarUsu.addActionListener(e1 -> {
+                        conn = BaseDeDatos.iniciarBaseDeDatos("src/db/usuarios.db");
+                        int fila = tablaUsu.getSelectedRow();
+
+                        if (fila != -1) {
+                            modeloTablaUsu.eliminarUsuario(fila);
+                        } else {
+                            JOptionPane.showMessageDialog(null, "Seleccione una fila para eliminar", "Error", JOptionPane.ERROR_MESSAGE);
+                        }
+
+                    });
+
+                    pCentro.add(new JPanel());
+                    pCentro.add(scrollUsu);
+                    pCentro.add(pCentroC);
+                    pCentroC.add(btnBorrarUsu);
+                }
+                case "Ver Actividades" -> {
+
+                    pCentro.removeAll();
+                    pCentroC.removeAll();
+
+                    JPanel panelTxt = new JPanel();
+                    JPanel panelBtn = new JPanel();
+                    JTextArea txtAct = new JTextArea("- Si la actividad está en Rojo: NO ESTA PAGADA." + "\n"
+                            + "\n" + "- Si la actividad está en Verde: SI ESTA PAGADA." + "\n"
+                            + "\n" + "- Al seleccionar una actividad el fondo se pone Blanco." + "\n"
+                            + "\n" + "- Para borrar una actividad primero se debe seleccionar una." + "\n"
+                            + "\n" + "- El usuario que aparece es responsable de pagar las actividades.");
+
+                    txtAct.setEditable(false);
+                    txtAct.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 15));
+                    panelTxt.add(txtAct, BorderLayout.CENTER);
+
+                    btnBorrarAct = new JButton("Borrar Actividad");
+                    panelBtn.add(btnBorrarAct);
+                    GestorFicheros.obtenerActividadesSemanalesDeFichero(Paths.get("src/io/ActividadesSemanales.txt"));
+                    Actividad[][] actividad = GestorFicheros.getActividadesSemanales();
+
+                    modeloListaAct = new DefaultListModel<>();
+                    for (int i = 0; i < 6; i++) {
+                        for (int j = 0; j < 10; j++) {
+                            if (actividad[i][j] != null) {
+                                modeloListaAct.addElement(actividad[i][j]);
+                            }
+
+                        }
+
+                    }
+                    lAct = new JList<>(modeloListaAct);
+                    scrollAct = new JScrollPane(lAct);
+
+                    lAct.setCellRenderer((list, value, index, isSelected, cellHasFocus) -> {
+                        JLabel label = new JLabel(((Actividad) value).toStringAdmin());
+                        label.setOpaque(true);
+                        label.setFont(new Font(Font.SANS_SERIF, Font.ITALIC, 14));
+
+                        if (value.isPagada()) {
+                            label.setBackground(Color.green);
+                        } else {
+                            label.setBackground(Color.red);
+                        }
+
+                        if (isSelected) {
+                            label.setBackground(list.getBackground());
+                        }
+
+                        return label;
+                    });
+
+                    btnBorrarAct.addActionListener(e12 -> {
+
+                        Actividad a = lAct.getSelectedValue();
+                        if (a == null) {
+                            JOptionPane.showMessageDialog(null, "Debes selecionar una actividad antes de borrarla");
+                        } else {
+                            GestorFicheros.eliminarActividadDeActividadSemanal(a);
+                            GestorFicheros.cargarActividadesSemanalesEnFichero(Paths.get("src/io/ActividadesSemanales.txt"));
+                            GestorFicheros.eliminarActividadUsuarioDeMapa(a.getUsuario(), a);
+                            GestorFicheros.cargarActividadesUsuarioEnFicheroBinario2(a.getUsuario(), Paths.get("src/io/ActividadesUsuario.dat"));
+                            modeloListaAct.removeElement(a);
+                        }
+                    });
+
+                    pCentro.add(panelTxt);
+                    pCentro.add(scrollAct);
+                    pCentro.add(panelBtn);
+                }
+                case "Ver Valoraciones" -> {
+
+                    pCentro.removeAll();
+                    pCentroC.removeAll();
+
+                    //Progress Bar Valoracion
+                    JProgressBar pb = new JProgressBar(0, 10);
+                    float valorTotal = 0;
+
+                    for (Integer val : BaseDeDatos.getValoraciones()) {
+                        valorTotal = valorTotal + val;
+                    }
+
+                    valorTotal = valorTotal / BaseDeDatos.getValoraciones().size();
+                    String valorStr = String.valueOf(valorTotal);
+                    String primerNum = String.valueOf(valorStr.charAt(0));
+                    pb.setValue(Integer.parseInt(primerNum));
+                    pb.setString(valorStr);
+                    pb.setStringPainted(true);
+                    pb.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 18));
+                    pb.setBackground(Color.BLACK);
+
+                    if (valorTotal < 5) {
+                        pb.setForeground(Color.RED);
+                    } else if (valorTotal < 8) {
+                        pb.setForeground(Color.ORANGE);
+                    } else {
+                        pb.setForeground(Color.GREEN);
+                    }
+
+                    //TextArea De Explicación
+                    JTextArea txtArea = new JTextArea("*EN ESTA VENTANA ESTA DISPONIBLE LA MEDIA DE LAS VALORACIONES DE LOS CLIENTES*" + "\n"
+                            + "\n" + "- Si la nota media esta entre [0 - 5) --> COLOR ROJO" + "\n"
+                            + "\n" + "- Si la nota media esta entre [5 - 8) --> COLOR NARANJA" + "\n"
+                            + "\n" + "- Si la nota media esta entre [8 - 10] --> COLOR VERDE");
+
+                    txtArea.setFont(new Font(Font.SANS_SERIF, Font.ITALIC, 14));
+                    txtArea.setEditable(false);
+
+                    pCentro.add(txtArea);
+                    pCentro.add(pb);
+                    pCentro.add(new JPanel());
+                }
+            }
+
+        });
 		
-		btnSalir.addActionListener(new ActionListener() {
-			
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				System.exit(0);
-				logger.info("Se ha pulsado el boton para salir");
-			}
-		});
+		btnSalir.addActionListener(e -> {
+            System.exit(0);
+            logger.info("Se ha pulsado el boton para salir");
+        });
 		
-		btnVolver.addActionListener(new ActionListener() {
-			
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				ventanaActual.dispose();
-				new VentanaInicioSesion();
-				logger.info("Se ha pulsado el boton para volver a la VentanaInicioSesion");
-				
-			}
-		});
+		btnVolver.addActionListener(e -> {
+            ventanaActual.dispose();
+            new VentanaInicioSesion();
+            logger.info("Se ha pulsado el boton para volver a la VentanaInicioSesion");
+
+        });
 		
 		setVisible(true);
 	}	
