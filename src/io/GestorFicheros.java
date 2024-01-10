@@ -5,6 +5,7 @@ import domain.Usuario;
 
 import java.io.*;
 import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.time.LocalDate;
 import java.util.*;
 import java.util.logging.Logger;
@@ -157,11 +158,9 @@ public class GestorFicheros {
 		}
         mapaActividadesUsuario.putIfAbsent(u.getUsuario(), new ArrayList<>());
     	u.setlActividades(mapaActividadesUsuario.get(u.getUsuario()));
-    	
     }
     
     public static void cargarActividadesUsuarioEnFicheroBinario (Usuario u, Path ruta) {
-    	
     	mapaActividadesUsuario.putIfAbsent(u.getUsuario(), new ArrayList<>());
     	
     	try {
@@ -177,11 +176,21 @@ public class GestorFicheros {
     	ArrayList<Actividad> actividades = mapaActividadesUsuario.get(usuario);
     	actividades.remove(a);
     }
-    
+
+    public static void eliminarTodasActividadesUsuarioDeMapa (String usuario){
+    	mapaActividadesUsuario.get(usuario).clear();
+    }
+
+    public static void eliminarYGuardarActividadesUsuarioDeMapa (String usuario, Actividad a){
+        eliminarActividadDeActividadSemanal(a);
+        cargarActividadesSemanalesEnFichero(Paths.get("src/io/ActividadesSemanales.txt"));
+        eliminarActividadUsuarioDeMapa(usuario, a);
+        cargarActividadesUsuarioEnFicheroBinario2(usuario, Paths.get("src/io/ActividadesUsuario.dat"));
+    }
  public static void cargarActividadesUsuarioEnFicheroBinario2 (String u, Path ruta) {
-    	
+
     	mapaActividadesUsuario.putIfAbsent(u, new ArrayList<>());
-    	
+
     	try {
 			ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(ruta.toFile()));
 			oos.writeObject(mapaActividadesUsuario);
@@ -190,5 +199,5 @@ public class GestorFicheros {
 			e.printStackTrace();
 		}
     }
-    
+
 }

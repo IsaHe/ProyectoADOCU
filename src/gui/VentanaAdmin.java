@@ -2,6 +2,7 @@ package gui;
 
 import db.BaseDeDatos;
 import domain.Actividad;
+import domain.Usuario;
 import io.GestorFicheros;
 
 import javax.swing.*;
@@ -132,8 +133,25 @@ public class VentanaAdmin extends JFrame{
 						}
 
 						public void eliminarUsuario(int rowIndex) {
-							BaseDeDatos.borrarUsuarioEnBD(conn, BaseDeDatos.getUsuariosSinAdmin().get(rowIndex).getUsuario());
-							fireTableRowsDeleted(rowIndex, rowIndex);
+                            Usuario usuario = BaseDeDatos.getUsuariosSinAdmin().get(rowIndex);
+                            try {
+                                GestorFicheros.obtenerActividadesSemanalesDeFichero(Paths.get("src/io/ActividadesSemanales.txt"));
+                                Actividad[][] actividad = GestorFicheros.getActividadesSemanales();
+                                for (int i = 0; i < 6; i++) {
+                                    for (int j = 0; j < 10; j++) {
+                                        if (actividad[i][j] != null && actividad[i][j].getUsuario().equals(usuario.getUsuario())) {
+                                            GestorFicheros.eliminarYGuardarActividadesUsuarioDeMapa(usuario.getUsuario(), actividad[i][j]);
+                                        }
+                                    }
+                                }
+                                BaseDeDatos.borrarUsuarioEnBD(conn, usuario.getUsuario());
+                                fireTableRowsDeleted(rowIndex, rowIndex);
+                                fireTableDataChanged();
+                            } catch (Exception e) {
+                                logger.severe("Error al borrar el usuario " + usuario.getUsuario());
+                                e.printStackTrace();
+                                JOptionPane.showMessageDialog(null, "Error al borrar el usuario " + usuario.getUsuario(), "Error", JOptionPane.ERROR_MESSAGE);
+                            }
 						}
 					}
 
@@ -194,7 +212,7 @@ public class VentanaAdmin extends JFrame{
                     scrollAct = new JScrollPane(lAct);
 
                     lAct.setCellRenderer((list, value, index, isSelected, cellHasFocus) -> {
-                        JLabel label = new JLabel(((Actividad) value).toStringAdmin());
+                        JLabel label = new JLabel(value.toStringAdmin());
                         label.setOpaque(true);
                         label.setFont(new Font(Font.SANS_SERIF, Font.ITALIC, 14));
 
@@ -217,10 +235,7 @@ public class VentanaAdmin extends JFrame{
                         if (a == null) {
                             JOptionPane.showMessageDialog(null, "Debes selecionar una actividad antes de borrarla");
                         } else {
-                            GestorFicheros.eliminarActividadDeActividadSemanal(a);
-                            GestorFicheros.cargarActividadesSemanalesEnFichero(Paths.get("src/io/ActividadesSemanales.txt"));
-                            GestorFicheros.eliminarActividadUsuarioDeMapa(a.getUsuario(), a);
-                            GestorFicheros.cargarActividadesUsuarioEnFicheroBinario2(a.getUsuario(), Paths.get("src/io/ActividadesUsuario.dat"));
+                            GestorFicheros.eliminarYGuardarActividadesUsuarioDeMapa(a.getUsuario(), a);
                             modeloListaAct.removeElement(a);
                         }
                     });

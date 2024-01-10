@@ -126,6 +126,7 @@ public class BaseDeDatos {
 			prepSt.executeUpdate();
 			prepSt.close();
 			conn.close();
+			usuarios.removeIf(u -> u.getUsuario().equals(usuario));
 		} catch (SQLException e) {
 			logger.warning("No se ha podido borrar el usuario en la Base De Datos");
 			JOptionPane.showMessageDialog(null, "No se ha podido borrar el usuario en la Base De Datos", "Error", JOptionPane.ERROR_MESSAGE);
