@@ -21,29 +21,12 @@ public class VentanaRegistro extends JFrame{
 	// ATRIBUTOS DE LA VENTANA
 
 	private final Logger logger = Logger.getLogger(VentanaRegistro.class.getName());
-	private final JPanel pSur;
-    private final JPanel pCentro;
-    private final JPanel pNorte;
-    private final JPanel pNombre;
-    private final JPanel pUsuario;
-    private final JPanel pApellidos;
-    private final JPanel pContra;
-    private final JPanel pEdad;
-	private final JTextField txtNombre;
+    private final JTextField txtNombre;
     private final JTextField txtUsuario;
     private final JTextField txtApellidos;
-	private final JLabel lblNombre;
-    private final JLabel lblUsuario;
-    private final JLabel lblContra;
-    private final JLabel lblApellidos;
-    private final JLabel lblEdad;
-    private final JLabel lblTitulo;
-	private final JPasswordField txtContra;
+    private final JPasswordField txtContra;
 	private final JComboBox<Integer> cEdad;
-	private final JButton btnRegistro;
-    private final JButton btnVolver;
-    private final JButton btnSalir;
-	private final Connection con = BaseDeDatos.iniciarBaseDeDatos("src/db/usuarios.db");
+    private final Connection con = BaseDeDatos.iniciarBaseDeDatos("src/db/usuarios.db");
 		
 	public VentanaRegistro(){
 		super();
@@ -56,15 +39,15 @@ public class VentanaRegistro extends JFrame{
 		setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
 		
 		//PANELES Y SUS ASIGNACIONES EN LA VENTANA
-		
-		pCentro = new JPanel();
-		pNorte = new JPanel();
-		pSur = new JPanel();
-		pNombre = new JPanel();
-		pApellidos = new JPanel();
-		pEdad = new JPanel();
-		pContra = new JPanel();
-		pUsuario = new JPanel();
+
+        JPanel pCentro = new JPanel();
+        JPanel pNorte = new JPanel();
+        JPanel pSur = new JPanel();
+        JPanel pNombre = new JPanel();
+        JPanel pApellidos = new JPanel();
+        JPanel pEdad = new JPanel();
+        JPanel pContra = new JPanel();
+        JPanel pUsuario = new JPanel();
 		
 		pCentro.setLayout(new GridLayout(0,2));
 		pSur.setLayout(new GridLayout(1,3));
@@ -82,7 +65,7 @@ public class VentanaRegistro extends JFrame{
 		//NOMBRE
 		
 		txtNombre = new JTextField(20);
-		lblNombre = new JLabel("      - NOMBRE: ");
+        JLabel lblNombre = new JLabel("      - NOMBRE: ");
 		lblNombre.setFont(new Font(Font.SERIF, Font.PLAIN, 30));
 		lblNombre.setForeground(Color.BLACK);
 		
@@ -102,7 +85,7 @@ public class VentanaRegistro extends JFrame{
 		//APELLIDOS
 		
 		txtApellidos = new JTextField(20);
-		lblApellidos = new JLabel("      - APELLIDOS: ");
+        JLabel lblApellidos = new JLabel("      - APELLIDOS: ");
 		lblApellidos.setFont(new Font(Font.SERIF, Font.PLAIN, 30));
 		lblApellidos.setForeground(Color.BLACK);
 		
@@ -126,16 +109,16 @@ public class VentanaRegistro extends JFrame{
 			numeros.add(i);
 		}
 		cEdad = new JComboBox<>(numeros);
-		
-		
-		lblEdad = new JLabel("      - EDAD: ");
+
+
+        JLabel lblEdad = new JLabel("      - EDAD: ");
 		lblEdad.setFont(new Font(Font.SERIF, Font.PLAIN, 30));
 		lblEdad.setForeground(Color.BLACK);
 	
 		//USUARIO
 		
 		txtUsuario = new JTextField(20);
-		lblUsuario = new JLabel("      - USUARIO: ");
+        JLabel lblUsuario = new JLabel("      - USUARIO: ");
 		lblUsuario.setFont(new Font(Font.SERIF, Font.PLAIN, 30));
 		lblUsuario.setForeground(Color.BLACK);
 		
@@ -154,7 +137,7 @@ public class VentanaRegistro extends JFrame{
 		//CONTRASEÑA
 		
 		txtContra = new JPasswordField(20);
-		lblContra = new JLabel("      - CONTRASEÑA: ");
+        JLabel lblContra = new JLabel("      - CONTRASEÑA: ");
 		lblContra.setFont(new Font(Font.SERIF, Font.PLAIN, 30));
 		lblContra.setForeground(Color.BLACK);
 		
@@ -172,17 +155,17 @@ public class VentanaRegistro extends JFrame{
 		});
 		
 		//TITULO
-		
-		lblTitulo  = new JLabel("REGISTRO");
+
+        JLabel lblTitulo = new JLabel("REGISTRO");
 		lblTitulo.setFont(new Font(Font.SERIF, Font.PLAIN, 40));
 		
 		//BOTONES
-		
-		btnRegistro = new JButton("REGISTRO");
+
+        JButton btnRegistro = new JButton("REGISTRO");
 		btnRegistro.setFont(new Font(Font.SERIF, Font.PLAIN, 25));
-		btnVolver = new JButton("VOLVER");
+        JButton btnVolver = new JButton("VOLVER");
 		btnVolver.setFont(new Font(Font.SERIF, Font.PLAIN, 25));
-		btnSalir = new JButton("SALIR");
+        JButton btnSalir = new JButton("SALIR");
 		btnSalir.setFont(new Font(Font.SERIF, Font.PLAIN, 25));
 		
 		//ASIGNACIÓN DE LOS ATRIBUTOS A LA VENTANA

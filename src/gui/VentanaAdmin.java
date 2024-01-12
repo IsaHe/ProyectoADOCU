@@ -24,21 +24,11 @@ public class VentanaAdmin extends JFrame{
 	
 	private final Logger logger = Logger.getLogger(VentanaAdmin.class.getName());
 	final JFrame ventanaActual = this;
-	private final JPanel pSur;
     private final JPanel pCentro;
     private final JPanel pCentroC;
-    private final JPanel pNorte;
-    private final JPanel pOeste;
-	private final JLabel lblTitulo;
-    private final JLabel lblFoto;
-	private final JButton btnVolver;
-    private final JButton btnSalir;
     private JButton btnBorrarAct;
     private final JButton btnBorrarUsu;
-	private final JTree arbol;
-	private final DefaultMutableTreeNode nRaiz;
-	private final DefaultTreeModel modeloArbol;
-	private JTable tablaUsu;
+    private JTable tablaUsu;
 	private JList<Actividad> lAct;
 	private DefaultListModel<Actividad> modeloListaAct;
 	private JScrollPane scrollUsu, scrollAct;
@@ -50,11 +40,11 @@ public class VentanaAdmin extends JFrame{
 		setExtendedState(MAXIMIZED_BOTH);
 		setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
 		setIconImage(new ImageIcon(Objects.requireNonNull(getClass().getResource("/resources/images//ADOCU.png"))).getImage());
-		
-		pSur = new JPanel();
+
+        JPanel pSur = new JPanel();
 		pCentro = new JPanel();
-		pNorte = new JPanel();
-		pOeste = new JPanel();
+        JPanel pNorte = new JPanel();
+        JPanel pOeste = new JPanel();
 		pCentroC = new JPanel();
 		
 		
@@ -66,22 +56,22 @@ public class VentanaAdmin extends JFrame{
 		getContentPane().add(pCentro, BorderLayout.CENTER);
 		getContentPane().add(pNorte, BorderLayout.NORTH);
 		getContentPane().add(pOeste, BorderLayout.WEST);
-		
-		lblTitulo = new JLabel("ADMINISTRADOR");
+
+        JLabel lblTitulo = new JLabel("ADMINISTRADOR");
 		lblTitulo.setFont(new Font(Font.SERIF, Font.PLAIN, 30));
 		lblTitulo.setForeground(Color.BLACK);
-		lblFoto = new JLabel(new ImageIcon(Objects.requireNonNull(getClass().getResource("/resources/images//ADOCU.png"))));
+        JLabel lblFoto = new JLabel(new ImageIcon(Objects.requireNonNull(getClass().getResource("/resources/images//ADOCU.png"))));
 
         JEditorPane etiqueta = getjEditorPane();
 
 
-        btnSalir = new JButton("SALIR");
-		btnVolver = new JButton("VOLVER");
+        JButton btnSalir = new JButton("SALIR");
+        JButton btnVolver = new JButton("VOLVER");
 		btnBorrarUsu = new JButton("Borrar Usuario");
-		
-		nRaiz = new DefaultMutableTreeNode("Administrador");
-		modeloArbol = new DefaultTreeModel(nRaiz);
-		arbol = new JTree(nRaiz);
+
+        DefaultMutableTreeNode nRaiz = new DefaultMutableTreeNode("Administrador");
+        DefaultTreeModel modeloArbol = new DefaultTreeModel(nRaiz);
+        JTree arbol = new JTree(nRaiz);
 		modeloArbol.insertNodeInto(new DefaultMutableTreeNode("Ver Usuarios"), nRaiz, 0);
 		modeloArbol.insertNodeInto(new DefaultMutableTreeNode("Ver Actividades"), nRaiz, 1);
 		modeloArbol.insertNodeInto(new DefaultMutableTreeNode("Ver Valoraciones"), nRaiz, 2);

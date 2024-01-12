@@ -21,32 +21,9 @@ public class VentanaPago extends JFrame{
     private final DefaultListModel<Actividad> modeloPagada;
 	private final JList<Actividad> listaPendiente;
     private final JList<Actividad> listaPagada;
-	private final JPanel pCentro;
-    private final JPanel pSur;
-    private final JPanel pNorte;
-    private final JPanel pCentroArriba;
-    private final JPanel pCentroAbajo;
-    private final JPanel pUsuario;
-    private final JPanel pContrasena;
-    private final JPanel pEntreListas;
-    private final JPanel pPagar;
-    private final JPanel pTodosPagar;
-    private final JPanel pPendiente;
-    private final JPanel pTodosPendiente;
-    private final JPanel pImporte;
-	private final JLabel lblImporte;
-    private final JLabel lblTitulo;
-    private final JLabel lblUsuario;
-    private final JLabel lblContrasena;
     private final JLabel lblImporteAPagar;
 	private final JTextField txtUsuario;
-	private final JButton btnPagar;
-    private final JButton btnVolver;
-    private final JButton btnPasarAPagada;
-    private final JButton btnPasarAPendiente;
-    private final JButton btnPasarTodosAPagar;
-    private final JButton btnPasarTodosAPendiente;
-	private JPasswordField pasContrasena;
+    private JPasswordField pasContrasena;
 	private float precio = 0;
 
 	public VentanaPago(){
@@ -59,19 +36,19 @@ public class VentanaPago extends JFrame{
 		setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
 		
 		//CREACION CONTENEDORES
-		pCentro = new JPanel();
-		pCentroArriba = new JPanel();
-		pEntreListas = new JPanel();
-		pPagar = new JPanel();
-		pTodosPagar = new JPanel();
-		pPendiente = new JPanel();
-		pTodosPendiente = new JPanel();
-		pImporte = new JPanel();
-		pCentroAbajo = new JPanel();
-		pUsuario = new JPanel();
-		pContrasena = new JPanel();
-		pSur = new JPanel();
-		pNorte = new JPanel();
+        JPanel pCentro = new JPanel();
+        JPanel pCentroArriba = new JPanel();
+        JPanel pEntreListas = new JPanel();
+        JPanel pPagar = new JPanel();
+        JPanel pTodosPagar = new JPanel();
+        JPanel pPendiente = new JPanel();
+        JPanel pTodosPendiente = new JPanel();
+        JPanel pImporte = new JPanel();
+        JPanel pCentroAbajo = new JPanel();
+        JPanel pUsuario = new JPanel();
+        JPanel pContrasena = new JPanel();
+        JPanel pSur = new JPanel();
+        JPanel pNorte = new JPanel();
 		
 		//FUNCION CONTENEDORES
 		pCentro.setLayout(new GridLayout(2, 1));
@@ -89,24 +66,24 @@ public class VentanaPago extends JFrame{
 		getContentPane().add(pCentro, BorderLayout.CENTER);
 		
 		//CREACION COMPONENTES
-		lblTitulo = new JLabel("PAGOS");
-		lblImporte = new JLabel("    - Importe a Pagar: ");
+        JLabel lblTitulo = new JLabel("PAGOS");
+        JLabel lblImporte = new JLabel("    - Importe a Pagar: ");
 		lblImporteAPagar = new JLabel("0€");
-		lblUsuario = new JLabel("    - Usuario: ");
+        JLabel lblUsuario = new JLabel("    - Usuario: ");
 		txtUsuario = new JTextField(20);
-		lblContrasena = new JLabel("    - Contraseña: ");
+        JLabel lblContrasena = new JLabel("    - Contraseña: ");
 		pasContrasena = new JPasswordField(20);
 		pasContrasena = new JPasswordField();
-		btnPagar = new JButton("PAGAR");
-		btnVolver = new JButton("VOLVER");
+        JButton btnPagar = new JButton("PAGAR");
+        JButton btnVolver = new JButton("VOLVER");
 		modeloPendiente = new DefaultListModel<>();
 		listaPendiente = new JList<>(modeloPendiente);
 		modeloPagada = new DefaultListModel<>();
 		listaPagada = new JList<>(modeloPagada);
-		btnPasarAPagada = new JButton(">");
-		btnPasarAPendiente = new JButton("<");
-		btnPasarTodosAPagar = new JButton(">>");
-		btnPasarTodosAPendiente = new JButton("<<");
+        JButton btnPasarAPagada = new JButton(">");
+        JButton btnPasarAPendiente = new JButton("<");
+        JButton btnPasarTodosAPagar = new JButton(">>");
+        JButton btnPasarTodosAPendiente = new JButton("<<");
 		
 		//FUNCION COMPONENTES
 		lblTitulo.setFont(new Font(Font.SERIF, Font.PLAIN, 60));

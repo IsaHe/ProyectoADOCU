@@ -1,7 +1,6 @@
 package gui;
 
 import domain.Actividad;
-import domain.Usuario;
 import io.GestorFicheros;
 
 import javax.swing.*;
@@ -21,20 +20,9 @@ import java.util.logging.Logger;
 public class VentanaTabla extends JFrame{
 
 	private final Logger logger = Logger.getLogger(VentanaTabla.class.getName());
-	private final JPanel pCentro;
-    private final JPanel pSur;
-	private final JTable tabla;
-	private final JButton btnVolver;
-    private final JButton btnPagar;
-	
-	private final JScrollPane scroll;
-	private final List<String> horas;
-
-	private final Usuario usuario = VentanaInicioSesion.getUsuario();
-	
+    private final JTable tabla;
 	private int fila = -1;
 	private  int columna = -1;
-	
 	private int filaRender = -1;
 	private int columnaRender = -1;
 	
@@ -144,7 +132,7 @@ public class VentanaTabla extends JFrame{
 		//VENTANA
 		
 		//Horas de la tabla
-		horas = new ArrayList<>();
+        List<String> horas = new ArrayList<>();
 		horas.add("8:10 - 9:00");
 		horas.add("9:10 - 10:00");
 		horas.add("10:10 - 11:00");
@@ -161,14 +149,14 @@ public class VentanaTabla extends JFrame{
 		setExtendedState(MAXIMIZED_BOTH);
 		
 		//CREACION CONTENEDORES
-		pSur = new JPanel();
-		pCentro =  new JPanel();
+        JPanel pSur = new JPanel();
+        JPanel pCentro = new JPanel();
 		
 		//CREACION COMPONENTES
-		btnPagar = new JButton("PAGAR");
-		btnVolver = new JButton("VOLVER");
+        JButton btnPagar = new JButton("PAGAR");
+        JButton btnVolver = new JButton("VOLVER");
 		tabla = new JTable(new TablaActividades(horas));
-		scroll = new JScrollPane(tabla);
+        JScrollPane scroll = new JScrollPane(tabla);
 		
 		//FUNCIONES COMPONENTES
 		btnPagar.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 18));

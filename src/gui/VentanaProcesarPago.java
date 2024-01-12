@@ -8,10 +8,7 @@ public class VentanaProcesarPago extends JFrame{
 
 	private final Logger logger = Logger.getLogger(VentanaProcesarPago.class.getName());
 	private final JProgressBar pb;
-	private final JPanel pCentral;
-    private final JPanel panel;
-	private final JLabel lblTitulo;
-	private final JFrame vActual;
+    private final JFrame vActual;
 	
 	public VentanaProcesarPago() {
 		super();
@@ -25,12 +22,12 @@ public class VentanaProcesarPago extends JFrame{
 		
 		//CREACION DE CONTENEDORES
 		pb = new JProgressBar(1, 100);
-		lblTitulo = new JLabel("Procesando el pago...");
-		
-		pCentral = new JPanel(new GridLayout(2, 1));
+        JLabel lblTitulo = new JLabel("Procesando el pago...");
+
+        JPanel pCentral = new JPanel(new GridLayout(2, 1));
 		pCentral.setAlignmentY(CENTER_ALIGNMENT);
 		pCentral.add(lblTitulo);
-		panel = new JPanel();
+        JPanel panel = new JPanel();
 		panel.add(pb);
 		pCentral.add(panel);
 		getContentPane().add(pCentral);

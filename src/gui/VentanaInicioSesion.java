@@ -17,25 +17,10 @@ import java.util.logging.Logger;
 public class VentanaInicioSesion extends JFrame{
 
 	private final Logger logger = Logger.getLogger(VentanaInicioSesion.class.getName());
-	private final JPanel panelCentro;
-    private final JPanel panelCentroIzq;
-    private final JPanel panelSur;
-    private final JPanel panelNorte;
-    private final JPanel panelConstrasena;
-    private final JPanel panelUsuario;
-	private final JLabel lblUsuario;
-    private final JLabel lblContrasena;
-    private final JLabel lblTitulo;
-    private final JLabel lblFoto;
-	private final JTextField txtUsuario;
+    private final JTextField txtUsuario;
 	private final JPasswordField pasContrasena;
-	private final JButton btnInicioSesion;
-    private final JButton btnRegistrarse;
-    private final JButton btnSalir;
-	private final JFrame VentanaActual;
-	private final Connection con = BaseDeDatos.iniciarBaseDeDatos("src/db/usuarios.db");
-	private final Connection conn = BaseDeDatos.iniciarBaseDeDatos("src/db/valoraciones.db");
-	private static Usuario  usuario;
+    private final JFrame VentanaActual;
+    private static Usuario  usuario;
 	
 	public static Usuario getUsuario() {
 		return usuario;
@@ -44,8 +29,10 @@ public class VentanaInicioSesion extends JFrame{
 	public VentanaInicioSesion () {
 		
 		VentanaActual = this;
-		BaseDeDatos.obtenerUsuariosDeBaseDeDatos(con);
-		BaseDeDatos.obtenerValoracionesDeBaseDeDatos(conn);
+        Connection con = BaseDeDatos.iniciarBaseDeDatos("src/db/usuarios.db");
+        BaseDeDatos.obtenerUsuariosDeBaseDeDatos(con);
+        Connection conn = BaseDeDatos.iniciarBaseDeDatos("src/db/valoraciones.db");
+        BaseDeDatos.obtenerValoracionesDeBaseDeDatos(conn);
 		GestorFicheros.obtenerActividadesDeFichero(Paths.get("src/io/ListaActividades.txt"));
 		GestorFicheros.obtenerActividadesSemanalesDeFichero(Paths.get("src/io/ActividadesSemanales.txt"));
 		GestorFicheros.actualizarActividadesSemanales();
@@ -57,23 +44,23 @@ public class VentanaInicioSesion extends JFrame{
 		setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
 		
 		//CREACION CONTENEDORES
-		panelNorte = new JPanel();
-		panelCentro = new JPanel();
-		panelCentroIzq = new JPanel();
-		panelSur = new JPanel();
-		lblFoto = new JLabel(new ImageIcon(Objects.requireNonNull(getClass().getResource("/resources/images//ADOCU.png"))));
-		panelConstrasena = new JPanel();
-		panelUsuario = new JPanel();
+        JPanel panelNorte = new JPanel();
+        JPanel panelCentro = new JPanel();
+        JPanel panelCentroIzq = new JPanel();
+        JPanel panelSur = new JPanel();
+        JLabel lblFoto = new JLabel(new ImageIcon(Objects.requireNonNull(getClass().getResource("/resources/images//ADOCU.png"))));
+        JPanel panelConstrasena = new JPanel();
+        JPanel panelUsuario = new JPanel();
 		
 		//CREACION COMPONENTES
-		lblUsuario = new JLabel("    - Usuario: ");
-		lblContrasena = new JLabel("    - Contraseña: ");
-		lblTitulo = new JLabel(" - ADOCU - ");
+        JLabel lblUsuario = new JLabel("    - Usuario: ");
+        JLabel lblContrasena = new JLabel("    - Contraseña: ");
+        JLabel lblTitulo = new JLabel(" - ADOCU - ");
 		txtUsuario = new JTextField(20);
 		pasContrasena = new JPasswordField(20);
-		btnInicioSesion = new JButton("INICIAR SESION");
-		btnRegistrarse = new JButton("REGISTRARSE");
-		btnSalir = new JButton("SALIR");
+        JButton btnInicioSesion = new JButton("INICIAR SESION");
+        JButton btnRegistrarse = new JButton("REGISTRARSE");
+        JButton btnSalir = new JButton("SALIR");
 		
 		//FUNCIONES CONTENEDORES
 		panelCentro.setLayout(new GridLayout(1,2));

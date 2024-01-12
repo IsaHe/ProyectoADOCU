@@ -11,7 +11,7 @@ import static org.junit.Assert.*;
 
 public class ActividadTest {
 
-    Actividad a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11,    a12;
+    Actividad a1, a2, a3, a4, a5, a6;
 
     Actividad[][] arrayActividades;
 
@@ -23,14 +23,6 @@ public class ActividadTest {
         a4 = new Actividad("b", 41, 878.434343F, true, "usuario");
         a5 = new Actividad("a", 240, 30.342323F, false, "usuario");
         a6 = new Actividad("a", 147, 10.454874548724548F, true, "usuario");
-
-        a7 = new Actividad();
-        a8 = new Actividad("a", 1, 1.005F);
-        a9 = new Actividad("a", 582, 15000.8548F);
-        a10 = new Actividad("b", 41, 878.434343F);
-        a11 = new Actividad("a", 240, 30.342323F);
-        a12 = new Actividad("a", 147, 10.454874548724548F);
-
     }
 
     @Test
