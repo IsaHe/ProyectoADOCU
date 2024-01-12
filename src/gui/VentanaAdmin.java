@@ -16,7 +16,18 @@ import java.nio.file.Paths;
 import java.sql.Connection;
 import java.util.Objects;
 import java.util.logging.Logger;
-
+/**
+ * VentanaAdmin es una clase que extiende JFrame y representa la ventana de administrador en la aplicación.
+ * Esta ventana permite al administrador ver y gestionar usuarios, actividades y calificaciones.
+ * <p>
+ * La clase contiene varios componentes como paneles, botones, etiquetas, tablas, listas y paneles de desplazamiento.
+ * También mantiene una conexión con la base de datos.
+ * <p>
+ * El constructor de la clase inicializa la ventana y sus componentes.
+ * Establece el diseño de los paneles, añade componentes a los paneles y añade oyentes de acción a los botones y al árbol.
+ * <p>
+ * La clase también contiene varios métodos privados para obtener JTextArea, JProgressBar y JEditorPane con configuraciones específicas.
+ */
 public class VentanaAdmin extends JFrame{
 	
 	@Serial
@@ -33,10 +44,13 @@ public class VentanaAdmin extends JFrame{
 	private DefaultListModel<Actividad> modeloListaAct;
 	private JScrollPane scrollUsu, scrollAct;
 	private Connection conn = BaseDeDatos.iniciarBaseDeDatos("src/db/usuarios.db");
-	
 
+
+    /**
+     * Constructor para VentanaAdmin.
+     * Inicializa la ventana y sus componentes.
+     */
 	public VentanaAdmin(){
-		
 		setExtendedState(MAXIMIZED_BOTH);
 		setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
 		setIconImage(new ImageIcon(Objects.requireNonNull(getClass().getResource("/resources/images//ADOCU.png"))).getImage());
@@ -264,6 +278,10 @@ public class VentanaAdmin extends JFrame{
 		setVisible(true);
 	}
 
+    /**
+     * Método para obtener un JTextArea con texto de explicación.
+     * @return Un JTextArea con texto de explicación.
+     */
     private static JTextArea getTextArea() {
         JTextArea txtArea = new JTextArea("""
                 *EN ESTA VENTANA ESTA DISPONIBLE LA MEDIA DE LAS VALORACIONES DE LOS CLIENTES*
@@ -279,6 +297,10 @@ public class VentanaAdmin extends JFrame{
         return txtArea;
     }
 
+    /**
+     * Método para obtener un JProgressBar con la valoración media.
+     * @return Un JProgressBar con la valoración media.
+     */
     private static JProgressBar getjProgressBar() {
         JProgressBar pb = new JProgressBar(0, 10);
         float valorTotal = 0;
@@ -306,6 +328,10 @@ public class VentanaAdmin extends JFrame{
         return pb;
     }
 
+    /**
+     * Método para obtener un JTextArea con texto de explicación.
+     * @return Un JTextArea con texto de explicación.
+     */
     private static JTextArea getjTextArea() {
         JTextArea txtAct = new JTextArea("""
                 - Si la actividad está en Rojo: NO ESTA PAGADA.
@@ -322,6 +348,10 @@ public class VentanaAdmin extends JFrame{
         return txtAct;
     }
 
+    /**
+     * Método para obtener un JEditorPane con texto de explicación.
+     * @return Un JEditorPane con texto de explicación.
+     */
     private static JEditorPane getjEditorPane() {
         String textoExplicacionValoracionHTML =
             "<h1>¡Bienvendido a la ventana de administrador!</h1>" +

@@ -11,6 +11,19 @@ import java.io.Serial;
 import java.nio.file.Paths;
 import java.util.logging.Logger;
 
+/**
+ * VentanaPago es una clase que extiende JFrame y representa la ventana de pago en la aplicación.
+ * Esta ventana permite al usuario pagar las actividades seleccionadas.
+ * <p>
+ * La clase contiene varios componentes como paneles, botones, etiquetas, campos de texto y un campo de contraseña.
+ * También mantiene una lista de actividades pendientes y pagadas, y el precio total a pagar.
+ * <p>
+ * El constructor de la clase inicializa la ventana y sus componentes.
+ * Establece las propiedades de la ventana, añade componentes a los paneles, y añade oyentes de acción a los botones.
+ * También llena la lista de actividades pendientes con las actividades del usuario.
+ * <p>
+ * Los botones de la ventana tienen asignados varios eventos. El botón de pagar comprueba si el usuario y la contraseña introducidos son correctos y, en caso afirmativo, paga las actividades seleccionadas y actualiza las actividades del usuario. El botón de volver cierra la ventana de pago y abre la ventana de tabla. Los botones de pasar a pagada y pasar a pendiente mueven las actividades seleccionadas entre las listas de pendientes y pagadas. Los botones de pasar todos a pagar y pasar todos a pendiente mueven todas las actividades entre las listas de pendientes y pagadas.
+ */
 public class VentanaPago extends JFrame{
 
 	@Serial

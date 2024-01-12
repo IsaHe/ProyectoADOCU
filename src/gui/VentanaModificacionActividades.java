@@ -10,6 +10,20 @@ import java.time.LocalDate;
 import java.util.Objects;
 import java.util.logging.Logger;
 
+/**
+ * VentanaModificacionActividades es una clase que extiende JFrame y representa la ventana de modificación de actividades en la aplicación.
+ * Esta ventana permite al usuario modificar las actividades.
+ * <p>
+ * La clase contiene varios componentes como etiquetas, botones, paneles y un JComboBox.
+ * También mantiene una lista de actividades y el número máximo de personas para una actividad.
+ * <p>
+ * El constructor de la clase inicializa la ventana y sus componentes.
+ * Establece las propiedades de la ventana, añade componentes a los paneles, y añade oyentes de acción a los botones.
+ * También llena el JComboBox con las actividades del día seleccionado.
+ * <p>
+ * La clase también contiene varios métodos privados para convertir el día de la semana de inglés a español,
+ * localizar la hora en la tabla y localizar la fecha en la tabla.
+ */
 public class VentanaModificacionActividades extends JFrame {
     private static final Logger logger = Logger.getLogger(VentanaModificacionActividades.class.getName());
     final Actividad[] listaActividades;
@@ -109,6 +123,12 @@ public class VentanaModificacionActividades extends JFrame {
         setVisible(true);
     }
 
+    /**
+     * Metodo para convertir el dia de la semana en ingles a español.
+     *
+     * @param dia El dia de la semana en ingles.
+     * @return El dia de la semana en español.
+     */
     private String convertirDiaSemana(String dia) {
         return switch (dia) {
             case "MONDAY" -> "Lunes";
@@ -122,6 +142,12 @@ public class VentanaModificacionActividades extends JFrame {
         };
     }
 
+    /**
+     * Metodo para localizar la hora en la tabla.
+     *
+     * @param hora La hora a localizar.
+     * @return La posicion de la hora en la tabla.
+     */
     private int localizarHoraEnTabla(String hora) {
     	return switch (hora) {
     		case "8:10 - 9:00" -> 0;
@@ -138,6 +164,12 @@ public class VentanaModificacionActividades extends JFrame {
     	};
     }
 
+    /**
+     * Metodo para localizar la fecha en la tabla.
+     *
+     * @param fecha La fecha a localizar.
+     * @return La posicion de la fecha en la tabla.
+     */
     private int localizarFechaEnTabla(LocalDate fecha) {
         if (Objects.equals(fecha, LocalDate.now())) {
             return 0;

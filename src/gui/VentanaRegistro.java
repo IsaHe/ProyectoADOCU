@@ -13,6 +13,21 @@ import java.util.Arrays;
 import java.util.Vector;
 import java.util.logging.Logger;
 
+/**
+ * VentanaRegistro es una clase que extiende JFrame y representa la ventana de registro en la aplicación.
+ * Esta ventana permite al usuario registrarse en la aplicación.
+ * <p>
+ * La clase contiene varios componentes como paneles, botones, etiquetas, campos de texto, un campo de contraseña y un JComboBox.
+ * También mantiene una conexión con la base de datos y un Logger para registrar información y errores.
+ * <p>
+ * El constructor de la clase inicializa la ventana y sus componentes.
+ * Establece las propiedades de la ventana, añade componentes a los paneles, y añade oyentes de acción a los botones.
+ * También llena el JComboBox con los números del 18 al 100 para seleccionar la edad.
+ * <p>
+ * Los botones de la ventana tienen asignados varios eventos. El botón de registro comprueba si el usuario ya existe y, en caso contrario, registra al usuario en la base de datos y abre la ventana de inicio de sesión. El botón de volver cierra la ventana de registro y abre la ventana de inicio de sesión. El botón de salir cierra la aplicación.
+ * <p>
+ * Los campos de texto de nombre, apellidos y usuario tienen asignados KeyAdapters para limitar la longitud de los textos introducidos y permitir solo caracteres alfabéticos en el caso de nombre y apellidos.
+ */
 public class VentanaRegistro extends JFrame{
 	
 	@Serial

@@ -9,31 +9,57 @@ import java.util.logging.Logger;
 
 import javax.swing.JOptionPane;
 
+/**
+ * Clase BaseDeDatos que se encarga de la gestión de los usuarios y las valoraciones en la base de datos.
+ * Esta clase contiene métodos para iniciar la base de datos, obtener y cargar usuarios y valoraciones,
+ * y realizar operaciones como comprobar, borrar y obtener usuarios.
+ */
 public class BaseDeDatos {
 
 	private static List<Usuario> usuarios;
 	private static List<Integer> valoraciones;
 	static final Logger logger = Logger.getLogger(BaseDeDatos.class.getName());
-	
 
+	/**
+	 * Comprueba si un usuario existe en la lista de usuarios.
+	 * @param usuario El usuario a comprobar.
+	 * @return true si el usuario existe, false en caso contrario.
+	 */
 	public static boolean comprobarUsuario(Usuario usuario) {
 		return usuarios.contains(usuario);
 	}
 
+	/**
+	 * Obtiene la lista de usuarios.
+	 * @return La lista de usuarios.
+	 */
 	public static List<Usuario> getUsuarios() {
 		return usuarios;
 	}
 
+	/**
+	 * Obtiene la lista de usuarios SIN el admin incluido.
+	 * @return La lista de usuarios.
+	 */
 	public static List<Usuario> getUsuariosSinAdmin() {
 		List<Usuario> usuariosSinAdmin = usuarios;
 		usuariosSinAdmin.removeIf(u -> u.getUsuario().equals("Admin"));
 		return usuariosSinAdmin;
 	}
-	
+
+	/**
+	 * Obtiene la lista de valoraciones.
+	 * @return La lista de valoraciones.
+	 */
 	public static List<Integer> getValoraciones() {
 		return valoraciones;
 	}
-	
+
+	/**
+	 * Inicia la conexión con la base de datos.
+	 * @param nomBaseDatos El nombre de la base de datos.
+	 * @return La conexión con la base de datos.
+	 */
 	public static Connection iniciarBaseDeDatos (String nomBaseDatos) {
 		Connection con = null;
 		try {
@@ -45,7 +71,11 @@ public class BaseDeDatos {
 		
 		return con;
 	}
-	
+
+	/**
+	 * Obtiene los usuarios de la base de datos y los carga en la lista de usuarios.
+	 * @param con La conexión con la base de datos.
+	 */
 	public static void obtenerUsuariosDeBaseDeDatos (Connection con) {
 		
 		usuarios = new ArrayList<>();
@@ -75,7 +105,11 @@ public class BaseDeDatos {
 			logger.warning("Error al obtener los usuarios de la Base De Datos");
 		}
 	}
-	
+
+	/**
+	 * Carga los usuarios de la lista en la base de datos.
+	 * @param con La conexión con la base de datos.
+	 */
 	public static void cargarUsuariosEnBaseDeDatos (Connection con) {
 		
 		try {
@@ -118,7 +152,12 @@ public class BaseDeDatos {
 			logger.warning("Error al cerrar conexion en Base De Datos");
 		}
 	}
-	
+
+	/**
+	 * Borra un usuario en la base de datos.
+	 * @param conn La conexión con la base de datos.
+	 * @param usuario El nombre de usuario a borrar.
+	 */
 	public static void borrarUsuarioEnBD(Connection conn, String usuario) {
 		try {
 			PreparedStatement prepSt = conn.prepareStatement("DELETE FROM usuarios WHERE usuario = ?");
@@ -132,7 +171,12 @@ public class BaseDeDatos {
 			JOptionPane.showMessageDialog(null, "No se ha podido borrar el usuario en la Base De Datos", "Error", JOptionPane.ERROR_MESSAGE);
 		}
 	}
-	
+
+	/**
+	 * Inicia la conexión con la base de datos de valoraciones.
+	 * @param nomBD El nombre de la base de datos de valoraciones.
+	 * @return La conexión con la base de datos de valoraciones.
+	 */
 	public static Connection iniciarBaseDeDatosValoraciones (String nomBD) {
 		Connection con = null;
 		try {
@@ -145,6 +189,10 @@ public class BaseDeDatos {
 		return con;
 	}
 
+	/**
+	 * Carga las valoraciones en la base de datos de valoraciones.
+	 * @param con La conexión con la base de datos de valoraciones.
+	 */
 	public static void cargarValoracionEnBaseDeDatos (Connection con) {
 		try {
 			PreparedStatement prepSt = con.prepareStatement("DELETE FROM valoraciones");
@@ -163,7 +211,11 @@ public class BaseDeDatos {
 			logger.warning("Error al cerrar la conexion con la Base De Datos");
 		}
 	}
-	
+
+	/**
+	 * Obtiene las valoraciones de la base de datos de valoraciones y las carga en la lista de valoraciones.
+	 * @param con La conexión con la base de datos de valoraciones.
+	 */
 	public static void obtenerValoracionesDeBaseDeDatos(Connection con){
 		
 		valoraciones = new ArrayList<>();

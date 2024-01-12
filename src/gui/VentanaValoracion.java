@@ -10,6 +10,21 @@ import java.sql.Connection;
 import java.util.Objects;
 import java.util.logging.Logger;
 
+/**
+ * VentanaValoracion es una clase que extiende JFrame y representa la ventana de valoración en la aplicación.
+ * Esta ventana permite al usuario valorar su experiencia con las actividades.
+ * <p>
+ * La clase contiene varios componentos como paneles, botones, etiquetas, un JComboBox y un JEditorPane.
+ * También mantiene una conexión con la base de datos y un Logger para registrar información y errores.
+ * <p>
+ * El constructor de la clase inicializa la ventana y sus componentes.
+ * Establece las propiedades de la ventana, añade componentes a los paneles, y añade oyentes de acción a los botones.
+ * También llena el JComboBox con las opciones de valoración.
+ * <p>
+ * Los botones de la ventana tienen asignados varios eventos. El botón de enviar recoge la valoración seleccionada, la añade a la base de datos y cierra la aplicación.
+ * <p>
+ * La clase también contiene un método privado para crear el JEditorPane, que muestra un mensaje de agradecimiento y una explicación de la importancia de la valoración para la mejora del servicio.
+ */
 public class VentanaValoracion extends JFrame {
 	
     final Logger logger = Logger.getLogger(VentanaValoracion.class.getName());
@@ -49,6 +64,12 @@ public class VentanaValoracion extends JFrame {
         setVisible(true);
     }
 
+    /**
+     * Metodo para crear el boton de enviar.
+     *
+     * @param valoracion El JComboBox con las opciones de valoración.
+     * @return El boton de enviar.
+     */
     private JButton getBtnEnviar(JComboBox<Valoracion> valoracion) {
         JButton btnEnviar = new JButton("Enviar");
         btnEnviar.addActionListener(e -> {
@@ -83,6 +104,12 @@ public class VentanaValoracion extends JFrame {
         return btnEnviar;
     }
 
+    /**
+     * Metodo para crear el JEditorPane.
+     *
+     * @param urlLogo La URL del logo de la aplicación.
+     * @return El JEditorPane con el mensaje de agradecimiento y la explicación de la importancia de la valoración.
+     */
     private static JEditorPane getjEditorPane(URL urlLogo) {
         String textoExplicacionValoracionHTML = "<html><body>" +
                 "<div style='text-align: center; margin-top: 20px;'>" +

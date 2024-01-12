@@ -4,6 +4,17 @@ import javax.swing.*;
 import java.awt.*;
 import java.util.logging.Logger;
 
+/**
+ * VentanaProcesarPago es una clase que extiende JFrame y representa la ventana de procesamiento de pago en la aplicación.
+ * Esta ventana muestra una barra de progreso mientras se procesa el pago.
+ * <p>
+ * La clase contiene un Logger para registrar información y errores, una JProgressBar para mostrar el progreso del pago, y una referencia a la ventana actual.
+ * <p>
+ * El constructor de la clase inicializa la ventana y sus componentes.
+ * Establece las propiedades de la ventana, añade componentes a los paneles, y crea un hilo para simular el procesamiento del pago.
+ * <p>
+ * El hilo creado en el constructor incrementa el valor de la JProgressBar en un bucle hasta llegar a 100, simbolizando el final del procesamiento del pago. Cuando el procesamiento del pago se completa, se muestra un mensaje de confirmación y se abre la ventana de pago.
+ */
 public class VentanaProcesarPago extends JFrame{
 
 	private final Logger logger = Logger.getLogger(VentanaProcesarPago.class.getName());
@@ -34,7 +45,8 @@ public class VentanaProcesarPago extends JFrame{
 		
 		Thread t = new Thread(() -> {
             for(int i=0;i<100;i++) {
-                pb.setValue(i);
+				int finalI = i;
+				SwingUtilities.invokeLater(() -> pb.setValue(finalI));
                 try {
                     Thread.sleep(20);
                 } catch (InterruptedException e) {

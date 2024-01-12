@@ -14,6 +14,21 @@ import java.time.LocalDate;
 import java.util.Objects;
 import java.util.logging.Logger;
 
+/**
+ * VentanaInicioSesion es una clase que extiende JFrame y representa la ventana de inicio de sesión en la aplicación.
+ * Esta ventana permite al usuario iniciar sesión en la aplicación.
+ * <p>
+ * La clase contiene varios componentes como paneles, botones, etiquetas, campos de texto y un campo de contraseña.
+ * También mantiene una conexión con la base de datos y un Logger para registrar información y errores.
+ * <p>
+ * El constructor de la clase inicializa la ventana y sus componentes.
+ * Establece las propiedades de la ventana, añade componentes a los paneles, y añade oyentes de acción a los botones.
+ * También llena la lista de usuarios con los usuarios de la base de datos y actualiza las actividades semanales.
+ * <p>
+ * La clase también contiene un método estático para obtener el usuario que ha iniciado sesión.
+ * <p>
+ * Los botones de la ventana tienen asignados varios eventos. El botón de inicio de sesión comprueba si el usuario y la contraseña introducidos son correctos y, en caso afirmativo, inicia la sesión y abre la ventana correspondiente. El botón de registro abre la ventana de registro. El botón de salir cierra la ventana de inicio de sesión y abre la ventana de valoración.
+ */
 public class VentanaInicioSesion extends JFrame{
 
 	private final Logger logger = Logger.getLogger(VentanaInicioSesion.class.getName());
