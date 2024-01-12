@@ -7,10 +7,11 @@ import java.util.logging.Logger;
 public class VentanaProcesarPago extends JFrame{
 
 	private final Logger logger = Logger.getLogger(VentanaProcesarPago.class.getName());
-	private JProgressBar pb;
-	private JPanel pCentral,panel;
-	private JLabel lblTitulo;
-	private JFrame vActual;
+	private final JProgressBar pb;
+	private final JPanel pCentral;
+    private final JPanel panel;
+	private final JLabel lblTitulo;
+	private final JFrame vActual;
 	
 	public VentanaProcesarPago() {
 		super();
@@ -34,24 +35,20 @@ public class VentanaProcesarPago extends JFrame{
 		pCentral.add(panel);
 		getContentPane().add(pCentral);
 		
-		Thread t = new Thread(new Runnable() {
-			
-			@Override
-			public void run() {
-				for(int i=0;i<100;i++) {
-					pb.setValue(i);
-					try {
-						Thread.sleep(20);
-					} catch (InterruptedException e) {
-						logger.warning("Error al dormir el hilo");
-						logger.warning(e.getMessage());
-					}
-				}
-				JOptionPane.showMessageDialog(null, "Pago recibido correctamente");
-				new VentanaPago();
-				vActual.dispose();
-			}
-		}); 
+		Thread t = new Thread(() -> {
+            for(int i=0;i<100;i++) {
+                pb.setValue(i);
+                try {
+                    Thread.sleep(20);
+                } catch (InterruptedException e) {
+                    logger.warning("Error al dormir el hilo");
+                    logger.warning(e.getMessage());
+                }
+            }
+            JOptionPane.showMessageDialog(null, "Pago recibido correctamente");
+            new VentanaPago();
+            vActual.dispose();
+        });
 		t.start();
 		
 		setVisible(true);

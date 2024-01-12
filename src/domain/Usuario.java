@@ -8,28 +8,28 @@ public class Usuario {
 	private String apellido;
 	private int edad;
 	private String usuario;
-	private String contraseña;
+	private String contrasena;
 	private ArrayList<Actividad> lActividades = new ArrayList<>();
 	
 	public Usuario() {
 		super();
 	}
 
-	public Usuario(String nom, String apellido, int edad, String usuario, String contraseña, ArrayList<Actividad> lActividades) {
+	public Usuario(String nom, String apellido, int edad, String usuario, String contrasena, ArrayList<Actividad> lActividades) {
 		super();
 		this.nom = nom;
 		this.apellido = apellido;
 		this.edad = edad;
 		this.usuario = usuario;
-		this.contraseña = contraseña;
+		this.contrasena = contrasena;
 		this.lActividades = lActividades;
 	}
 	
 
-	public Usuario(String usuario, String contraseña) {
+	public Usuario(String usuario, String contrasena) {
 		super();
 		this.usuario = usuario;
-		this.contraseña = contraseña;
+		this.contrasena = contrasena;
 	}
 
 	public ArrayList<Actividad> getlActividades() {
@@ -72,12 +72,12 @@ public class Usuario {
 		this.usuario = usuario;
 	}
 
-	public String getContraseña() {
-		return contraseña;
+	public String getContrasena() {
+		return contrasena;
 	}
 
-	public void setContraseña(String contraseña) {
-		this.contraseña = contraseña;
+	public void setContrasena(String contrasena) {
+		this.contrasena = contrasena;
 	}
 
 	public void eliminarActividadDeLista(Actividad actividad) {
@@ -86,7 +86,7 @@ public class Usuario {
 
 	@Override
 	public String toString() {
-		return nom + ";" + apellido + ";" + edad + ";" + usuario + ";" + contraseña;
+		return nom + ";" + apellido + ";" + edad + ";" + usuario + ";" + contrasena;
 	}
 	
 	@Override

@@ -7,22 +7,34 @@ import io.GestorFicheros;
 
 import javax.swing.*;
 import java.awt.*;
+import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.sql.Connection;
 import java.time.LocalDate;
+import java.util.Objects;
 import java.util.logging.Logger;
 
 public class VentanaInicioSesion extends JFrame{
 
 	private final Logger logger = Logger.getLogger(VentanaInicioSesion.class.getName());
-	private JPanel panelCentro, panelCentroIzq, panelSur, panelNorte, panelConstraseña, panelUsuario;
-	private JLabel lblUsuario, lblContrasena, lblTitulo, lblFoto;
-	private JTextField txtUsuario;
-	private JPasswordField pasContrasena;
-	private JButton btnInicioSesion, btnRegistrarse, btnSalir;
-	private JFrame VentanaActual;
-	private Connection con = BaseDeDatos.iniciarBaseDeDatos("src/db/usuarios.db");
-	private Connection conn = BaseDeDatos.iniciarBaseDeDatos("src/db/valoraciones.db");
+	private final JPanel panelCentro;
+    private final JPanel panelCentroIzq;
+    private final JPanel panelSur;
+    private final JPanel panelNorte;
+    private final JPanel panelConstrasena;
+    private final JPanel panelUsuario;
+	private final JLabel lblUsuario;
+    private final JLabel lblContrasena;
+    private final JLabel lblTitulo;
+    private final JLabel lblFoto;
+	private final JTextField txtUsuario;
+	private final JPasswordField pasContrasena;
+	private final JButton btnInicioSesion;
+    private final JButton btnRegistrarse;
+    private final JButton btnSalir;
+	private final JFrame VentanaActual;
+	private final Connection con = BaseDeDatos.iniciarBaseDeDatos("src/db/usuarios.db");
+	private final Connection conn = BaseDeDatos.iniciarBaseDeDatos("src/db/valoraciones.db");
 	private static Usuario  usuario;
 	
 	public static Usuario getUsuario() {
@@ -49,8 +61,8 @@ public class VentanaInicioSesion extends JFrame{
 		panelCentro = new JPanel();
 		panelCentroIzq = new JPanel();
 		panelSur = new JPanel();
-		lblFoto = new JLabel(new ImageIcon(getClass().getResource("/resources/images//ADOCU.png")));
-		panelConstraseña = new JPanel();
+		lblFoto = new JLabel(new ImageIcon(Objects.requireNonNull(getClass().getResource("/resources/images//ADOCU.png"))));
+		panelConstrasena = new JPanel();
 		panelUsuario = new JPanel();
 		
 		//CREACION COMPONENTES
@@ -67,7 +79,7 @@ public class VentanaInicioSesion extends JFrame{
 		panelCentro.setLayout(new GridLayout(1,2));
 		panelCentroIzq.setLayout(new GridLayout(2,2));
 		panelSur.setLayout(new GridLayout(1,3));
-		panelConstraseña.setLayout(new GridLayout(3,1));
+		panelConstrasena.setLayout(new GridLayout(3,1));
 		panelUsuario.setLayout(new GridLayout(3,1));
 		
 		
@@ -90,10 +102,10 @@ public class VentanaInicioSesion extends JFrame{
 		panelUsuario.add(txtUsuario);
 		panelUsuario.add(new JPanel());
 		panelCentroIzq.add(lblContrasena);
-		panelCentroIzq.add(panelConstraseña);
-		panelConstraseña.add(new JPanel());
-		panelConstraseña.add(pasContrasena);
-		panelConstraseña.add(new JPanel());
+		panelCentroIzq.add(panelConstrasena);
+		panelConstrasena.add(new JPanel());
+		panelConstrasena.add(pasContrasena);
+		panelConstrasena.add(new JPanel());
 		panelSur.add(btnInicioSesion);
 		panelSur.add(btnRegistrarse);
 		panelSur.add(btnSalir);
@@ -112,19 +124,20 @@ public class VentanaInicioSesion extends JFrame{
 			String contrasena = pasContrasena.getText();
 			String usuario1 = txtUsuario.getText();
 			int pos = BaseDeDatos.getUsuarios().indexOf(usuario);
+			Path ruta = Paths.get("src/io/ActividadesUsuario.dat");
 			if(usuario1.equals("Admin") && contrasena.equals("111")) {
 				usuario.setNom("Admin");
 				usuario.setApellido("Admin");
 				usuario.setEdad(20);
-				GestorFicheros.obtenerActividadesUsuarioEnFicheroBinario(usuario, Paths.get("src/io/ActividadesUsuario.dat"));
+				GestorFicheros.obtenerActividadesUsuarioEnFicheroBinario(usuario, ruta);
 				new VentanaAdmin();
 				VentanaActual.setVisible(false);
 				logger.info("Se ha iniciado Sesion con el admin");
-			}else if (BaseDeDatos.comprobarUsuario(usuario) && BaseDeDatos.getUsuarios().get(pos).getContraseña().equals(usuario.getContraseña())) {
+			}else if (BaseDeDatos.comprobarUsuario(usuario) && BaseDeDatos.getUsuarios().get(pos).getContrasena().equals(usuario.getContrasena())) {
 				usuario.setNom(BaseDeDatos.getUsuarios().get(pos).getNom());
 				usuario.setApellido(BaseDeDatos.getUsuarios().get(pos).getApellido());
 				usuario.setEdad(BaseDeDatos.getUsuarios().get(pos).getEdad());
-				GestorFicheros.obtenerActividadesUsuarioEnFicheroBinario(usuario, Paths.get("src/io/ActividadesUsuario.dat"));
+				GestorFicheros.obtenerActividadesUsuarioEnFicheroBinario(usuario, ruta);
 				logger.info("Se ha iniciado sesion");
 				new VentanaTabla();
 				this.dispose();

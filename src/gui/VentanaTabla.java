@@ -21,14 +21,16 @@ import java.util.logging.Logger;
 public class VentanaTabla extends JFrame{
 
 	private final Logger logger = Logger.getLogger(VentanaTabla.class.getName());
-	private JPanel pCentro, pSur;
-	private JTable tabla;
-	private JButton btnVolver, btnPagar;
+	private final JPanel pCentro;
+    private final JPanel pSur;
+	private final JTable tabla;
+	private final JButton btnVolver;
+    private final JButton btnPagar;
 	
-	private JScrollPane scroll;
-	private List<String> horas;
+	private final JScrollPane scroll;
+	private final List<String> horas;
 
-	private Usuario usuario = VentanaInicioSesion.getUsuario();
+	private final Usuario usuario = VentanaInicioSesion.getUsuario();
 	
 	private int fila = -1;
 	private  int columna = -1;
@@ -40,8 +42,8 @@ public class VentanaTabla extends JFrame{
 		
 		//CLASE DE LA TABLA
 		class TablaActividades extends AbstractTableModel{
-			private List<String> horas;
-			private Object [] fechas = {"HORAS",LocalDate.now(),LocalDate.now().plusDays(1),LocalDate.now().plusDays(2),LocalDate.now().plusDays(3),LocalDate.now().plusDays(4),LocalDate.now().plusDays(5)};
+			private final List<String> horas;
+			private final Object [] fechas = {"HORAS",LocalDate.now(),LocalDate.now().plusDays(1),LocalDate.now().plusDays(2),LocalDate.now().plusDays(3),LocalDate.now().plusDays(4),LocalDate.now().plusDays(5)};
 					
 			public TablaActividades(List<String> horas) {
 				this.horas = horas;

@@ -7,24 +7,43 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.io.Serial;
 import java.sql.Connection;
+import java.util.Arrays;
 import java.util.Vector;
 import java.util.logging.Logger;
 
 public class VentanaRegistro extends JFrame{
 	
+	@Serial
 	private static final long serialVersionUID = 1L;
 	
 	// ATRIBUTOS DE LA VENTANA
 
 	private final Logger logger = Logger.getLogger(VentanaRegistro.class.getName());
-	private JPanel pSur, pCentro, pNorte, pNombre, pUsuario, pApellidos, pContra, pEdad;
-	private JTextField txtNombre, txtUsuario, txtApellidos;
-	private JLabel lblNombre, lblUsuario, lblContra, lblApellidos, lblEdad, lblTitulo;
-	private JPasswordField txtContra;
-	private JComboBox<Integer> cEdad;
-	private JButton btnRegistro, btnVolver, btnSalir;
-	private Connection con = BaseDeDatos.iniciarBaseDeDatos("src/db/usuarios.db");
+	private final JPanel pSur;
+    private final JPanel pCentro;
+    private final JPanel pNorte;
+    private final JPanel pNombre;
+    private final JPanel pUsuario;
+    private final JPanel pApellidos;
+    private final JPanel pContra;
+    private final JPanel pEdad;
+	private final JTextField txtNombre;
+    private final JTextField txtUsuario;
+    private final JTextField txtApellidos;
+	private final JLabel lblNombre;
+    private final JLabel lblUsuario;
+    private final JLabel lblContra;
+    private final JLabel lblApellidos;
+    private final JLabel lblEdad;
+    private final JLabel lblTitulo;
+	private final JPasswordField txtContra;
+	private final JComboBox<Integer> cEdad;
+	private final JButton btnRegistro;
+    private final JButton btnVolver;
+    private final JButton btnSalir;
+	private final Connection con = BaseDeDatos.iniciarBaseDeDatos("src/db/usuarios.db");
 		
 	public VentanaRegistro(){
 		super();
@@ -106,7 +125,7 @@ public class VentanaRegistro extends JFrame{
 		for (int i = 18; i<100; i++) {
 			numeros.add(i);
 		}
-		cEdad = new JComboBox<Integer>(numeros);
+		cEdad = new JComboBox<>(numeros);
 		
 		
 		lblEdad = new JLabel("      - EDAD: ");
@@ -216,8 +235,8 @@ public class VentanaRegistro extends JFrame{
 		});
 		
 		btnRegistro.addActionListener(e->{
-			
-			Usuario usuario = new Usuario(txtNombre.getText(), txtApellidos.getText(), (int)cEdad.getSelectedItem(), txtUsuario.getText(), txtContra.getText(), null);
+			assert cEdad.getSelectedItem() != null;
+			Usuario usuario = new Usuario(txtNombre.getText(), txtApellidos.getText(), (int)cEdad.getSelectedItem(), txtUsuario.getText(), Arrays.toString(txtContra.getPassword()), null);
 			if (!BaseDeDatos.comprobarUsuario(usuario)) {
 				BaseDeDatos.getUsuarios().add(usuario);
 				BaseDeDatos.cargarUsuariosEnBaseDeDatos(con);

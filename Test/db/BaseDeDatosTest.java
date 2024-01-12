@@ -1,23 +1,19 @@
 package db;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertThrows;
-
-import java.sql.Connection;
-import java.sql.SQLException;
-import java.util.List;
-
+import domain.Usuario;
 import org.junit.Before;
 import org.junit.Test;
 
-import domain.Usuario;
+import java.sql.Connection;
+import java.util.List;
+
+import static org.junit.Assert.*;
 
 public class BaseDeDatosTest {
 
 	List<Usuario> usuarios;
 	List<Integer> valoraciones;
-	Connection con = BaseDeDatos.iniciarBaseDeDatos("src/db/usuarios.db");
+	final Connection con = BaseDeDatos.iniciarBaseDeDatos("src/db/usuarios.db");
 	
 	@Before
 	public void setUp() {
@@ -30,7 +26,7 @@ public class BaseDeDatosTest {
 	@Test
 	public void comprobarUsuarioTest() {
 		Usuario u = new Usuario("Isaac", "Herbozo", 19, "Isaac", "111", null);
-		assertEquals(true, BaseDeDatos.comprobarUsuario(u));
+        assertTrue(BaseDeDatos.comprobarUsuario(u));
 	}
 	
 	@Test
@@ -44,18 +40,6 @@ public class BaseDeDatosTest {
 		
 	}
 	
-	@Test 
-	
-	public void iniciarBaseDeDatosTestError() {
-		assertThrows(AssertionError.class, ()->{
-			assertEquals(SQLException.class, BaseDeDatos.iniciarBaseDeDatos("error.db"));
-		});
-		
-		assertThrows(AssertionError.class, ()->{
-			assertEquals(ClassNotFoundException.class, BaseDeDatos.iniciarBaseDeDatos("error.db"));
-		});
-	}
-	
 	@Test
 	public void  getValoracionesTest() {
 		assertEquals(valoraciones, BaseDeDatos.getValoraciones());
@@ -64,20 +48,12 @@ public class BaseDeDatosTest {
 	@Test
 	public void obtenerUsuariosDeBaseDeDatosTest () {
 		
-		assertThrows(AssertionError.class, ()->{
-			assertThrows(Exception.class, ()->{
-				BaseDeDatos.obtenerUsuariosDeBaseDeDatos(con);
-			});
-		});
+		assertThrows(AssertionError.class, ()-> assertThrows(Exception.class, ()-> BaseDeDatos.obtenerUsuariosDeBaseDeDatos(con)));
 	}
 	
 	@Test
 	public void  cargarUsuariosEnBaseDeDatosTest() {
-		assertThrows(AssertionError.class, ()->{
-			assertThrows(Exception.class, ()->{
-				BaseDeDatos.cargarUsuariosEnBaseDeDatos(con);
-			});
-		});
+		assertThrows(AssertionError.class, ()-> assertThrows(Exception.class, ()-> BaseDeDatos.cargarUsuariosEnBaseDeDatos(con)));
 	}
 	
 	@Test
@@ -88,20 +64,12 @@ public class BaseDeDatosTest {
 	
 	@Test
 	public void cargarValoracionesEnBaseDeDatosTest() {
-		assertThrows(AssertionError.class, ()->{
-			assertThrows(Exception.class, ()->{
-				BaseDeDatos.cargarValoracionEnBaseDeDatos(con);
-			});
-		});
+		assertThrows(AssertionError.class, ()-> assertThrows(Exception.class, ()-> BaseDeDatos.cargarValoracionEnBaseDeDatos(con)));
 	}
 	
 	@Test
 	public void obtenerValoracionesDeBaseDeDatosTest() {
-		assertThrows(AssertionError.class, ()->{
-			assertThrows(Exception.class, ()->{
-				BaseDeDatos.obtenerValoracionesDeBaseDeDatos(con);
-			});
-		});
+		assertThrows(AssertionError.class, ()-> assertThrows(Exception.class, ()-> BaseDeDatos.obtenerValoracionesDeBaseDeDatos(con)));
 		
 		List<Integer> lista = BaseDeDatos.getValoraciones();
 		BaseDeDatos.obtenerValoracionesDeBaseDeDatos(con);

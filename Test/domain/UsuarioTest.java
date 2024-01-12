@@ -69,12 +69,12 @@ public class UsuarioTest {
     }
 
     @Test
-    public void testSetContraseña() {
-        usuario1.setContraseña("contraseña");
-        assertEquals("contraseña", usuario1.getContraseña());
-        usuario2.setContraseña("contraseñ2121a");
-        assertEquals("contraseñ2121a", usuario2.getContraseña());
-        assertNull(usuario.getContraseña());
+    public void testSetContrasena() {
+        usuario1.setContrasena("contraseña");
+        assertEquals("contraseña", usuario1.getContrasena());
+        usuario2.setContrasena("contraseñ2121a");
+        assertEquals("contraseñ2121a", usuario2.getContrasena());
+        assertNull(usuario.getContrasena());
     }
 
     @Test

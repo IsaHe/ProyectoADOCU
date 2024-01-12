@@ -13,7 +13,7 @@ public class BaseDeDatos {
 
 	private static List<Usuario> usuarios;
 	private static List<Integer> valoraciones;
-	static Logger logger = Logger.getLogger(BaseDeDatos.class.getName());
+	static final Logger logger = Logger.getLogger(BaseDeDatos.class.getName());
 	
 
 	public static boolean comprobarUsuario(Usuario usuario) {
@@ -93,7 +93,7 @@ public class BaseDeDatos {
 			String apellido = u.getApellido();
 			int edad = u.getEdad();
 			String usuario = u.getUsuario();
-			String cont = u.getContraseña();
+			String cont = u.getContrasena();
 			try {
 				PreparedStatement prepSt = con.prepareStatement("INSERT INTO usuarios (nombre, apellido, edad, usuario, contrasenia) VALUES (?,?,?,?,?)");
 				

@@ -12,7 +12,7 @@ import java.util.logging.Logger;
 
 public class VentanaModificacionActividades extends JFrame {
     private static final Logger logger = Logger.getLogger(VentanaModificacionActividades.class.getName());
-    Actividad[] listaActividades;
+    final Actividad[] listaActividades;
     int numeroMaxPersonas = 0;
 
     public VentanaModificacionActividades(int numeroPersonas, String horaActividad, LocalDate fechaActividad, VentanaTabla ventanaTabla) {    //Formato horas [hora, minutos, segundos]

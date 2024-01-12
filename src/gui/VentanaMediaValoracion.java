@@ -27,9 +27,5 @@ public class VentanaMediaValoracion extends JFrame {
     public void setValoracionMedia(int valoracionMedia) {
         this.valoracionMedia = valoracionMedia;
     }
-
-    public static void main(String[] args) {
-        VentanaMediaValoracion ventanaMediaValoracion = new VentanaMediaValoracion();
-    }
     
 }

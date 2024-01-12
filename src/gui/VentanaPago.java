@@ -7,22 +7,45 @@ import io.GestorFicheros;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.io.Serial;
 import java.nio.file.Paths;
 import java.util.logging.Logger;
 
 public class VentanaPago extends JFrame{
 
+	@Serial
 	private static final long serialVersionUID = 1L;
 
 	private final Logger logger = Logger.getLogger(VentanaPago.class.getName());
-	private DefaultListModel<Actividad> modeloPendiente, modeloPagada;
-	private JList<Actividad> listaPendiente, listaPagada;
-	private JPanel pCentro, pSur, pNorte, pCentroArriba, pCentroAbajo, pUsuario, pContraseña, pEntreListas, pPagar, pTodosPagar, pPendiente,pTodosPendiente , pImporte;
-	private JLabel lblImporte, lblTitulo, lblUsuario, lblContrasena, lblImporteAPagar;
-	private JTextField txtUsuario;
-	private JButton btnPagar, btnVolver, btnPasarAPagada, btnPasarAPendiente, btnPasarTodosAPagar, btnPasarTodosAPendiente;
+	private final DefaultListModel<Actividad> modeloPendiente;
+    private final DefaultListModel<Actividad> modeloPagada;
+	private final JList<Actividad> listaPendiente;
+    private final JList<Actividad> listaPagada;
+	private final JPanel pCentro;
+    private final JPanel pSur;
+    private final JPanel pNorte;
+    private final JPanel pCentroArriba;
+    private final JPanel pCentroAbajo;
+    private final JPanel pUsuario;
+    private final JPanel pContrasena;
+    private final JPanel pEntreListas;
+    private final JPanel pPagar;
+    private final JPanel pTodosPagar;
+    private final JPanel pPendiente;
+    private final JPanel pTodosPendiente;
+    private final JPanel pImporte;
+	private final JLabel lblImporte;
+    private final JLabel lblTitulo;
+    private final JLabel lblUsuario;
+    private final JLabel lblContrasena;
+    private final JLabel lblImporteAPagar;
+	private final JTextField txtUsuario;
+	private final JButton btnPagar;
+    private final JButton btnVolver;
+    private final JButton btnPasarAPagada;
+    private final JButton btnPasarAPendiente;
+    private final JButton btnPasarTodosAPagar;
+    private final JButton btnPasarTodosAPendiente;
 	private JPasswordField pasContrasena;
 	private float precio = 0;
 
@@ -46,7 +69,7 @@ public class VentanaPago extends JFrame{
 		pImporte = new JPanel();
 		pCentroAbajo = new JPanel();
 		pUsuario = new JPanel();
-		pContraseña = new JPanel();
+		pContrasena = new JPanel();
 		pSur = new JPanel();
 		pNorte = new JPanel();
 		
@@ -57,7 +80,7 @@ public class VentanaPago extends JFrame{
 		pImporte.setLayout(new GridLayout(1,2));
 		pCentroAbajo.setLayout(new GridLayout(1,4));
 		pUsuario.setLayout(new GridLayout(5, 1));
-		pContraseña.setLayout(new GridLayout(5, 1));
+		pContrasena.setLayout(new GridLayout(5, 1));
 		pSur.setLayout(new GridLayout(1, 2));
 		
 		//AÑADIR CONTENEDOR A VENTANA PRINCIPAL
@@ -120,12 +143,12 @@ public class VentanaPago extends JFrame{
 		pUsuario.add(new JPanel());
 		pUsuario.add(new JPanel());
 		pCentroAbajo.add(lblContrasena);
-		pCentroAbajo.add(pContraseña);
-		pContraseña.add(new JPanel());
-		pContraseña.add(new JPanel());
-		pContraseña.add(pasContrasena);
-		pContraseña.add(new JPanel());
-		pContraseña.add(new JPanel());
+		pCentroAbajo.add(pContrasena);
+		pContrasena.add(new JPanel());
+		pContrasena.add(new JPanel());
+		pContrasena.add(pasContrasena);
+		pContrasena.add(new JPanel());
+		pContrasena.add(new JPanel());
 		pSur.add(btnPagar);
 		pSur.add(btnVolver);
 		
@@ -147,7 +170,7 @@ public class VentanaPago extends JFrame{
 
 			logger.info("Se ha pulsado el botón Pagar");
 			Usuario usuario = VentanaInicioSesion.getUsuario();
-			if (txtUsuario.getText().equals(usuario.getUsuario()) && pasContrasena.getText().equals(usuario.getContraseña()) && !modeloPagada.isEmpty()) {
+			if (txtUsuario.getText().equals(usuario.getUsuario()) && pasContrasena.getText().equals(usuario.getContrasena()) && !modeloPagada.isEmpty()) {
 				lblImporteAPagar.setText("0");
 				for (int i = modeloPagada.size()-1; i>=0; i--) {
 					usuario.getlActividades().remove(i);
@@ -167,71 +190,55 @@ public class VentanaPago extends JFrame{
 			
 		});
 		
-		btnPasarAPagada.addActionListener(new ActionListener() {
-			
-			@Override
-			public void actionPerformed(ActionEvent e) {
+		btnPasarAPagada.addActionListener(e -> {
+
+            Actividad act = listaPendiente.getSelectedValue();
+            if (act != null) {
+                precio = precio + act.getPrecio();
+                modeloPagada.addElement(act);
+                modeloPendiente.removeElement(act);
+                String precioStr = Float.toString(precio);
+                lblImporteAPagar.setText(precioStr);
+            }else {
+                JOptionPane.showMessageDialog(null, "Seleccione una actividad");
+            }
+        });
 		
-				Actividad act = listaPendiente.getSelectedValue();
-				if (act != null) {
-					precio = precio + act.getPrecio();
-					modeloPagada.addElement(act);
-					modeloPendiente.removeElement(act);
-					String precioStr = Float.toString(precio);
-					lblImporteAPagar.setText(precioStr);
-				}else {
-					JOptionPane.showMessageDialog(null, "Seleccione una actividad");
-				}
-			}
-		});
+		btnPasarAPendiente.addActionListener(e -> {
+            Actividad act = listaPagada.getSelectedValue();
+            if (act != null) {
+                precio = precio - act.getPrecio();
+                modeloPendiente.addElement(act);
+                modeloPagada.removeElement(act);
+                String precioStr = Float.toString(precio);
+                lblImporteAPagar.setText(precioStr);
+            }else {
+                JOptionPane.showMessageDialog(null, "Seleccione una actividad");
+            }
+        });
 		
-		btnPasarAPendiente.addActionListener(new ActionListener() {
-			
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				Actividad act = listaPagada.getSelectedValue();
-				if (act != null) {
-					precio = precio - act.getPrecio();
-					modeloPendiente.addElement(act);
-					modeloPagada.removeElement(act);
-					String precioStr = Float.toString(precio);
-					lblImporteAPagar.setText(precioStr);
-				}else {
-					JOptionPane.showMessageDialog(null, "Seleccione una actividad");
-				}
-			}
-		});
+		btnPasarTodosAPagar.addActionListener(e -> {
+
+            for(int i = 0; i<modeloPendiente.getSize(); i++) {
+                modeloPagada.addElement(modeloPendiente.get(i));
+                precio = precio + modeloPendiente.get(i).getPrecio();
+            }
+            String precioStr = Float.toString(precio);
+            lblImporteAPagar.setText(precioStr);
+            modeloPendiente.removeAllElements();
+
+        });
 		
-		btnPasarTodosAPagar.addActionListener(new ActionListener() {
-			
-			@Override
-			public void actionPerformed(ActionEvent e) {
-		
-				for(int i = 0; i<modeloPendiente.getSize(); i++) {
-					modeloPagada.addElement(modeloPendiente.get(i));
-					precio = precio + modeloPendiente.get(i).getPrecio();
-				}
-				String precioStr = Float.toString(precio);
-				lblImporteAPagar.setText(precioStr);
-				modeloPendiente.removeAllElements();
-				
-			}
-		});
-		
-		btnPasarTodosAPendiente.addActionListener(new ActionListener() {
-			
-			@Override
-			public void actionPerformed(ActionEvent e) {
-		
-				for (int i = 0; i<modeloPagada.getSize(); i++) {
-					modeloPendiente.addElement(modeloPagada.get(i));
-				}
-				precio = 0;
-				String precioStr = Float.toString(precio);
-				lblImporteAPagar.setText(precioStr);
-				modeloPagada.removeAllElements();
-			}
-		});
+		btnPasarTodosAPendiente.addActionListener(e -> {
+
+            for (int i = 0; i<modeloPagada.getSize(); i++) {
+                modeloPendiente.addElement(modeloPagada.get(i));
+            }
+            precio = 0;
+            String precioStr = Float.toString(precio);
+            lblImporteAPagar.setText(precioStr);
+            modeloPagada.removeAllElements();
+        });
 		
 		setVisible(true);
 	}

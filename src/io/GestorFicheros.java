@@ -3,6 +3,7 @@ package io;
 import domain.Actividad;
 import domain.Usuario;
 
+import javax.swing.*;
 import java.io.*;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -16,7 +17,7 @@ public class GestorFicheros {
     private static LocalDate ultimoAccesoAtabla;
     private static Map<String, ArrayList<Actividad>> mapaActividadesUsuario = new HashMap<>();
 
-    static Logger logger = Logger.getLogger(GestorFicheros.class.getName());
+    static final Logger logger = Logger.getLogger(GestorFicheros.class.getName());
 
 
     public static void obtenerActividadesDeFichero (Path ruta) {
@@ -154,7 +155,8 @@ public class GestorFicheros {
 			mapaActividadesUsuario = (Map<String, ArrayList<Actividad>>) ois.readObject();
 			ois.close();
 		} catch (IOException | ClassNotFoundException e) {
-			e.printStackTrace();
+            logger.warning("Error al obtener las actividades del usuario del fichero");
+            JOptionPane.showMessageDialog(null, "Error al obtener las actividades del usuario del fichero", "Error", JOptionPane.ERROR_MESSAGE);
 		}
         mapaActividadesUsuario.putIfAbsent(u.getUsuario(), new ArrayList<>());
     	u.setlActividades(mapaActividadesUsuario.get(u.getUsuario()));
@@ -168,17 +170,14 @@ public class GestorFicheros {
 			oos.writeObject(mapaActividadesUsuario);
 			oos.close();
 		} catch (IOException e) {
-			e.printStackTrace();
+			logger.warning("Error al cargar las actividades del usuario al fichero");
+            JOptionPane.showMessageDialog(null, "Error al cargar las actividades del usuario al fichero", "Error", JOptionPane.ERROR_MESSAGE);
 		}
     }
     
     public static void eliminarActividadUsuarioDeMapa (String usuario, Actividad a){
     	ArrayList<Actividad> actividades = mapaActividadesUsuario.get(usuario);
     	actividades.remove(a);
-    }
-
-    public static void eliminarTodasActividadesUsuarioDeMapa (String usuario){
-    	mapaActividadesUsuario.get(usuario).clear();
     }
 
     public static void eliminarYGuardarActividadesUsuarioDeMapa (String usuario, Actividad a){
@@ -196,7 +195,8 @@ public class GestorFicheros {
 			oos.writeObject(mapaActividadesUsuario);
 			oos.close();
 		} catch (IOException e) {
-			e.printStackTrace();
+			logger.warning("Error al cargar las actividades del usuario al fichero binario2");
+            JOptionPane.showMessageDialog(null, "Error al cargar las actividades del usuario al fichero", "Error", JOptionPane.ERROR_MESSAGE);
 		}
     }
 

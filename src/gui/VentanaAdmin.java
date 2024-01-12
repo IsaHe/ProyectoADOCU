@@ -11,6 +11,7 @@ import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.DefaultTreeModel;
 import javax.swing.tree.TreePath;
 import java.awt.*;
+import java.io.Serial;
 import java.nio.file.Paths;
 import java.sql.Connection;
 import java.util.Objects;
@@ -18,16 +19,25 @@ import java.util.logging.Logger;
 
 public class VentanaAdmin extends JFrame{
 	
-	private static final long serialVersionUID = 1L;
+	@Serial
+    private static final long serialVersionUID = 1L;
 	
 	private final Logger logger = Logger.getLogger(VentanaAdmin.class.getName());
-	JFrame ventanaActual = this;
-	private JPanel pSur,pCentro, pCentroC, pNorte, pOeste;
-	private JLabel lblTitulo, lblFoto;
-	private JButton btnVolver, btnSalir, btnBorrarAct, btnBorrarUsu;
-	private JTree arbol;
-	private DefaultMutableTreeNode nRaiz;
-	private DefaultTreeModel modeloArbol;
+	final JFrame ventanaActual = this;
+	private final JPanel pSur;
+    private final JPanel pCentro;
+    private final JPanel pCentroC;
+    private final JPanel pNorte;
+    private final JPanel pOeste;
+	private final JLabel lblTitulo;
+    private final JLabel lblFoto;
+	private final JButton btnVolver;
+    private final JButton btnSalir;
+    private JButton btnBorrarAct;
+    private final JButton btnBorrarUsu;
+	private final JTree arbol;
+	private final DefaultMutableTreeNode nRaiz;
+	private final DefaultTreeModel modeloArbol;
 	private JTable tablaUsu;
 	private JList<Actividad> lAct;
 	private DefaultListModel<Actividad> modeloListaAct;
@@ -61,18 +71,11 @@ public class VentanaAdmin extends JFrame{
 		lblTitulo.setFont(new Font(Font.SERIF, Font.PLAIN, 30));
 		lblTitulo.setForeground(Color.BLACK);
 		lblFoto = new JLabel(new ImageIcon(Objects.requireNonNull(getClass().getResource("/resources/images//ADOCU.png"))));
-		
-		String textoExplicacionValoracionHTML =
-                "<h1>¡Bienvendido a la ventana de administrador!</h1>" +
-                "<p>Esta ventana alverga un monton de interacciones como administrador, como por ejemplo:</p>" +
-                "<p>Ver los diferentes usuarios en una lista, ver las actividades de cada usuario y los pagos realizados por el usuario.</p>" ;
-		JEditorPane etiqueta = new JEditorPane("text/html", textoExplicacionValoracionHTML);
-		etiqueta.setEditable(false);
-        etiqueta.setOpaque(false);
-        
-        
-        
-		btnSalir = new JButton("SALIR");
+
+        JEditorPane etiqueta = getjEditorPane();
+
+
+        btnSalir = new JButton("SALIR");
 		btnVolver = new JButton("VOLVER");
 		btnBorrarUsu = new JButton("Borrar Usuario");
 		
@@ -128,7 +131,7 @@ public class VentanaAdmin extends JFrame{
                                 case 1 -> BaseDeDatos.getUsuariosSinAdmin().get(rowIndex).getApellido();
                                 case 2 -> BaseDeDatos.getUsuariosSinAdmin().get(rowIndex).getEdad();
                                 case 3 -> BaseDeDatos.getUsuariosSinAdmin().get(rowIndex).getUsuario();
-                                case 4 -> BaseDeDatos.getUsuariosSinAdmin().get(rowIndex).getContraseña();
+                                case 4 -> BaseDeDatos.getUsuariosSinAdmin().get(rowIndex).getContrasena();
                                 default -> null;
                             };
 						}
@@ -183,14 +186,7 @@ public class VentanaAdmin extends JFrame{
 
                     JPanel panelTxt = new JPanel();
                     JPanel panelBtn = new JPanel();
-                    JTextArea txtAct = new JTextArea("- Si la actividad está en Rojo: NO ESTA PAGADA." + "\n"
-                            + "\n" + "- Si la actividad está en Verde: SI ESTA PAGADA." + "\n"
-                            + "\n" + "- Al seleccionar una actividad el fondo se pone Blanco." + "\n"
-                            + "\n" + "- Para borrar una actividad primero se debe seleccionar una." + "\n"
-                            + "\n" + "- El usuario que aparece es responsable de pagar las actividades.");
-
-                    txtAct.setEditable(false);
-                    txtAct.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 15));
+                    JTextArea txtAct = getjTextArea();
                     panelTxt.add(txtAct, BorderLayout.CENTER);
 
                     btnBorrarAct = new JButton("Borrar Actividad");
@@ -250,38 +246,10 @@ public class VentanaAdmin extends JFrame{
                     pCentroC.removeAll();
 
                     //Progress Bar Valoracion
-                    JProgressBar pb = new JProgressBar(0, 10);
-                    float valorTotal = 0;
-
-                    for (Integer val : BaseDeDatos.getValoraciones()) {
-                        valorTotal = valorTotal + val;
-                    }
-
-                    valorTotal = valorTotal / BaseDeDatos.getValoraciones().size();
-                    String valorStr = String.valueOf(valorTotal);
-                    String primerNum = String.valueOf(valorStr.charAt(0));
-                    pb.setValue(Integer.parseInt(primerNum));
-                    pb.setString(valorStr);
-                    pb.setStringPainted(true);
-                    pb.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 18));
-                    pb.setBackground(Color.BLACK);
-
-                    if (valorTotal < 5) {
-                        pb.setForeground(Color.RED);
-                    } else if (valorTotal < 8) {
-                        pb.setForeground(Color.ORANGE);
-                    } else {
-                        pb.setForeground(Color.GREEN);
-                    }
+                    JProgressBar pb = getjProgressBar();
 
                     //TextArea De Explicación
-                    JTextArea txtArea = new JTextArea("*EN ESTA VENTANA ESTA DISPONIBLE LA MEDIA DE LAS VALORACIONES DE LOS CLIENTES*" + "\n"
-                            + "\n" + "- Si la nota media esta entre [0 - 5) --> COLOR ROJO" + "\n"
-                            + "\n" + "- Si la nota media esta entre [5 - 8) --> COLOR NARANJA" + "\n"
-                            + "\n" + "- Si la nota media esta entre [8 - 10] --> COLOR VERDE");
-
-                    txtArea.setFont(new Font(Font.SANS_SERIF, Font.ITALIC, 14));
-                    txtArea.setEditable(false);
+                    JTextArea txtArea = getTextArea();
 
                     pCentro.add(txtArea);
                     pCentro.add(pb);
@@ -304,6 +272,75 @@ public class VentanaAdmin extends JFrame{
         });
 		
 		setVisible(true);
-	}	
-	
+	}
+
+    private static JTextArea getTextArea() {
+        JTextArea txtArea = new JTextArea("""
+                *EN ESTA VENTANA ESTA DISPONIBLE LA MEDIA DE LAS VALORACIONES DE LOS CLIENTES*
+
+                - Si la nota media esta entre [0 - 5) --> COLOR ROJO
+
+                - Si la nota media esta entre [5 - 8) --> COLOR NARANJA
+
+                - Si la nota media esta entre [8 - 10] --> COLOR VERDE""");
+
+        txtArea.setFont(new Font(Font.SANS_SERIF, Font.ITALIC, 14));
+        txtArea.setEditable(false);
+        return txtArea;
+    }
+
+    private static JProgressBar getjProgressBar() {
+        JProgressBar pb = new JProgressBar(0, 10);
+        float valorTotal = 0;
+
+        for (Integer val : BaseDeDatos.getValoraciones()) {
+            valorTotal = valorTotal + val;
+        }
+
+        valorTotal = valorTotal / BaseDeDatos.getValoraciones().size();
+        String valorStr = String.valueOf(valorTotal);
+        String primerNum = String.valueOf(valorStr.charAt(0));
+        pb.setValue(Integer.parseInt(primerNum));
+        pb.setString(valorStr);
+        pb.setStringPainted(true);
+        pb.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 18));
+        pb.setBackground(Color.BLACK);
+
+        if (valorTotal < 5) {
+            pb.setForeground(Color.RED);
+        } else if (valorTotal < 8) {
+            pb.setForeground(Color.ORANGE);
+        } else {
+            pb.setForeground(Color.GREEN);
+        }
+        return pb;
+    }
+
+    private static JTextArea getjTextArea() {
+        JTextArea txtAct = new JTextArea("""
+                - Si la actividad está en Rojo: NO ESTA PAGADA.
+
+                - Si la actividad está en Verde: SI ESTA PAGADA.
+
+                - Al seleccionar una actividad el fondo se pone Blanco.
+
+                - Para borrar una actividad primero se debe seleccionar una.
+
+                - El usuario que aparece es responsable de pagar las actividades.""");
+        txtAct.setEditable(false);
+        txtAct.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 15));
+        return txtAct;
+    }
+
+    private static JEditorPane getjEditorPane() {
+        String textoExplicacionValoracionHTML =
+            "<h1>¡Bienvendido a la ventana de administrador!</h1>" +
+            "<p>Esta ventana alverga un monton de interacciones como administrador, como por ejemplo:</p>" +
+            "<p>Ver los diferentes usuarios en una lista, ver las actividades de cada usuario y los pagos realizados por el usuario.</p>";
+        JEditorPane etiqueta = new JEditorPane("text/html", textoExplicacionValoracionHTML);
+        etiqueta.setEditable(false);
+        etiqueta.setOpaque(false);
+        return etiqueta;
+    }
+
 }
