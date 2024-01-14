@@ -8,6 +8,7 @@ import java.awt.*;
 import java.nio.file.Paths;
 import java.time.LocalDate;
 import java.util.Objects;
+import java.util.Vector;
 import java.util.logging.Logger;
 
 /**
@@ -36,9 +37,14 @@ public class VentanaModificacionActividades extends JFrame {
         setLayout(new GridLayout(4, 2, 0, 0));
 
         //CREACION Y FORMATO DE LOS LABELS
+        Vector<Integer> numeros = new Vector<>();
+		for (int i = 0; i<11; i++) {
+			numeros.add(i);
+		}
+        JComboBox<Integer> NumeroDePersonas = new JComboBox<>(numeros);
         JLabel lblHora = new JLabel(" Hora: " + horaActividad);
         JLabel lblFecha = new JLabel("Fecha: " + fechaActividad);
-        JLabel lblNumeroPersonas = new JLabel("Número de personas: " + numeroPersonas + "/" + numeroMaxPersonas);
+        JLabel lblNumeroPersonas = new JLabel("Número de personas: " + numeroPersonas + "/");
         JLabel lblActividad = new JLabel("Actividad: ");
         JLabel lblRecordatrio = new JLabel("Recordatorio: ");
 
@@ -72,7 +78,9 @@ public class VentanaModificacionActividades extends JFrame {
         btnSi.addActionListener(e -> logger.info("El usuario acepta el recordatorio"));
 
         JButton btnRegistrarHora = new JButton("Registrar hora");
+        btnRegistrarHora.setFont(new Font(Font.SERIF, Font.PLAIN, 25));
         JButton btnVolver = new JButton("Volver");
+        btnVolver.setFont(new Font(Font.SERIF, Font.PLAIN, 25));
 
         btnVolver.addActionListener(e -> {
             logger.info("Se ha pulsado el botón Volver");
@@ -97,7 +105,7 @@ public class VentanaModificacionActividades extends JFrame {
         panelActividad.add(actividades);
 
         JPanel panelRadioBotones = new JPanel();
-        panelRadioBotones.setLayout(new GridLayout(2, 1));
+        
         panelRadioBotones.add(btnSi);
         panelRadioBotones.add(btnNo);
 
@@ -105,12 +113,18 @@ public class VentanaModificacionActividades extends JFrame {
         panelRecordatorio.setLayout(new GridLayout(1, 2));
         panelRecordatorio.add(lblRecordatrio);
         panelRecordatorio.add(panelRadioBotones);
-
+        
+        JPanel panelPersona = new JPanel();
+        panelPersona.setLayout(new GridLayout(0, 3));
         //ADICION DE ELEMENTOS AL CONTENEDOR PRINCIPAL
         add(lblHora);
         add(lblFecha);
         add(panelActividad);
         add(lblNumeroPersonas);
+        add(panelPersona);
+        panelPersona.add(NumeroDePersonas);
+        panelPersona.add(new JPanel());
+        panelPersona.add(new JPanel());
         add(panelRecordatorio);
         add(panelVacio);
         add(btnVolver);

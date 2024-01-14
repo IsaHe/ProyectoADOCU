@@ -80,19 +80,21 @@ public class VentanaInicioSesion extends JFrame{
 		//FUNCIONES CONTENEDORES
 		panelCentro.setLayout(new GridLayout(1,2));
 		panelCentroIzq.setLayout(new GridLayout(2,2));
-		panelSur.setLayout(new GridLayout(1,3));
 		panelConstrasena.setLayout(new GridLayout(3,1));
 		panelUsuario.setLayout(new GridLayout(3,1));
 		
 		
 		//FUNCIONES COMPONENTES
-		lblTitulo.setFont(new Font(Font.DIALOG, Font.ITALIC, 65));
+		lblTitulo.setFont(new Font(Font.SERIF, Font.BOLD, 65));
 		lblUsuario.setFont(new Font(Font.DIALOG, Font.ITALIC, 30));
 		lblContrasena.setFont(new Font(Font.DIALOG, Font.ITALIC, 30));
 		txtUsuario.setFont(new Font(Font.DIALOG, Font.BOLD, 16));
-		btnInicioSesion.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 18));
-		btnRegistrarse.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 18));
-		btnSalir.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 18));
+		btnInicioSesion.setFont(new Font(Font.SERIF, Font.PLAIN, 25));
+		btnRegistrarse.setFont(new Font(Font.SERIF, Font.PLAIN, 25));
+		btnSalir.setFont(new Font(Font.SERIF, Font.PLAIN, 25));
+		
+		
+		
 		
 		//AÑADIR COMPONENTES A CONTENEDORES
 		panelNorte.add(lblTitulo);

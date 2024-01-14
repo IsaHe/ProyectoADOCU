@@ -65,7 +65,6 @@ public class VentanaRegistro extends JFrame{
         JPanel pUsuario = new JPanel();
 		
 		pCentro.setLayout(new GridLayout(0,2));
-		pSur.setLayout(new GridLayout(1,3));
 		pNombre.setLayout(new GridLayout(3,1));
 		pApellidos.setLayout(new GridLayout(3,1));
 		pEdad.setLayout(new GridLayout(3,1));

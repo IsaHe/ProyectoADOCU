@@ -71,7 +71,7 @@ public class VentanaPago extends JFrame{
 		pCentroAbajo.setLayout(new GridLayout(1,4));
 		pUsuario.setLayout(new GridLayout(5, 1));
 		pContrasena.setLayout(new GridLayout(5, 1));
-		pSur.setLayout(new GridLayout(1, 2));
+		
 		
 		//AÑADIR CONTENEDOR A VENTANA PRINCIPAL
 		getContentPane().add(pSur, BorderLayout.SOUTH);
@@ -104,8 +104,8 @@ public class VentanaPago extends JFrame{
 		lblImporteAPagar.setFont(new Font(Font.SERIF, Font.BOLD, 16));
 		lblUsuario.setFont(new Font(Font.SERIF, Font.PLAIN, 35));
 		lblContrasena.setFont(new Font(Font.SERIF, Font.PLAIN, 35));
-		btnPagar.setFont(new Font(Font.SERIF, Font.PLAIN, 30));
-		btnVolver.setFont(new Font(Font.SERIF, Font.PLAIN, 30));
+		btnPagar.setFont(new Font(Font.SERIF, Font.PLAIN, 25));
+		btnVolver.setFont(new Font(Font.SERIF, Font.PLAIN, 25));
 		
 		//AÑADIR COMPONENTES A CONTENEDORES
 		pNorte.add(lblTitulo);

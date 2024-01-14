@@ -79,8 +79,10 @@ public class VentanaAdmin extends JFrame{
         JEditorPane etiqueta = getjEditorPane();
 
 
-        JButton btnSalir = new JButton("SALIR");
         JButton btnVolver = new JButton("VOLVER");
+		btnVolver.setFont(new Font(Font.SERIF, Font.PLAIN, 25));
+        JButton btnSalir = new JButton("SALIR");
+		btnSalir.setFont(new Font(Font.SERIF, Font.PLAIN, 25));
 		btnBorrarUsu = new JButton("Borrar Usuario");
 
         DefaultMutableTreeNode nRaiz = new DefaultMutableTreeNode("Administrador");
