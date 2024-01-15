@@ -26,7 +26,8 @@ import java.util.logging.Logger;
  * localizar la hora en la tabla y localizar la fecha en la tabla.
  */
 public class VentanaModificacionActividades extends JFrame {
-    private static final Logger logger = Logger.getLogger(VentanaModificacionActividades.class.getName());
+    private static final long serialVersionUID = 1L;
+	private static final Logger logger = Logger.getLogger(VentanaModificacionActividades.class.getName());
     final Actividad[] listaActividades;
     int numeroMaxPersonas = 0;
 

@@ -31,6 +31,10 @@ import java.util.logging.Logger;
  */
 public class VentanaInicioSesion extends JFrame{
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private final Logger logger = Logger.getLogger(VentanaInicioSesion.class.getName());
     private final JTextField txtUsuario;
 	private final JPasswordField pasContrasena;

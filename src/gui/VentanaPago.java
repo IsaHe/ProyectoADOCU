@@ -79,7 +79,7 @@ public class VentanaPago extends JFrame{
 		getContentPane().add(pCentro, BorderLayout.CENTER);
 		
 		//CREACION COMPONENTES
-        JLabel lblTitulo = new JLabel("PAGOS");
+        JLabel lblTitulo = new JLabel("-PAGOS-");
         JLabel lblImporte = new JLabel("    - Importe a Pagar: ");
 		lblImporteAPagar = new JLabel("0€");
         JLabel lblUsuario = new JLabel("    - Usuario: ");

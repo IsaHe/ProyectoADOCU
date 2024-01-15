@@ -7,7 +7,8 @@ import java.io.Serializable;
  * Esta clase contiene información sobre el nombre de la actividad, el número de participantes, el precio, si está pagada y el usuario que la realiza.
  */
 public class Actividad implements Serializable{
-    private String nombre;
+    private static final long serialVersionUID = 1L;
+	private String nombre;
     private int numeroParticipantes;
     private float precio;
     private boolean pagada;

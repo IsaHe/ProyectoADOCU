@@ -53,7 +53,6 @@ public class VentanaAdmin extends JFrame{
 	public VentanaAdmin(){
 		setExtendedState(MAXIMIZED_BOTH);
 		setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
-		setIconImage(new ImageIcon(Objects.requireNonNull(getClass().getResource("/resources/images//ADOCU.png"))).getImage());
 
         JPanel pSur = new JPanel();
 		pCentro = new JPanel();
@@ -61,22 +60,22 @@ public class VentanaAdmin extends JFrame{
         JPanel pOeste = new JPanel();
 		pCentroC = new JPanel();
 		
-		
 		pCentro.setLayout(new GridLayout(3, 3));
 		pOeste.setLayout(new GridLayout(3, 0));
-		
 		
 		getContentPane().add(pSur, BorderLayout.SOUTH);
 		getContentPane().add(pCentro, BorderLayout.CENTER);
 		getContentPane().add(pNorte, BorderLayout.NORTH);
 		getContentPane().add(pOeste, BorderLayout.WEST);
 
-        JLabel lblTitulo = new JLabel("ADMINISTRADOR");
+        JLabel lblTitulo = new JLabel("-ADMINISTRADOR-");
 		lblTitulo.setFont(new Font(Font.SERIF, Font.PLAIN, 30));
 		lblTitulo.setForeground(Color.BLACK);
-        JLabel lblFoto = new JLabel(new ImageIcon(Objects.requireNonNull(getClass().getResource("/resources/images//ADOCU.png"))));
-
-        JEditorPane etiqueta = getjEditorPane();
+		JLabel lblFoto = new JLabel();
+		ImageIcon imagen = new ImageIcon(Objects.requireNonNull(getClass().getResource("/resources/images//ADOCU.png")));
+		ImageIcon imagenConDimensiones = new ImageIcon(imagen.getImage().getScaledInstance(250, 250, Image.SCALE_DEFAULT));
+        lblFoto.setIcon(imagenConDimensiones);
+		JEditorPane etiqueta = getjEditorPane();
 
 
         JButton btnVolver = new JButton("VOLVER");
@@ -88,14 +87,18 @@ public class VentanaAdmin extends JFrame{
         DefaultMutableTreeNode nRaiz = new DefaultMutableTreeNode("Administrador");
         DefaultTreeModel modeloArbol = new DefaultTreeModel(nRaiz);
         JTree arbol = new JTree(nRaiz);
+        RenderNodosImagenes renderer = new RenderNodosImagenes();
+        arbol.setCellRenderer(renderer);
 		modeloArbol.insertNodeInto(new DefaultMutableTreeNode("Ver Usuarios"), nRaiz, 0);
+		
 		modeloArbol.insertNodeInto(new DefaultMutableTreeNode("Ver Actividades"), nRaiz, 1);
 		modeloArbol.insertNodeInto(new DefaultMutableTreeNode("Ver Valoraciones"), nRaiz, 2);
 		
-		
+		JPanel pFoto = new JPanel();
 		pOeste.add(arbol);
 		pOeste.add(etiqueta);
-		pOeste.add(lblFoto);
+		pOeste.add(pFoto);
+		pFoto.add(lblFoto);
 		pNorte.add(lblTitulo);
 		pSur.add(btnSalir);
 		pSur.add(btnVolver);
@@ -103,9 +106,11 @@ public class VentanaAdmin extends JFrame{
 		arbol.addTreeSelectionListener(e -> {
             TreePath tp = e.getPath();
             String ultimo = tp.getLastPathComponent().toString();
+            
 
 
             switch (ultimo) {
+            
                 case "Ver Usuarios" -> {
 
                     pCentro.removeAll();
@@ -113,6 +118,10 @@ public class VentanaAdmin extends JFrame{
 
 					class CustomUserTableModel extends AbstractTableModel {
 
+						/**
+						 * 
+						 */
+						private static final long serialVersionUID = 1L;
 						private final String[] columnNames = {"Nombre", "Apellido", "Edad", "Usuario", "Contraseña"};
 
 						@Override
@@ -364,5 +373,7 @@ public class VentanaAdmin extends JFrame{
         etiqueta.setOpaque(false);
         return etiqueta;
     }
+    
+    
 
 }

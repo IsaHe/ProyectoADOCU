@@ -19,6 +19,10 @@ import java.util.logging.Logger;
 
 public class VentanaTabla extends JFrame{
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private final Logger logger = Logger.getLogger(VentanaTabla.class.getName());
     private final JTable tabla;
 	private int fila = -1;
@@ -47,6 +51,10 @@ public class VentanaTabla extends JFrame{
 		
 		//CLASE DE LA TABLA
 		class TablaActividades extends AbstractTableModel{
+			/**
+			 * 
+			 */
+			private static final long serialVersionUID = 1L;
 			private final List<String> horas;
 			private final Object [] fechas = {"HORAS",LocalDate.now(),LocalDate.now().plusDays(1),LocalDate.now().plusDays(2),LocalDate.now().plusDays(3),LocalDate.now().plusDays(4),LocalDate.now().plusDays(5)};
 					

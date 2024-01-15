@@ -211,7 +211,7 @@ public class GestorFicheros {
      * @param u El usuario.
      * @param ruta La ruta del fichero.
      */
-    public static void obtenerActividadesUsuarioEnFicheroBinario (Usuario u, Path ruta) {
+	public static void obtenerActividadesUsuarioEnFicheroBinario (Usuario u, Path ruta) {
     	
     	try {
 			ObjectInputStream ois = new ObjectInputStream(new FileInputStream(ruta.toFile()));

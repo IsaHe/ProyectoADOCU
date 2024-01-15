@@ -17,6 +17,10 @@ import java.util.logging.Logger;
  */
 public class VentanaProcesarPago extends JFrame{
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private final Logger logger = Logger.getLogger(VentanaProcesarPago.class.getName());
 	private final JProgressBar pb;
     private final JFrame vActual;

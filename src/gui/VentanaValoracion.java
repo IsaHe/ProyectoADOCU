@@ -27,7 +27,8 @@ import java.util.logging.Logger;
  */
 public class VentanaValoracion extends JFrame {
 	
-    final Logger logger = Logger.getLogger(VentanaValoracion.class.getName());
+    private static final long serialVersionUID = 1L;
+	final Logger logger = Logger.getLogger(VentanaValoracion.class.getName());
     final Connection con = BaseDeDatos.iniciarBaseDeDatosValoraciones("src/db/valoraciones.db");
     enum Valoracion {
         MUY_MAL, MAL, REGULAR, BIEN, MUY_BIEN
