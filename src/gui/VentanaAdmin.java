@@ -106,8 +106,6 @@ public class VentanaAdmin extends JFrame{
 		arbol.addTreeSelectionListener(e -> {
             TreePath tp = e.getPath();
             String ultimo = tp.getLastPathComponent().toString();
-            
-
 
             switch (ultimo) {
             
@@ -121,7 +119,8 @@ public class VentanaAdmin extends JFrame{
 						/**
 						 * 
 						 */
-						private static final long serialVersionUID = 1L;
+						@Serial
+                        private static final long serialVersionUID = 1L;
 						private final String[] columnNames = {"Nombre", "Apellido", "Edad", "Usuario", "Contraseña"};
 
 						@Override

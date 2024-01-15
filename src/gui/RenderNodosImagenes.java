@@ -2,6 +2,7 @@ package gui;
 
 import java.awt.Component;
 import java.awt.Image;
+import java.io.Serial;
 import java.net.URL;
 
 import javax.swing.ImageIcon;
@@ -12,7 +13,8 @@ public class RenderNodosImagenes extends DefaultTreeCellRenderer{
 	 /**
 	 * 
 	 */
-	private static final long serialVersionUID = 1L;
+	@Serial
+    private static final long serialVersionUID = 1L;
 	private ImageIcon iconoNodo;
 
     public RenderNodosImagenes() {

@@ -5,6 +5,7 @@ import io.GestorFicheros;
 
 import javax.swing.*;
 import java.awt.*;
+import java.io.Serial;
 import java.nio.file.Paths;
 import java.time.LocalDate;
 import java.util.Objects;
@@ -26,6 +27,7 @@ import java.util.logging.Logger;
  * localizar la hora en la tabla y localizar la fecha en la tabla.
  */
 public class VentanaModificacionActividades extends JFrame {
+    @Serial
     private static final long serialVersionUID = 1L;
 	private static final Logger logger = Logger.getLogger(VentanaModificacionActividades.class.getName());
     final Actividad[] listaActividades;

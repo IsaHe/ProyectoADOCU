@@ -7,6 +7,7 @@ import io.GestorFicheros;
 
 import javax.swing.*;
 import java.awt.*;
+import java.io.Serial;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.sql.Connection;
@@ -34,6 +35,7 @@ public class VentanaInicioSesion extends JFrame{
 	/**
 	 * 
 	 */
+	@Serial
 	private static final long serialVersionUID = 1L;
 	private final Logger logger = Logger.getLogger(VentanaInicioSesion.class.getName());
     private final JTextField txtUsuario;

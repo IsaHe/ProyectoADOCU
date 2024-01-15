@@ -10,6 +10,7 @@ import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionAdapter;
+import java.io.Serial;
 import java.nio.file.Paths;
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -17,11 +18,30 @@ import java.util.List;
 import java.util.Objects;
 import java.util.logging.Logger;
 
+
+/**
+ * VentanaTabla es una clase que extiende JFrame y representa la ventana de tabla en la aplicación.
+ * Esta ventana muestra una tabla con las actividades programadas para la semana.
+ * <p>
+ * La clase contiene un Logger para registrar información y errores, una JTable para mostrar las actividades, y dos variables enteras para almacenar la fila y columna seleccionadas en la tabla.
+ * <p>
+ * El constructor de la clase inicializa la ventana y sus componentes.
+ * Establece las propiedades de la ventana, añade componentes a los paneles, y crea un modelo de tabla personalizado para mostrar las actividades.
+ * También añade oyentes de eventos al ratón para detectar cuando se selecciona una celda de la tabla y cuando se mueve el ratón sobre la tabla.
+ * <p>
+ * La clase también contiene una clase interna para el modelo de la tabla, que extiende AbstractTableModel.
+ * Esta clase interna define los nombres de las columnas, el número de filas y columnas, el valor de cada celda, y si una celda es editable.
+ * También redefine el método fireTableCellUpdated para repintar la tabla cuando se actualiza una celda.
+ * <p>
+ * La clase también contiene una clase interna para el renderizado de la tabla, que implementa TableCellRenderer.
+ * Esta clase interna define cómo se debe mostrar cada celda de la tabla, dependiendo de si la celda contiene una actividad o no.
+ */
 public class VentanaTabla extends JFrame{
 
 	/**
 	 * 
 	 */
+	@Serial
 	private static final long serialVersionUID = 1L;
 	private final Logger logger = Logger.getLogger(VentanaTabla.class.getName());
     private final JTable tabla;
@@ -30,23 +50,6 @@ public class VentanaTabla extends JFrame{
 	private int filaRender = -1;
 	private int columnaRender = -1;
 
-	/**
-	 * VentanaTabla es una clase que extiende JFrame y representa la ventana de tabla en la aplicación.
-	 * Esta ventana muestra una tabla con las actividades programadas para la semana.
-	 * <p>
-	 * La clase contiene un Logger para registrar información y errores, una JTable para mostrar las actividades, y dos variables enteras para almacenar la fila y columna seleccionadas en la tabla.
-	 * <p>
-	 * El constructor de la clase inicializa la ventana y sus componentes.
-	 * Establece las propiedades de la ventana, añade componentes a los paneles, y crea un modelo de tabla personalizado para mostrar las actividades.
-	 * También añade oyentes de eventos al ratón para detectar cuando se selecciona una celda de la tabla y cuando se mueve el ratón sobre la tabla.
-	 * <p>
-	 * La clase también contiene una clase interna para el modelo de la tabla, que extiende AbstractTableModel.
-	 * Esta clase interna define los nombres de las columnas, el número de filas y columnas, el valor de cada celda, y si una celda es editable.
-	 * También redefine el método fireTableCellUpdated para repintar la tabla cuando se actualiza una celda.
-	 * <p>
-	 * La clase también contiene una clase interna para el renderizado de la tabla, que implementa TableCellRenderer.
-	 * Esta clase interna define cómo se debe mostrar cada celda de la tabla, dependiendo de si la celda contiene una actividad o no.
-	 */
 	public VentanaTabla () {
 		
 		//CLASE DE LA TABLA
@@ -54,6 +57,7 @@ public class VentanaTabla extends JFrame{
 			/**
 			 * 
 			 */
+			@Serial
 			private static final long serialVersionUID = 1L;
 			private final List<String> horas;
 			private final Object [] fechas = {"HORAS",LocalDate.now(),LocalDate.now().plusDays(1),LocalDate.now().plusDays(2),LocalDate.now().plusDays(3),LocalDate.now().plusDays(4),LocalDate.now().plusDays(5)};

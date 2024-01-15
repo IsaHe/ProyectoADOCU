@@ -5,6 +5,7 @@ import javax.swing.*;
 import db.BaseDeDatos;
 
 import java.awt.*;
+import java.io.Serial;
 import java.net.URL;
 import java.sql.Connection;
 import java.util.Objects;
@@ -27,6 +28,7 @@ import java.util.logging.Logger;
  */
 public class VentanaValoracion extends JFrame {
 	
+    @Serial
     private static final long serialVersionUID = 1L;
 	final Logger logger = Logger.getLogger(VentanaValoracion.class.getName());
     final Connection con = BaseDeDatos.iniciarBaseDeDatosValoraciones("src/db/valoraciones.db");

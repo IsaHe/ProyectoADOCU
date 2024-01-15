@@ -2,6 +2,7 @@ package gui;
 
 import javax.swing.*;
 import java.awt.*;
+import java.io.Serial;
 import java.util.logging.Logger;
 
 /**
@@ -20,6 +21,7 @@ public class VentanaProcesarPago extends JFrame{
 	/**
 	 * 
 	 */
+	@Serial
 	private static final long serialVersionUID = 1L;
 	private final Logger logger = Logger.getLogger(VentanaProcesarPago.class.getName());
 	private final JProgressBar pb;
