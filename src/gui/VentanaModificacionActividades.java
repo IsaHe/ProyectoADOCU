@@ -31,7 +31,6 @@ public class VentanaModificacionActividades extends JFrame {
     private static final long serialVersionUID = 1L;
 	private static final Logger logger = Logger.getLogger(VentanaModificacionActividades.class.getName());
     final Actividad[] listaActividades;
-    int numeroMaxPersonas = 0;
 
     public VentanaModificacionActividades(int numeroPersonas, String horaActividad, LocalDate fechaActividad, VentanaTabla ventanaTabla) {    //Formato horas [hora, minutos, segundos]
         setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
@@ -65,8 +64,7 @@ public class VentanaModificacionActividades extends JFrame {
         actividades.addActionListener(e -> {
             Actividad actividad = (Actividad) actividades.getSelectedItem();
             assert actividad != null;
-            numeroMaxPersonas = actividad.getNumeroParticipantes();
-            lblNumeroPersonas.setText("Número de personas: " + numeroPersonas + "/" + numeroMaxPersonas);
+            lblNumeroPersonas.setText("Número de personas: " + numeroPersonas + "/");
         });
 
         actividades.addActionListener(e -> logger.info("Se ha seleccionado la actividad: " + Objects.requireNonNull(actividades.getSelectedItem())));
