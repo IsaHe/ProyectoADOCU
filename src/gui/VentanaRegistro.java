@@ -233,7 +233,7 @@ public class VentanaRegistro extends JFrame{
 		
 		btnRegistro.addActionListener(e->{
 			assert cEdad.getSelectedItem() != null;
-			Usuario usuario = new Usuario(txtNombre.getText(), txtApellidos.getText(), (int)cEdad.getSelectedItem(), txtUsuario.getText(), Arrays.toString(txtContra.getPassword()), null);
+			Usuario usuario = new Usuario(txtNombre.getText(), txtApellidos.getText(), (int)cEdad.getSelectedItem(), txtUsuario.getText(), String.valueOf(txtContra.getPassword()), null);
 			if (!BaseDeDatos.comprobarUsuario(usuario)) {
 				BaseDeDatos.getUsuarios().add(usuario);
 				BaseDeDatos.cargarUsuariosEnBaseDeDatos(con);
