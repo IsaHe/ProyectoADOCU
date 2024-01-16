@@ -15,7 +15,6 @@ import java.nio.file.Paths;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 import java.util.logging.Logger;
 
 
@@ -146,7 +145,7 @@ public class VentanaTabla extends JFrame{
 							label.setBackground(Color.RED);
 						}
 					}else {
-						ImageIcon imagen = new ImageIcon(Objects.requireNonNull(getClass().getResource("/resources/images//" + ((Actividad) value).getNombre() + ".jpg")));
+						ImageIcon imagen = new ImageIcon("src/resources/images/" + ((Actividad) value).getNombre() + ".jpg");
 						ImageIcon imagenConDimensiones = new ImageIcon(imagen.getImage().getScaledInstance(180, 100, Image.SCALE_DEFAULT));
                         label.setIcon(imagenConDimensiones);
                         label.setText("");

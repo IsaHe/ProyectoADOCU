@@ -14,7 +14,6 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.sql.Connection;
 import java.time.LocalDate;
-import java.util.Objects;
 import java.util.logging.Logger;
 
 /**
@@ -71,7 +70,7 @@ public class VentanaInicioSesion extends JFrame{
         JPanel panelCentro = new JPanel();
         JPanel panelCentroIzq = new JPanel();
         JPanel panelSur = new JPanel();
-        JLabel lblFoto = new JLabel(new ImageIcon(Objects.requireNonNull(getClass().getResource("/resources/images//ADOCU.png"))));
+        JLabel lblFoto = new JLabel(new ImageIcon("src/resources/images/ADOCU.png"));
         JPanel panelConstrasena = new JPanel();
         JPanel panelUsuario = new JPanel();
 		

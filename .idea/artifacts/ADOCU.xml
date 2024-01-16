@@ -1,0 +1,10 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="ADOCU">
+    <output-path>$PROJECT_DIR$/out/artifacts/ADOCU</output-path>
+    <root id="archive" name="ADOCU.jar">
+      <element id="module-output" name="ProyectoADOCU" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/src/lib/sqlite-jdbc-3.39.4.0 (1).jar" path-in-jar="/" />
+      <element id="module-source" name="ProyectoADOCU" />
+    </root>
+  </artifact>
+</component>

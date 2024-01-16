@@ -35,7 +35,7 @@ public class VentanaModificacionActividades extends JFrame {
     public VentanaModificacionActividades(int numeroPersonas, String horaActividad, LocalDate fechaActividad, VentanaTabla ventanaTabla) {    //Formato horas [hora, minutos, segundos]
         setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
         setTitle("Modificación de actividades");
-        setIconImage(new ImageIcon(Objects.requireNonNull(getClass().getResource("/resources/images//ADOCU.png"))).getImage());
+        setIconImage(new ImageIcon("src/resources/images/ADOCU.png").getImage());
         setLayout(new GridLayout(4, 2, 0, 0));
 
         //CREACION Y FORMATO DE LOS LABELS

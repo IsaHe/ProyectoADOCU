@@ -14,7 +14,6 @@ import java.awt.*;
 import java.io.Serial;
 import java.nio.file.Paths;
 import java.sql.Connection;
-import java.util.Objects;
 import java.util.logging.Logger;
 /**
  * VentanaAdmin es una clase que extiende JFrame y representa la ventana de administrador en la aplicación.
@@ -72,7 +71,7 @@ public class VentanaAdmin extends JFrame{
 		lblTitulo.setFont(new Font(Font.SERIF, Font.PLAIN, 30));
 		lblTitulo.setForeground(Color.BLACK);
 		JLabel lblFoto = new JLabel();
-		ImageIcon imagen = new ImageIcon(Objects.requireNonNull(getClass().getResource("/resources/images//ADOCU.png")));
+		ImageIcon imagen = new ImageIcon("src/resources/images/ADOCU.png");
 		ImageIcon imagenConDimensiones = new ImageIcon(imagen.getImage().getScaledInstance(250, 250, Image.SCALE_DEFAULT));
         lblFoto.setIcon(imagenConDimensiones);
 		JEditorPane etiqueta = getjEditorPane();

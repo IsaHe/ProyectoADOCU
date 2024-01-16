@@ -6,7 +6,6 @@ import db.BaseDeDatos;
 
 import java.awt.*;
 import java.io.Serial;
-import java.net.URL;
 import java.sql.Connection;
 import java.util.Objects;
 import java.util.logging.Logger;
@@ -39,13 +38,13 @@ public class VentanaValoracion extends JFrame {
     public VentanaValoracion() {
         setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
         setTitle("Valoración");
-        setIconImage(new ImageIcon(Objects.requireNonNull(getClass().getResource("/resources/images//ADOCU.png"))).getImage());
+        setIconImage(new ImageIcon("src/resources/images/ADOCU.png").getImage());
 
         //CREACION DE ELEMENTOS Y CONTENEDORES
         JComboBox<Valoracion> valoracion = new JComboBox<>(Valoracion.values());
         valoracion.addActionListener(e -> logger.info("Se ha seleccionado la valoración: " + Objects.requireNonNull(valoracion.getSelectedItem())));
 
-        URL urlLogo = getClass().getResource("/resources/images//ADOCU.png");
+        String urlLogo = "src/resources/images/ADOCU.png";
         JEditorPane etiqueta = getjEditorPane(urlLogo);
 
         JPanel panelValoracion = new JPanel();
@@ -113,7 +112,7 @@ public class VentanaValoracion extends JFrame {
      * @param urlLogo La URL del logo de la aplicación.
      * @return El JEditorPane con el mensaje de agradecimiento y la explicación de la importancia de la valoración.
      */
-    private static JEditorPane getjEditorPane(URL urlLogo) {
+    private static JEditorPane getjEditorPane(String urlLogo) {
         String textoExplicacionValoracionHTML = "<html><body>" +
                 "<div style='text-align: center; margin-top: 20px;'>" +
                 "<img src= " + urlLogo + " alt='Logo de ADOCU' width='150'><br><br>" +
