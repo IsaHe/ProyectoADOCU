@@ -5,6 +5,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import java.sql.Connection;
+import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.Assert.*;
@@ -76,6 +77,15 @@ public class BaseDeDatosTest {
 		List<Integer> lista2 = BaseDeDatos.getValoraciones();
 		assertEquals(lista.size(), lista2.size());
 		
+	}
+
+	@Test
+	public void getUsuariosSinAdminTest() {
+		List<Usuario> usuariosSinAdmin = new ArrayList<>();
+		usuariosSinAdmin.add(new Usuario("Isaac", "Herbozo", 19, "Isaac", "111", null));
+		usuariosSinAdmin.add(new Usuario("Aitor", "Peral", 19, "Peral", "111", null));
+		usuariosSinAdmin.add(new Usuario("Xabier", "Urrutia", 20, "Xabi_U", "111", null));
+		assertEquals(usuariosSinAdmin, BaseDeDatos.getUsuariosSinAdmin());
 	}
 	
 

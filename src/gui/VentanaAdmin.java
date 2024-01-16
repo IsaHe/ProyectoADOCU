@@ -111,6 +111,7 @@ public class VentanaAdmin extends JFrame{
             
                 case "Ver Usuarios" -> {
 
+                    repaint();
                     pCentro.removeAll();
                     pCentroC.removeAll();
 
@@ -195,6 +196,7 @@ public class VentanaAdmin extends JFrame{
                 }
                 case "Ver Actividades" -> {
 
+                    repaint();
                     pCentro.removeAll();
                     pCentroC.removeAll();
 
@@ -256,6 +258,7 @@ public class VentanaAdmin extends JFrame{
                 }
                 case "Ver Valoraciones" -> {
 
+                    repaint();
                     pCentro.removeAll();
                     pCentroC.removeAll();
 

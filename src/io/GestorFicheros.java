@@ -215,8 +215,13 @@ public class GestorFicheros {
     	
     	try {
 			ObjectInputStream ois = new ObjectInputStream(new FileInputStream(ruta.toFile()));
-			mapaActividadesUsuario = (Map<String, ArrayList<Actividad>>) ois.readObject();
-			ois.close();
+            Object obj = ois.readObject();
+            if (obj instanceof Map) {
+                mapaActividadesUsuario = (Map<String, ArrayList<Actividad>>) obj;
+            } else {
+                logger.warning("Error: el objeto leído del fichero no es un Map<String, ArrayList<Actividad>>");
+            }
+            ois.close();
 		} catch (IOException | ClassNotFoundException e) {
             logger.warning("Error al obtener las actividades del usuario del fichero");
             JOptionPane.showMessageDialog(null, "Error al obtener las actividades del usuario del fichero", "Error", JOptionPane.ERROR_MESSAGE);

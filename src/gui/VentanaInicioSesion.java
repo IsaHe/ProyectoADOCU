@@ -7,6 +7,8 @@ import io.GestorFicheros;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.io.Serial;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -126,6 +128,26 @@ public class VentanaInicioSesion extends JFrame{
 		getContentPane().add(panelNorte, BorderLayout.NORTH);
 		
 		setVisible(true);
+
+		txtUsuario.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyPressed(KeyEvent e) {
+				if (e.getKeyCode()==KeyEvent.VK_ENTER) {
+					btnInicioSesion.doClick();
+					logger.info("Se ha pulsado la tecla Enter en el campo de usuario");
+				}
+			}
+		});
+
+		pasContrasena.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyPressed(KeyEvent e) {
+				if (e.getKeyCode()==KeyEvent.VK_ENTER) {
+					btnInicioSesion.doClick();
+					logger.info("Se ha pulsado la tecla Enter en el campo de contraseña");
+				}
+			}
+		});
 		
 		//EVENTOS BOTONES
 		btnInicioSesion.addActionListener((e)->{
